@@ -346,6 +346,46 @@
   <div style="display:flex;gap:14px;flex-wrap:wrap;justify-content:center;position:relative;z-index:1"><a href="contact.html" class="b-gold">Start Investing Now →</a><a href="calculators.html" class="b-out">Try Our Calculators</a></div>
 </section>
 
+<!-- INFLATION THIEF CALCULATOR -->
+<section class="inf-sec" id="infSec">
+  <div class="svc-head">
+    <div class="svc-tag">Eye Opener</div>
+    <h2 class="svc-title">Inflation Is <em>Stealing Your Wealth</em></h2>
+    <p class="svc-sub">See exactly how much more your money grows when invested vs. sitting in a savings account or FD. Drag the sliders and see the difference.</p>
+  </div>
+  <div class="inf-sliders">
+    <div>
+      <label style="font-size:.72rem;letter-spacing:.08em;color:var(--t3);display:block;margin-bottom:8px">STARTING AMOUNT</label>
+      <div style="display:flex;align-items:center;gap:14px">
+        <input type="range" id="infAmt" min="100000" max="10000000" step="100000" value="1000000" style="flex:1;accent-color:var(--gold)">
+        <span id="infAmtV" style="font-size:1rem;font-weight:700;color:var(--gold);min-width:72px;text-align:right">₹10.00 L</span>
+      </div>
+    </div>
+    <div>
+      <label style="font-size:.72rem;letter-spacing:.08em;color:var(--t3);display:block;margin-bottom:8px">TIME HORIZON</label>
+      <div style="display:flex;align-items:center;gap:14px">
+        <input type="range" id="infYrs" min="5" max="30" step="1" value="20" style="flex:1;accent-color:var(--gold)">
+        <span id="infYrsV" style="font-size:1rem;font-weight:700;color:var(--gold);min-width:50px;text-align:right">20 yrs</span>
+      </div>
+    </div>
+  </div>
+  <div class="inf-chart-wrap"><canvas id="infChart"></canvas></div>
+  <div class="inf-stats">
+    <div class="inf-stat s-red">
+      <div class="inf-stat-val" id="infStatFD">—</div>
+      <div class="inf-stat-lbl">FD / Savings at 6%</div>
+    </div>
+    <div class="inf-stat s-gold">
+      <div class="inf-stat-val" id="infStatInv">—</div>
+      <div class="inf-stat-lbl">Invested at 12%</div>
+    </div>
+    <div class="inf-stat">
+      <div class="inf-stat-val" id="infStatDiff" style="color:#4ade80">—</div>
+      <div class="inf-stat-lbl">Extra Wealth Created</div>
+    </div>
+  </div>
+</section>
+
 <footer>
   <div class="f-grid">
     <div><div class="f-brand-name">Akshay Maheshwari</div><div class="f-brand-sub">Investment Advisor</div><p class="f-about">Helping individuals and families grow their wealth through smart, disciplined, and transparent financial guidance across India.</p></div>
@@ -357,6 +397,8 @@
 </footer>
 
 <a href="https://wa.me/919827599966?text=i%20am%20intereseted%20in%20your%20financial%20advice" target="_blank" class="waf">💬</a>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
 <script src="js/main.js"></script>
+<script src="js/features.js"></script>
 </body>
 </html>

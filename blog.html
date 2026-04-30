@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wealth Decoded — Blog | Akshay Maheshwari</title>
+<meta name="description" content="Practical financial insights — SIP vs FD, retirement planning, insurance guides, and more from Akshay Maheshwari, Investment Advisor.">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<div class="sp" id="sp"></div>
+<div class="stars" id="stars"></div>
+
+<nav class="nav" id="mainNav">
+  <a class="nb" href="index.html">
+    <div class="nm"><span>A</span></div>
+    <div><div class="nn">Akshay Maheshwari</div><div class="ns">Investment Advisor</div></div>
+  </a>
+  <div class="nl" id="nl">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <div class="dd"><a style="cursor:default">Services ▾</a>
+      <div class="dd-mega">
+        <div class="dm-col">
+          <a href="services.html#wealth" class="dm-cat"><span>📈</span>Wealth &amp; Investments</a>
+          <a href="sip.html" class="dm-item">SIP &amp; Mutual Funds</a>
+          <a href="stock.html" class="dm-item">Stock Market</a>
+          <a href="pms.html" class="dm-item">PMS</a>
+          <a href="bonds.html" class="dm-item">Bonds</a>
+          <a href="aif.html" class="dm-item">AIF</a>
+          <a href="private-equity.html" class="dm-item">Private Equity</a>
+        </div>
+        <div class="dm-col">
+          <a href="services.html#protection" class="dm-cat"><span>🛡️</span>Insurance &amp; Protection</a>
+          <a href="insurance.html" class="dm-item">Insurance</a>
+          <a href="will.html" class="dm-item">Will</a>
+          <a href="trust.html" class="dm-item">Trust</a>
+          <a href="estate-planning.html" class="dm-item">Estate Planning</a>
+        </div>
+        <div class="dm-col">
+          <a href="services.html#planning" class="dm-cat"><span>🌅</span>Retirement &amp; Goals</a>
+          <a href="retirement.html" class="dm-item">Retirement Planning</a>
+          <a href="succession-planning.html" class="dm-item">Succession Planning</a>
+        </div>
+        <div class="dm-col">
+          <a href="services.html#global" class="dm-cat"><span>🌍</span>Global &amp; Alternatives</a>
+          <a href="international.html" class="dm-item">International Equities</a>
+          <a href="gift-city.html" class="dm-item">Gift City</a>
+          <a href="unlisted.html" class="dm-item">Unlisted Securities</a>
+        </div>
+        <div class="dm-col">
+          <a href="services.html#financing" class="dm-cat"><span>💰</span>Financing &amp; Capital</a>
+          <a href="loan.html" class="dm-item">Loan Against Security</a>
+          <a href="debt-financing.html" class="dm-item">Debt Financing</a>
+          <a href="equity-financing.html" class="dm-item">Equity Financing</a>
+          <a href="exit-planning.html" class="dm-item">Exit Planning</a>
+        </div>
+        <div class="dm-col">
+          <a href="services.html#elite" class="dm-cat"><span>👑</span>Elite &amp; Family Office</a>
+          <a href="family-office.html" class="dm-item">Family Office</a>
+          <a href="elite.html" class="dm-item">Elite Advisory</a>
+          <a href="services.html" class="dm-item dm-all">View All Services →</a>
+        </div>
+      </div>
+    </div>
+    <a href="calculators.html">Calculators</a>
+    <a href="testimonials.html">Testimonials</a>
+    <a href="contact.html">Contact</a>
+    <a href="contact.html" class="ncta">Free Consultation</a>
+  </div>
+  <div class="srch-wrap" id="srchWrap"><input type="text" class="srch-bar" id="srchInp" placeholder="🔍 Search services..." oninput="doSearch(this.value)" autocomplete="off"><div class="srch-drop" id="srchRes"></div></div><div class="ham"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- HERO -->
+<section style="padding:120px 5% 60px;text-align:center;background:var(--bg)">
+  <div style="max-width:700px;margin:0 auto">
+    <div class="sc-step" style="opacity:1;transform:none;justify-content:center;margin-bottom:12px">Wealth Decoded</div>
+    <h1 class="sc-title" style="opacity:1;transform:none;font-size:clamp(2rem,5vw,3rem);text-align:center">Financial Insights That <em>Actually Help</em></h1>
+    <p style="font-size:.9rem;color:var(--t2);margin-top:14px;line-height:1.75">No jargon. No fluff. Real numbers, honest comparisons, and practical advice that helps you make smarter decisions with your money.</p>
+  </div>
+</section>
+
+<!-- FILTER TAGS -->
+<div style="padding:0 5% 40px;display:flex;gap:10px;flex-wrap:wrap;justify-content:center" id="blogFilters">
+  <button class="blog-filter active" data-cat="all">All Posts</button>
+  <button class="blog-filter" data-cat="Mutual Funds">Mutual Funds</button>
+  <button class="blog-filter" data-cat="Retirement">Retirement</button>
+  <button class="blog-filter" data-cat="Insurance">Insurance</button>
+  <button class="blog-filter" data-cat="Market Insights">Market Insights</button>
+</div>
+
+<!-- BLOG GRID -->
+<section style="padding:0 5% 80px;background:var(--bg)">
+  <div style="max-width:1280px;margin:0 auto">
+    <div class="blog-listing-grid" id="blogGrid">
+
+      <a href="blog/sip-vs-fd.html" class="bp-card-lg" data-cat="Mutual Funds">
+        <div class="bp-cat">Mutual Funds</div>
+        <div class="bp-title-lg">SIP vs FD: The Real Numbers Nobody Shows You</div>
+        <div class="bp-body">₹10,000/month in FD vs. SIP for 20 years. The difference will change how you think about your savings account forever. Includes actual compound growth numbers.</div>
+        <div class="bp-meta"><span>May 2025</span><span>5 min read</span></div>
+      </a>
+
+      <a href="blog/retirement-corpus-2040.html" class="bp-card-lg" data-cat="Retirement">
+        <div class="bp-cat">Retirement</div>
+        <div class="bp-title-lg">Why ₹1 Crore Is No Longer Enough to Retire in India</div>
+        <div class="bp-body">With inflation at 6–7%, a ₹1 Crore corpus lasts less than 12 years. Here's the real number you need for a comfortable retirement — and how to get there.</div>
+        <div class="bp-meta"><span>May 2025</span><span>6 min read</span></div>
+      </a>
+
+      <a href="blog/power-of-starting-early.html" class="bp-card-lg" data-cat="Mutual Funds">
+        <div class="bp-cat">Mutual Funds</div>
+        <div class="bp-title-lg">The ₹2.8 Crore Difference Between Starting SIP at 25 vs 35</div>
+        <div class="bp-body">Same SIP amount. Same fund. 10-year head start. The compounding math is staggering — and it's the most important investing lesson you'll ever learn.</div>
+        <div class="bp-meta"><span>May 2025</span><span>4 min read</span></div>
+      </a>
+
+      <a href="blog/term-insurance-guide.html" class="bp-card-lg" data-cat="Insurance">
+        <div class="bp-cat">Insurance</div>
+        <div class="bp-title-lg">Term Insurance: The Most Important Product You're Skipping</div>
+        <div class="bp-body">If you earn ₹10 lakh/year and your family depends on your income, you need ₹1 Crore+ in term cover. Here's why most people are dangerously underinsured.</div>
+        <div class="bp-meta"><span>May 2025</span><span>5 min read</span></div>
+      </a>
+
+      <a href="blog/gold-vs-sip.html" class="bp-card-lg" data-cat="Market Insights">
+        <div class="bp-cat">Market Insights</div>
+        <div class="bp-title-lg">Gold vs SIP: Where Should Indians Really Put Their Money?</div>
+        <div class="bp-body">Indians love gold. But does it actually beat inflation? We compare 20-year returns from physical gold, gold ETF, and equity SIP — the results are clear.</div>
+        <div class="bp-meta"><span>May 2025</span><span>5 min read</span></div>
+      </a>
+
+      <a href="blog/what-is-pms.html" class="bp-card-lg" data-cat="Market Insights">
+        <div class="bp-cat">Market Insights</div>
+        <div class="bp-title-lg">What is PMS and Should You Invest in It?</div>
+        <div class="bp-body">Portfolio Management Services offers direct stock portfolios for HNIs. But it requires ₹50 Lakh minimum — is it worth it vs. mutual funds? An honest breakdown.</div>
+        <div class="bp-meta"><span>May 2025</span><span>6 min read</span></div>
+      </a>
+
+      <a href="blog/health-insurance-guide.html" class="bp-card-lg" data-cat="Insurance">
+        <div class="bp-cat">Insurance</div>
+        <div class="bp-title-lg">Why Your Company Health Insurance Is Not Enough</div>
+        <div class="bp-body">Your employer's ₹3–5 lakh group cover sounds adequate — until a serious illness hits. Here's why every salaried professional needs a personal health policy too.</div>
+        <div class="bp-meta"><span>May 2025</span><span>5 min read</span></div>
+      </a>
+
+      <a href="blog/sip-common-mistakes.html" class="bp-card-lg" data-cat="Mutual Funds">
+        <div class="bp-cat">Mutual Funds</div>
+        <div class="bp-title-lg">7 SIP Mistakes That Are Silently Killing Your Returns</div>
+        <div class="bp-body">Most SIP investors make at least 3 of these 7 mistakes — and never realise until it's too late. Stopping SIPs in a crash is just the beginning.</div>
+        <div class="bp-meta"><span>May 2025</span><span>5 min read</span></div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-band">
+  <div class="cta-inner">
+    <h2>Ready to Put This Into <em>Action?</em></h2>
+    <p>Reading is the first step. The second is a personalised plan that puts these principles to work for your specific goals.</p>
+    <div class="cta-band-btns">
+      <a href="contact.html" class="b-gold">Book Free Consultation →</a>
+      <a href="calculators.html" class="b-out">Try Calculators</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="f-grid">
+    <div><div class="f-brand-name">Akshay Maheshwari</div><div class="f-brand-sub">Investment Advisor</div><p class="f-about">Helping individuals and families grow their wealth through smart, disciplined, and transparent financial guidance across India.</p></div>
+    <div><h5 class="f-h">Services</h5><ul class="f-list f-list-2col"><li><a href="sip.html">SIP &amp; Mutual Funds</a></li><li><a href="stock.html">Stock Market</a></li><li><a href="insurance.html">Insurance</a></li><li><a href="retirement.html">Retirement</a></li><li><a href="pms.html">PMS</a></li><li><a href="private-equity.html">Private Equity</a></li><li><a href="bonds.html">Bonds</a></li><li><a href="loan.html">Loan Against Security</a></li><li><a href="aif.html">AIF</a></li><li><a href="unlisted.html">Unlisted Securities</a></li><li><a href="gift-city.html">Gift City</a></li><li><a href="international.html">International Equities</a></li><li><a href="will.html">Will</a></li><li><a href="trust.html">Trust</a></li><li><a href="family-office.html">Family Office</a></li><li><a href="debt-financing.html">Debt Financing</a></li><li><a href="equity-financing.html">Equity Financing</a></li><li><a href="exit-planning.html">Exit Planning</a></li><li><a href="succession-planning.html">Succession Planning</a></li><li><a href="estate-planning.html">Estate Planning</a></li><li><a href="elite.html">Elite Advisory</a></li></ul></div>
+    <div><h5 class="f-h">Company</h5><ul class="f-list"><li><a href="about.html">About</a></li><li><a href="testimonials.html">Testimonials</a></li><li><a href="calculators.html">Calculators</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+    <div><h5 class="f-h">Connect</h5><ul class="f-list"><li><a href="tel:+919827599966">📱 +91 98275 99966</a></li><li><a href="mailto:yourmail@gmail.com">📧 yourmail@gmail.com</a></li><li><a href="https://www.kotaksecurities.com/landing-page/franchisee/open-demat-account-partner-madhu-maheshwari-neo" target="_blank">📊 Open Demat Account</a></li><li><a href="https://wa.me/919827599966?text=Hi%20Akshay%2C%20I%20am%20interested%20in%20your%20financial%20services." target="_blank">💬 WhatsApp</a></li></ul></div>
+  </div>
+  <div class="f-disc"><p style="font-weight:700;color:var(--gold);font-size:.8rem">AMFI Registered Mutual Fund Distributor &nbsp;|&nbsp; ARN-268752 &nbsp;&amp;&nbsp; ARN-33209</p><p style="margin-top:4px">Risk Factors – Investments in Mutual Funds are subject to Market Risks. Read all scheme related documents carefully before investing.</p></div>
+  <div class="f-bot"><p>© 2025 Akshay Maheshwari. All rights reserved.</p></div>
+</footer>
+
+<a href="https://wa.me/919827599966?text=Hi%20Akshay%2C%20I%20am%20interested%20in%20your%20financial%20services." target="_blank" class="waf">💬</a>
+<script src="js/main.js"></script>
+<style>
+.blog-listing-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:24px}
+.bp-card-lg{display:flex;flex-direction:column;gap:12px;padding:28px;background:var(--bg2);border:1px solid rgba(201,168,76,.1);border-radius:14px;text-decoration:none;transition:all .3s}
+.bp-card-lg:hover{border-color:rgba(201,168,76,.3);transform:translateY(-3px)}
+.bp-title-lg{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:700;color:var(--w);line-height:1.35}
+.blog-filter{padding:7px 18px;border-radius:20px;border:1px solid rgba(201,168,76,.2);background:transparent;color:var(--t2);font-size:.78rem;font-family:'Outfit',sans-serif;cursor:pointer;transition:all .2s}
+.blog-filter:hover,.blog-filter.active{background:rgba(201,168,76,.12);border-color:var(--gold);color:var(--gold)}
+.bp-card-lg.hidden{display:none}
+</style>
+<script>
+document.querySelectorAll('.blog-filter').forEach(btn=>{
+  btn.addEventListener('click',function(){
+    document.querySelectorAll('.blog-filter').forEach(b=>b.classList.remove('active'));
+    this.classList.add('active');
+    const cat=this.dataset.cat;
+    document.querySelectorAll('.bp-card-lg').forEach(card=>{
+      card.classList.toggle('hidden',cat!=='all'&&card.dataset.cat!==cat);
+    });
+  });
+});
+</script>
+</body>
+</html>

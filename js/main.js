@@ -48,9 +48,34 @@ function animateCounter(el){
 const ham=document.querySelector('.ham');
 if(ham){
   ham.addEventListener('click',()=>{
-    document.getElementById('nl').classList.toggle('open');
+    const nl=document.getElementById('nl');
+    nl.classList.toggle('open');
+    if(!nl.classList.contains('open')){
+      document.querySelectorAll('.dd.mob-open').forEach(d=>d.classList.remove('mob-open'));
+      document.querySelectorAll('.dm-col.mob-open').forEach(c=>c.classList.remove('mob-open'));
+    }
   });
 }
+// Mobile two-level accordion
+const ddTrigger=document.querySelector('.dd>a');
+if(ddTrigger){
+  ddTrigger.addEventListener('click',function(e){
+    if(window.innerWidth>960)return;
+    e.preventDefault();
+    this.closest('.dd').classList.toggle('mob-open');
+  });
+}
+document.querySelectorAll('.dm-cat').forEach(cat=>{
+  cat.addEventListener('click',function(e){
+    if(window.innerWidth>960)return;
+    const col=this.closest('.dm-col');
+    if(!col.classList.contains('mob-open')){
+      e.preventDefault();
+      document.querySelectorAll('.dm-col.mob-open').forEach(c=>c.classList.remove('mob-open'));
+      col.classList.add('mob-open');
+    }
+  });
+});
 
 // ── WEALTH COUNTER (story pages) ──
 const wcV=document.getElementById('wc-v');
@@ -143,13 +168,30 @@ function onScroll(){
 window.addEventListener('scroll',onScroll,{passive:true});
 onScroll();
 
-// ── FORM SUBMIT FEEDBACK ──
+// ── FORM SUBMIT (Netlify) ──
 document.querySelectorAll('.fbtn').forEach(btn=>{
   btn.addEventListener('click',function(e){
-    e.preventDefault();
-    this.textContent='✓ Sent!';
-    this.style.background='#1E7A5A';
-    setTimeout(()=>{this.textContent='Send Message →';this.style.background=''},3000);
+    const form=btn.closest('form');
+    if(form&&form.dataset.netlify==='true'){
+      e.preventDefault();
+      const data=new URLSearchParams(new FormData(form));
+      btn.textContent='Sending…';btn.disabled=true;
+      fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:data.toString()})
+        .then(()=>{
+          btn.textContent='✓ Sent! We\'ll be in touch soon.';
+          btn.style.background='#1E7A5A';btn.disabled=false;
+          form.reset();
+          setTimeout(()=>{btn.textContent='Send Message →';btn.style.background='';},4000);
+        })
+        .catch(()=>{
+          btn.textContent='Error — try WhatsApp instead';btn.disabled=false;
+          setTimeout(()=>{btn.textContent='Send Message →';},3000);
+        });
+    } else {
+      e.preventDefault();
+      btn.textContent='✓ Sent!';btn.style.background='#1E7A5A';
+      setTimeout(()=>{btn.textContent='Send Message →';btn.style.background='';},3000);
+    }
   });
 });
 
@@ -252,7 +294,55 @@ if(document.getElementById('l1')){['l1','l2','l3'].forEach(id=>syncNum(id,'n'+id
 if(document.getElementById('g1')){['g1','g2','g3'].forEach(id=>syncNum(id,'n'+id));cG();}
 if(document.getElementById('w1')){['w1','w2','w3','w4'].forEach(id=>syncNum(id,'n'+id));cW();}
 
+// ── CONTEXT-AWARE WHATSAPP ──
+const _WAF_MSGS={
+  'sip.html':'Hi Akshay, I want to start a SIP or invest in Mutual Funds.',
+  'stock.html':'Hi Akshay, I want to start investing in the Stock Market.',
+  'insurance.html':'Hi Akshay, I want to review my Insurance coverage.',
+  'retirement.html':'Hi Akshay, I want to plan my Retirement.',
+  'pms.html':'Hi Akshay, I am interested in Portfolio Management Services.',
+  'bonds.html':'Hi Akshay, I want to learn about Bond investments.',
+  'aif.html':'Hi Akshay, I am interested in Alternative Investment Funds.',
+  'private-equity.html':'Hi Akshay, I want to explore Private Equity.',
+  'will.html':'Hi Akshay, I would like help drafting a Will.',
+  'trust.html':'Hi Akshay, I want to set up a Trust.',
+  'estate-planning.html':'Hi Akshay, I want to plan my Estate.',
+  'succession-planning.html':'Hi Akshay, I am interested in Succession Planning.',
+  'international.html':'Hi Akshay, I want to invest in International Equities.',
+  'gift-city.html':'Hi Akshay, I want to know more about GIFT City investments.',
+  'unlisted.html':'Hi Akshay, I am interested in Unlisted Securities.',
+  'loan.html':'Hi Akshay, I want to explore a Loan Against Securities.',
+  'debt-financing.html':'Hi Akshay, I am interested in Debt Financing.',
+  'equity-financing.html':'Hi Akshay, I am interested in Equity Financing.',
+  'exit-planning.html':'Hi Akshay, I want to plan my business Exit.',
+  'family-office.html':'Hi Akshay, I am interested in Family Office services.',
+  'elite.html':'Hi Akshay, I am interested in your Elite Advisory services.',
+  'calculators.html':'Hi Akshay, I would like a personalised investment consultation.',
+  'about.html':'Hi Akshay, I would like to know more about your advisory.',
+  'salaried.html':'Hi Akshay, I am a salaried professional looking for financial planning.',
+  'business-owner.html':'Hi Akshay, I am a business owner looking for wealth management.',
+  'nri.html':'Hi Akshay, I am an NRI looking to invest in India.',
+};
+let _wafPhone='919827599966';
+function setWafMsg(){
+  const page=(window.location.pathname.split('/').pop()||'index.html').toLowerCase();
+  const msg=_WAF_MSGS[page]||'Hi Akshay, I am interested in your financial services.';
+  const waf=document.querySelector('.waf');
+  if(waf)waf.href=`https://wa.me/${_wafPhone}?text=${encodeURIComponent(msg)}`;
+}
+setWafMsg();
+
 // ═══════ SEARCH ═══════
+const CALCULATORS=[
+  {name:'SIP Calculator',ico:'🧮',url:'calculators.html'},
+  {name:'Loan Calculator',ico:'🏦',url:'calculators.html'},
+  {name:'Goal Planner Calculator',ico:'🎯',url:'calculators.html'},
+  {name:'Retirement Calculator',ico:'🌅',url:'calculators.html'},
+  {name:'Inflation Calculator',ico:'📉',url:'calculators.html'},
+  {name:'EMI Calculator',ico:'📊',url:'calculators.html'},
+  {name:'SIP Step-Up Calculator',ico:'📈',url:'calculators.html'},
+  {name:'Wealth Growth Calculator',ico:'💰',url:'calculators.html'},
+];
 const SERVICES=[
   {name:'SIP & Mutual Funds',ico:'📈',url:'sip.html'},
   {name:'Stock Market',ico:'📊',url:'stock.html'},
@@ -280,8 +370,13 @@ function doSearch(q){
   const res=document.getElementById('srchRes');if(!res)return;
   const term=q.trim().toLowerCase();
   if(!term){res.classList.remove('open');return;}
-  const matches=SERVICES.filter(s=>s.name.toLowerCase().includes(term));
-  res.innerHTML=matches.length?matches.map(s=>`<a class="srch-item" href="${s.url}"><span class="srch-item-ico">${s.ico}</span><span class="srch-item-name">${s.name}</span></a>`).join(''):'<div class="srch-empty">No services found</div>';
+  const svcMatches=SERVICES.filter(s=>s.name.toLowerCase().includes(term));
+  const calcMatches=CALCULATORS.filter(c=>c.name.toLowerCase().includes(term));
+  const all=[
+    ...svcMatches.map(s=>`<a class="srch-item" href="${s.url}"><span class="srch-item-ico">${s.ico}</span><span class="srch-item-name">${s.name}</span><span class="srch-item-tag">Service</span></a>`),
+    ...calcMatches.map(c=>`<a class="srch-item" href="${c.url}"><span class="srch-item-ico">${c.ico}</span><span class="srch-item-name">${c.name}</span><span class="srch-item-tag" style="color:var(--t2)">Calculator</span></a>`)
+  ];
+  res.innerHTML=all.length?all.join(''):'<div class="srch-empty">No results found</div>';
   res.classList.add('open');
 }
 document.addEventListener('click',e=>{
@@ -302,9 +397,10 @@ function applyContact(c){
   if(!c)return;
   // WhatsApp URL (update all wa.me links including FAB)
   const ph=(c.whatsapp||'919827599966').replace(/\D/g,'');
-  const msg=encodeURIComponent(c.waMsg||'i am intereseted in your financial advice');
+  const msg=encodeURIComponent(c.waMsg||'Hi Akshay, I am interested in your financial services.');
   const waUrl=`https://wa.me/${ph}?text=${msg}`;
-  document.querySelectorAll('a[href^="https://wa.me/"]').forEach(a=>a.href=waUrl);
+  document.querySelectorAll('a[href^="https://wa.me/"]:not(.waf)').forEach(a=>a.href=waUrl);
+  _wafPhone=ph;setWafMsg();
 
   // Phone links — update href + visible text/value
   if(c.phone){
@@ -373,3 +469,6 @@ async function loadDynamicContent(){
 }
 
 loadDynamicContent();
+
+// ── AUTO-INIT CALCULATORS on page load ──
+cS();cL();cG();cW();

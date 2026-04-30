@@ -7,6 +7,8 @@
 <meta name="description" content="Trusted Investment Advisor offering Mutual Funds, SIP, Stock Market, Insurance, Retirement Planning, and comprehensive wealth management services across India.">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/styles.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </head>
 <body>
 
@@ -78,16 +80,16 @@
   <div class="hh-l">
     <div class="hh-eyebrow">Trusted Advisor · India</div>
     <h1 class="hh-title">Your Trusted Partner in <em>Wealth Creation</em></h1>
-    <p class="hh-sub">Expert guidance across mutual funds, stock markets, insurance, tax planning, and retirement — designed to grow your wealth and protect your future.</p>
+    <p class="hh-sub">Expert guidance across mutual funds, stock markets, insurance, and retirement — designed to grow your wealth and protect your future.</p>
     <div class="hh-ctas">
       <a href="contact.html" class="b-gold">Book Free Consultation →</a>
       <a href="services.html" class="b-out">Explore Services</a>
     </div>
     <div class="hh-trust">
-      <div><div class="hh-t-num">5+</div><div class="hh-t-lbl">Service Verticals</div></div>
-      <div><div class="hh-t-num">100%</div><div class="hh-t-lbl">Goal-Oriented</div></div>
-      <div><div class="hh-t-num">SEBI</div><div class="hh-t-lbl">Aware Advisory</div></div>
-      <div><div class="hh-t-num">∞</div><div class="hh-t-lbl">Long-Term Focus</div></div>
+      <div><div class="hh-t-num" data-count="500" data-suffix="+">500+</div><div class="hh-t-lbl">Happy Clients</div></div>
+      <div><div class="hh-t-num" data-count="10" data-suffix="+">10+</div><div class="hh-t-lbl">Years Experience</div></div>
+      <div><div class="hh-t-num">AMFI</div><div class="hh-t-lbl">Registered Distributor</div></div>
+      <div><div class="hh-t-num" data-count="10" data-suffix="+">10+</div><div class="hh-t-lbl">Services Offered</div></div>
     </div>
   </div>
   <div class="hh-r">
@@ -130,6 +132,51 @@
     <div class="mq-item">Goal Planning <span>·</span></div>
   </div>
 </div>
+
+<!-- TRUST CREDENTIALS -->
+<section class="cred-strip">
+  <div class="cred-inner">
+    <div class="cred-item">
+      <div class="cred-icon">✅</div>
+      <div class="cred-info">
+        <div class="cred-title">AMFI Registered</div>
+        <div class="cred-sub">Mutual Fund Distributor</div>
+      </div>
+    </div>
+    <div class="cred-div"></div>
+    <div class="cred-item">
+      <div class="cred-icon">🔖</div>
+      <div class="cred-info">
+        <div class="cred-title">ARN-268752 · ARN-33209</div>
+        <div class="cred-sub">AMFI Registration Numbers</div>
+      </div>
+    </div>
+    <div class="cred-div"></div>
+    <div class="cred-item">
+      <div class="cred-icon">🏦</div>
+      <div class="cred-info">
+        <div class="cred-title">Kotak Securities</div>
+        <div class="cred-sub">Authorised Partner</div>
+      </div>
+    </div>
+    <div class="cred-div"></div>
+    <div class="cred-item">
+      <div class="cred-icon">📜</div>
+      <div class="cred-info">
+        <div class="cred-title">SEBI Compliant</div>
+        <div class="cred-sub">Regulatory Aware Advisory</div>
+      </div>
+    </div>
+    <div class="cred-div"></div>
+    <div class="cred-item">
+      <div class="cred-icon">⭐</div>
+      <div class="cred-info">
+        <div class="cred-title">10+ Years</div>
+        <div class="cred-sub">Financial Advisory Experience</div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- SERVICES -->
 <section class="svc-sec">
@@ -176,7 +223,7 @@
       <div class="svc-c-link">Explore →</div>
     </a>
   </div>
-  <div style="text-align:center;margin-top:44px"><a href="services.html" class="b-out">View All 21 Services →</a></div>
+  <div style="text-align:center;margin-top:44px"><a href="services.html" class="b-out">View All Services →</a></div>
 </section>
 
 <!-- WHY CHOOSE -->
@@ -191,6 +238,54 @@
     <div class="why-card"><div class="why-dot"><span>02</span></div><h3 class="why-h">Transparent Process</h3><p class="why-p">Clear, jargon-free guidance. You'll always understand exactly where your money goes and why.</p></div>
     <div class="why-card"><div class="why-dot"><span>03</span></div><h3 class="why-h">Goal-Oriented</h3><p class="why-p">Every rupee has a purpose. We don't just build portfolios — we build the life you want.</p></div>
     <div class="why-card"><div class="why-dot"><span>04</span></div><h3 class="why-h">Long-Term Vision</h3><p class="why-p">We think in decades, not days. Wealth that compounds, lasts, and creates lasting impact.</p></div>
+  </div>
+</section>
+
+<!-- FIND YOUR PATH -->
+<section class="path-sec">
+  <div class="svc-head">
+    <div class="svc-tag">Your Profile</div>
+    <h2 class="svc-title">Find Your <em>Financial Path</em></h2>
+    <p class="svc-sub">Every financial journey is different. Tell us who you are and we'll show you the right roadmap.</p>
+  </div>
+  <div class="path-grid">
+    <a href="salaried.html" class="path-card">
+      <div class="path-icon">👔</div>
+      <div class="path-badge">Most Popular</div>
+      <h3 class="path-title">I'm a Salaried Professional</h3>
+      <p class="path-desc">Build wealth systematically from every pay cheque — with SIP, the right insurance, and goal-based planning for your biggest milestones.</p>
+      <ul class="path-svcs">
+        <li>SIP &amp; Mutual Funds</li>
+        <li>Term &amp; Health Insurance</li>
+        <li>Retirement Planning</li>
+        <li>Goal-Based Investing</li>
+      </ul>
+      <div class="path-cta">See My Roadmap →</div>
+    </a>
+    <a href="business-owner.html" class="path-card">
+      <div class="path-icon">🏢</div>
+      <h3 class="path-title">I'm a Business Owner</h3>
+      <p class="path-desc">Protect your business legacy, plan a smart exit, and grow personal wealth beyond your core business with institutional-grade strategies.</p>
+      <ul class="path-svcs">
+        <li>Succession &amp; Exit Planning</li>
+        <li>PMS &amp; AIF</li>
+        <li>Family Office</li>
+        <li>Debt &amp; Equity Financing</li>
+      </ul>
+      <div class="path-cta">See My Roadmap →</div>
+    </a>
+    <a href="retirement-path.html" class="path-card">
+      <div class="path-icon">🌅</div>
+      <h3 class="path-title">I'm Planning for Retirement</h3>
+      <p class="path-desc">Build a corpus that sustains your lifestyle long after your last pay cheque — through disciplined investing, stable returns, and legacy structuring.</p>
+      <ul class="path-svcs">
+        <li>Retirement Planning</li>
+        <li>Bonds &amp; Stable Returns</li>
+        <li>Estate Planning</li>
+        <li>Will &amp; Succession</li>
+      </ul>
+      <div class="path-cta">See My Roadmap →</div>
+    </a>
   </div>
 </section>
 
@@ -224,10 +319,31 @@
 <section class="blog-sec">
   <div class="blog-sec-hd">
     <div class="blog-sec-title">Latest <span>Insights</span></div>
-    <a href="blogs.html" class="blog-all-btn">View All Posts →</a>
+    <a href="blog.html" class="blog-all-btn">View All Posts →</a>
   </div>
-  <div class="blog-scroll" id="blogScroll"></div>
+  <div class="blog-scroll">
+    <a href="blog/sip-vs-fd.html" class="bp-card">
+      <div class="bp-cat">Mutual Funds</div>
+      <div class="bp-title">SIP vs FD: The Real Numbers Nobody Shows You</div>
+      <div class="bp-body">₹10,000/month in FD vs. SIP for 20 years. The difference will change how you think about your savings account forever.</div>
+      <div class="bp-meta"><span>May 2025</span><span>5 min read</span></div>
+    </a>
+    <a href="blog/retirement-corpus-2040.html" class="bp-card">
+      <div class="bp-cat">Retirement</div>
+      <div class="bp-title">Why ₹1 Crore Is No Longer Enough to Retire in India</div>
+      <div class="bp-body">With inflation at 6–7%, a ₹1 Crore corpus lasts less than 12 years. Here's the real number you need — and how to get there.</div>
+      <div class="bp-meta"><span>May 2025</span><span>6 min read</span></div>
+    </a>
+    <a href="blog/power-of-starting-early.html" class="bp-card">
+      <div class="bp-cat">Mutual Funds</div>
+      <div class="bp-title">The ₹2.8 Crore Difference Between Starting at 25 vs 35</div>
+      <div class="bp-body">Same SIP amount. Same fund. 10-year head start. The compounding math is staggering — and it's the most important lesson in investing.</div>
+      <div class="bp-meta"><span>May 2025</span><span>4 min read</span></div>
+    </a>
+  </div>
 </section>
+
+<div class="f-disc" style="margin:0;border-radius:0;border-left:none;border-right:none;text-align:center;padding:14px 24px"><p style="font-weight:700;font-size:.9rem;letter-spacing:.04em;color:var(--gold)">AMFI Registered Mutual Fund Distributor &nbsp;|&nbsp; ARN-268752 &nbsp;&amp;&nbsp; ARN-33209</p></div>
 
 <!-- FOOTER -->
 <footer>
@@ -239,7 +355,7 @@
     </div>
     <div>
       <h5 class="f-h">Services</h5>
-      <ul class="f-list">
+      <ul class="f-list f-list-2col">
         <li><a href="sip.html">SIP &amp; Mutual Funds</a></li>
         <li><a href="stock.html">Stock Market</a></li>
         <li><a href="insurance.html">Insurance</a></li>
@@ -266,8 +382,7 @@
       </ul>
     </div>
   </div>
-  <div class="f-disc"><p>AMFI Registered Mutual Fund Distributor – ARN-268752, ARN-33209 &nbsp;|&nbsp; Risk Factors – Investments in Mutual Funds are subject to Market Risks. Read all scheme related documents carefully before investing.</p></div>
-  <div class="f-bot"><p>© 2025 Akshay Maheshwari. All rights reserved.</p></div>
+  <div class="f-bot"><p style="font-size:.7rem;color:var(--t3);margin-bottom:8px;opacity:.7">Risk Factors — Investments in Mutual Funds are subject to Market Risks. Read all scheme related documents carefully before investing.</p><p>© 2025 Akshay Maheshwari. All rights reserved.</p></div>
 </footer>
 
 <a href="https://wa.me/919827599966?text=i%20am%20intereseted%20in%20your%20financial%20advice" target="_blank" class="waf">💬</a>
@@ -281,5 +396,6 @@ if(window.netlifyIdentity){
 }
 </script>
 <script src="js/main.js"></script>
+<script src="js/features.js"></script>
 </body>
 </html>

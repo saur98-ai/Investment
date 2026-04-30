@@ -73,6 +73,40 @@
   <div class="srch-wrap" id="srchWrap"><input type="text" class="srch-bar" id="srchInp" placeholder="🔍 Search services..." oninput="doSearch(this.value)" autocomplete="off"><div class="srch-drop" id="srchRes"></div></div><div class="ham"><span></span><span></span><span></span></div>
 </nav>
 
+<!-- INVESTOR QUIZ -->
+<section class="quiz-sec" id="quizSec" style="background:var(--bg)">
+  <div class="svc-head">
+    <div class="svc-tag">2-Minute Quiz</div>
+    <h2 class="svc-title">What Kind of <em>Investor Are You?</em></h2>
+    <p class="svc-sub">Before you book — take 2 minutes to find your investor type. It helps us prepare a more personalised consultation for you.</p>
+  </div>
+  <div id="quizTeaser" class="quiz-teaser">
+    <div class="quiz-mock-row">
+      <div class="quiz-mock">🛡️ The Protector</div>
+      <div class="quiz-mock">💰 The Builder</div>
+      <div class="quiz-mock">📈 The Accelerator</div>
+      <div class="quiz-mock">👑 The Legacy Maker</div>
+      <div class="quiz-mock">🧭 The Explorer</div>
+    </div>
+    <button class="b-gold" id="quizStartBtn" style="margin-top:32px;font-size:.95rem">Find My Investor Type →</button>
+  </div>
+  <div id="quizBox" style="display:none;max-width:700px;margin:0 auto">
+    <div class="quiz-prog-wrap"><div class="quiz-prog-bar" id="quizProgBar" style="width:0%"></div></div>
+    <div style="font-size:.74rem;color:var(--t3);text-align:right;margin-top:6px;margin-bottom:20px" id="quizProgLbl">Question 1 of 8</div>
+    <div id="quizQWrap"></div>
+    <div id="quizNextWrap" style="display:none;justify-content:flex-end;margin-top:16px">
+      <button class="b-gold" id="quizNextBtn">Next →</button>
+    </div>
+  </div>
+  <div id="quizResult" style="display:none;max-width:700px;margin:0 auto"></div>
+  <div id="quizDownloadCard">
+    <div class="dc-emoji" id="dlCardEmoji">📈</div>
+    <div class="dc-name" id="dlCardName">The Builder</div>
+    <div class="dc-tag" id="dlCardTag">Systematic · Disciplined · Growing</div>
+    <div class="dc-url">akshayinvestment.netlify.app</div>
+  </div>
+</section>
+
 <section class="con-sec">
   <div class="con-g">
     <div>
@@ -81,24 +115,26 @@
       <p style="font-size:.95rem;color:var(--t2);line-height:1.7;margin-top:14px">Ready to start your financial journey? Reach out through any channel below — we typically respond within a few hours during business days.</p>
       <div class="cc">
         <a href="tel:+919827599966"><div class="cc-i">📱</div><div><div class="cc-l">Phone</div><div class="cc-v" data-cv>+91 98275 99966</div></div></a>
-        <a href="https://wa.me/919827599966?text=i%20am%20intereseted%20in%20your%20financial%20advice" target="_blank"><div class="cc-i">💬</div><div><div class="cc-l">WhatsApp</div><div class="cc-v">Click to Chat</div></div></a>
+        <a href="https://wa.me/919827599966?text=Hi%20Akshay%2C%20I%20am%20interested%20in%20your%20financial%20services." target="_blank"><div class="cc-i">💬</div><div><div class="cc-l">WhatsApp</div><div class="cc-v">Click to Chat</div></div></a>
         <a href="mailto:yourmail@gmail.com"><div class="cc-i">📧</div><div><div class="cc-l">Email</div><div class="cc-v" data-cv>yourmail@gmail.com</div></div></a>
         <div class="cc-item"><div class="cc-i">📍</div><div><div class="cc-l">Location</div><div class="cc-v">India</div></div></div>
       </div>
       <div class="socs">
         <a href="#" class="soc" data-social="instagram">📸 Instagram</a>
         <a href="#" class="soc" data-social="linkedin">💼 LinkedIn</a>
-        <a href="https://wa.me/919827599966?text=i%20am%20intereseted%20in%20your%20financial%20advice" class="soc" target="_blank">💬 WhatsApp</a>
+        <a href="https://wa.me/919827599966?text=Hi%20Akshay%2C%20I%20am%20interested%20in%20your%20financial%20services." class="soc" target="_blank">💬 WhatsApp</a>
         <a href="tel:+919827599966" class="soc">📞 Call</a>
       </div>
     </div>
-    <div class="cf">
+    <form class="cf" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="contact">
+      <p style="display:none"><input name="bot-field"></p>
       <h3>Book a Free Consultation</h3>
-      <div class="fg"><label>FULL NAME</label><input type="text" placeholder="Your Name"></div>
-      <div class="fg"><label>PHONE</label><input type="tel" placeholder="+91 98275 99966"></div>
-      <div class="fg"><label>EMAIL</label><input type="email" placeholder="you@email.com"></div>
+      <div class="fg"><label>FULL NAME</label><input type="text" name="name" placeholder="Your Name" required></div>
+      <div class="fg"><label>PHONE</label><input type="tel" name="phone" placeholder="+91 98275 99966"></div>
+      <div class="fg"><label>EMAIL</label><input type="email" name="email" placeholder="you@email.com"></div>
       <div class="fg"><label>INTERESTED IN</label>
-        <select>
+        <select name="service">
           <option>Select a Service</option>
           <option>SIP &amp; Mutual Funds</option>
           <option>Stock Market</option>
@@ -108,9 +144,9 @@
           <option>Complete Financial Review</option>
         </select>
       </div>
-      <div class="fg"><label>MESSAGE</label><textarea placeholder="Tell us briefly about your financial goals..."></textarea></div>
-      <button class="fbtn">Send Message →</button>
-    </div>
+      <div class="fg"><label>MESSAGE</label><textarea name="message" placeholder="Tell us briefly about your financial goals..."></textarea></div>
+      <button class="fbtn" type="submit">Send Message →</button>
+    </form>
   </div>
 </section>
 
@@ -119,12 +155,14 @@
     <div><div class="f-brand-name">Akshay Maheshwari</div><div class="f-brand-sub">Investment Advisor</div><p class="f-about">Helping individuals and families grow their wealth through smart, disciplined, and transparent financial guidance across India.</p></div>
     <div><h5 class="f-h">Services</h5><ul class="f-list f-list-2col"><li><a href="sip.html">SIP &amp; Mutual Funds</a></li><li><a href="stock.html">Stock Market</a></li><li><a href="insurance.html">Insurance</a></li><li><a href="retirement.html">Retirement</a></li><li><a href="pms.html">PMS</a></li><li><a href="private-equity.html">Private Equity</a></li><li><a href="bonds.html">Bonds</a></li><li><a href="loan.html">Loan Against Security</a></li><li><a href="aif.html">AIF</a></li><li><a href="unlisted.html">Unlisted Securities</a></li><li><a href="gift-city.html">Gift City</a></li><li><a href="international.html">International Equities</a></li><li><a href="will.html">Will</a></li><li><a href="trust.html">Trust</a></li><li><a href="family-office.html">Family Office</a></li><li><a href="debt-financing.html">Debt Financing</a></li><li><a href="equity-financing.html">Equity Financing</a></li><li><a href="exit-planning.html">Exit Planning</a></li><li><a href="succession-planning.html">Succession Planning</a></li><li><a href="estate-planning.html">Estate Planning</a></li><li><a href="elite.html">Elite Advisory</a></li></ul></div>
     <div><h5 class="f-h">Company</h5><ul class="f-list"><li><a href="about.html">About</a></li><li><a href="testimonials.html">Testimonials</a></li><li><a href="calculators.html">Calculators</a></li><li><a href="contact.html">Contact</a></li></ul></div>
-    <div><h5 class="f-h">Connect</h5><ul class="f-list"><li><a href="tel:+919827599966">📱 +91 98275 99966</a></li><li><a href="mailto:yourmail@gmail.com">📧 yourmail@gmail.com</a></li><li><a href="https://www.kotaksecurities.com/landing-page/franchisee/open-demat-account-partner-madhu-maheshwari-neo" target="_blank">📊 Open Demat Account</a></li><li><a href="https://wa.me/919827599966?text=i%20am%20intereseted%20in%20your%20financial%20advice" target="_blank">💬 WhatsApp</a></li></ul></div>
+    <div><h5 class="f-h">Connect</h5><ul class="f-list"><li><a href="tel:+919827599966">📱 +91 98275 99966</a></li><li><a href="mailto:yourmail@gmail.com">📧 yourmail@gmail.com</a></li><li><a href="https://www.kotaksecurities.com/landing-page/franchisee/open-demat-account-partner-madhu-maheshwari-neo" target="_blank">📊 Open Demat Account</a></li><li><a href="https://wa.me/919827599966?text=Hi%20Akshay%2C%20I%20am%20interested%20in%20your%20financial%20services." target="_blank">💬 WhatsApp</a></li></ul></div>
   </div>
   <div class="f-disc"><p>AMFI Registered Mutual Fund Distributor – ARN-268752, ARN-33209 &nbsp;|&nbsp; Risk Factors – Investments in Mutual Funds are subject to Market Risks. Read all scheme related documents carefully before investing.</p></div><div class="f-bot"><p>© 2025 Akshay Maheshwari. All rights reserved.</p></div>
 </footer>
 
-<a href="https://wa.me/919827599966?text=i%20am%20intereseted%20in%20your%20financial%20advice" target="_blank" class="waf">💬</a>
+<a href="https://wa.me/919827599966?text=Hi%20Akshay%2C%20I%20am%20interested%20in%20your%20financial%20services." target="_blank" class="waf">💬</a>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script src="js/main.js"></script>
+<script src="js/features.js"></script>
 </body>
 </html>
