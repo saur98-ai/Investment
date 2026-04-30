@@ -1,6 +1,9 @@
 const { getStore } = require('@netlify/blobs');
 
-const ALLOWED_KEYS = ['contact', 'testimonials', 'blogs'];
+// Change this password in GitHub to update admin access
+const ADMIN_SECRET = 'Akshay@Surbhi';
+
+const ALLOWED_KEYS = ['contact', 'testimonials', 'blogs', 'settings'];
 
 exports.handler = async (event) => {
   // CORS preflight
@@ -12,12 +15,9 @@ exports.handler = async (event) => {
     return { statusCode: 405, body: 'Method Not Allowed' };
   }
 
-  // Auth: check ADMIN_SECRET env var
-  const authHeader = event.headers['authorization'] || '';
-  const provided = authHeader.replace('Bearer ', '').trim();
-  const secret = process.env.ADMIN_SECRET;
-
-  if (!secret || provided !== secret) {
+  // Auth: check ADMIN_SECRET
+  const provided = (event.headers['authorization'] || '').replace('Bearer ', '').trim();
+  if (provided !== ADMIN_SECRET) {
     return { statusCode: 401, headers: cors(), body: JSON.stringify({ error: 'Unauthorized' }) };
   }
 
@@ -28,10 +28,15 @@ exports.handler = async (event) => {
     return { statusCode: 400, headers: cors(), body: JSON.stringify({ error: 'Invalid JSON' }) };
   }
 
+  // Auth ping — just confirms secret is correct, no write
+  if (body._ping) {
+    return { statusCode: 200, headers: cors(), body: JSON.stringify({ ok: true }) };
+  }
+
   const { key, data } = body;
 
-  if (!key || !ALLOWED_KEYS.includes(key)) {
-    return { statusCode: 400, headers: cors(), body: JSON.stringify({ error: 'Invalid key' }) };
+  if (!key || !ALLOWED_KEYS.includes(key) || data === null || data === undefined) {
+    return { statusCode: 400, headers: cors(), body: JSON.stringify({ error: 'Invalid key or data' }) };
   }
 
   try {

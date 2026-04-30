@@ -76,137 +76,61 @@
 <div class="ch">
   <div class="sc-step" style="opacity:1;transform:none;justify-content:center">Financial Tools</div>
   <div class="sc-title" style="opacity:1;transform:none;text-align:center;font-size:clamp(2rem,4vw,3rem)">Investment Calculators</div>
-  <p style="font-size:.95rem;color:var(--t2);max-width:560px;margin:14px auto 0;line-height:1.7">Plan your wealth with precision. Use our free calculators to project SIP returns, lumpsum growth, goal-based investments, and retirement income.</p>
-  <div class="ct">
-    <div class="ctb on" onclick="sT('sip',this)">SIP</div>
-    <div class="ctb" onclick="sT('ls',this)">Lumpsum</div>
-    <div class="ctb" onclick="sT('gl',this)">Goal</div>
-    <div class="ctb" onclick="sT('sw',this)">SWP</div>
+  <p style="font-size:.95rem;color:var(--t2);max-width:560px;margin:14px auto 0;line-height:1.7">Plan your wealth with precision. Project SIP returns, retirement corpus, EMI, goal values, and more — all in one place.</p>
+</div>
+
+<!-- Category tab nav -->
+<div class="cat-nav">
+  <div class="cat-tabs">
+    <button class="cat-btn on" id="cbtn-sip" onclick="switchCat('sip',this)">📊 SIP &amp; Wealth</button>
+    <button class="cat-btn" id="cbtn-goals" onclick="switchCat('goals',this)">🎯 Goals &amp; Retirement</button>
+    <button class="cat-btn" id="cbtn-loans" onclick="switchCat('loans',this)">💰 Loans &amp; Protection</button>
   </div>
 </div>
 
-<div class="ca">
-  <div class="cp on" id="cp-sip">
-    <div class="cg">
-      <div class="ci"><h3>📈 SIP Calculator</h3>
-        <div class="sg">
-          <div class="sh"><span class="sl">Monthly Investment</span><span class="sv" id="v1">₹5,000</span></div>
-          <div class="sg-row"><input type="range" id="r1" min="500" max="100000" step="500" value="5000" oninput="cS()"><input type="number" id="nr1" class="sg-num" min="500" max="100000" step="500" value="5000" onchange="syncSlider('nr1','r1',cS)"></div>
-        </div>
-        <div class="sg">
-          <div class="sh"><span class="sl">Expected Return (p.a.)</span><span class="sv" id="v2">12%</span></div>
-          <div class="sg-row"><input type="range" id="r2" min="1" max="30" step=".5" value="12" oninput="cS()"><input type="number" id="nr2" class="sg-num" min="1" max="30" step=".5" value="12" onchange="syncSlider('nr2','r2',cS)"></div>
-        </div>
-        <div class="sg">
-          <div class="sh"><span class="sl">Time Period (Years)</span><span class="sv" id="v3">10</span></div>
-          <div class="sg-row"><input type="range" id="r3" min="1" max="40" step="1" value="10" oninput="cS()"><input type="number" id="nr3" class="sg-num" min="1" max="40" step="1" value="10" onchange="syncSlider('nr3','r3',cS)"></div>
-        </div>
-      </div>
-      <div class="cr"><h3>Results</h3>
-        <div class="dn"><canvas id="d1" width="160" height="160"></canvas><div class="dc"><div class="dc-n" id="p1">63%</div><div class="dc-l">Returns</div></div></div>
-        <div class="cl"><div class="cli"><div class="cld" style="background:var(--gold)"></div>Invested</div><div class="cli"><div class="cld" style="background:var(--grn)"></div>Returns</div></div>
-        <div class="rr"><span class="rl">Total Invested</span><span class="rv" id="i1"></span></div>
-        <div class="rr"><span class="rl">Wealth Gained</span><span class="rv g" id="e1"></span></div>
-        <div class="rr"><span class="rl">Final Value</span><span class="rv b" id="t1"></span></div>
-      </div>
-    </div>
-  </div>
+<!-- Calculator section -->
+<div class="calc-section">
 
-  <div class="cp" id="cp-ls">
-    <div class="cg">
-      <div class="ci"><h3>💰 Lumpsum Calculator</h3>
-        <div class="sg">
-          <div class="sh"><span class="sl">Investment Amount</span><span class="sv" id="lv1">₹1,00,000</span></div>
-          <div class="sg-row"><input type="range" id="l1" min="10000" max="10000000" step="10000" value="100000" oninput="cL()"><input type="number" id="nl1" class="sg-num" min="10000" max="10000000" step="10000" value="100000" onchange="syncSlider('nl1','l1',cL)"></div>
-        </div>
-        <div class="sg">
-          <div class="sh"><span class="sl">Expected Return (p.a.)</span><span class="sv" id="lv2">12%</span></div>
-          <div class="sg-row"><input type="range" id="l2" min="1" max="30" step=".5" value="12" oninput="cL()"><input type="number" id="nl2" class="sg-num" min="1" max="30" step=".5" value="12" onchange="syncSlider('nl2','l2',cL)"></div>
-        </div>
-        <div class="sg">
-          <div class="sh"><span class="sl">Time Period (Years)</span><span class="sv" id="lv3">10</span></div>
-          <div class="sg-row"><input type="range" id="l3" min="1" max="40" step="1" value="10" oninput="cL()"><input type="number" id="nl3" class="sg-num" min="1" max="40" step="1" value="10" onchange="syncSlider('nl3','l3',cL)"></div>
-        </div>
-      </div>
-      <div class="cr"><h3>Results</h3>
-        <div class="dn"><canvas id="d2" width="160" height="160"></canvas><div class="dc"><div class="dc-n" id="p2">68%</div><div class="dc-l">Returns</div></div></div>
-        <div class="cl"><div class="cli"><div class="cld" style="background:var(--gold)"></div>Invested</div><div class="cli"><div class="cld" style="background:var(--grn)"></div>Returns</div></div>
-        <div class="rr"><span class="rl">Invested</span><span class="rv" id="li1"></span></div>
-        <div class="rr"><span class="rl">Wealth Gained</span><span class="rv g" id="le1"></span></div>
-        <div class="rr"><span class="rl">Final Value</span><span class="rv b" id="lt1"></span></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="cp" id="cp-gl">
-    <div class="cg">
-      <div class="ci"><h3>🎯 Goal Planning</h3>
-        <div class="sg">
-          <div class="sh"><span class="sl">Target Amount</span><span class="sv" id="gv1">₹50,00,000</span></div>
-          <div class="sg-row"><input type="range" id="g1" min="100000" max="50000000" step="100000" value="5000000" oninput="cG()"><input type="number" id="ng1" class="sg-num" min="100000" max="50000000" step="100000" value="5000000" onchange="syncSlider('ng1','g1',cG)"></div>
-        </div>
-        <div class="sg">
-          <div class="sh"><span class="sl">Expected Return</span><span class="sv" id="gv2">12%</span></div>
-          <div class="sg-row"><input type="range" id="g2" min="1" max="30" step=".5" value="12" oninput="cG()"><input type="number" id="ng2" class="sg-num" min="1" max="30" step=".5" value="12" onchange="syncSlider('ng2','g2',cG)"></div>
-        </div>
-        <div class="sg">
-          <div class="sh"><span class="sl">Time Available (Years)</span><span class="sv" id="gv3">15</span></div>
-          <div class="sg-row"><input type="range" id="g3" min="1" max="40" step="1" value="15" oninput="cG()"><input type="number" id="ng3" class="sg-num" min="1" max="40" step="1" value="15" onchange="syncSlider('ng3','g3',cG)"></div>
-        </div>
-      </div>
-      <div class="cr"><h3>Required Investment</h3>
-        <div class="rr"><span class="rl">Monthly SIP Needed</span><span class="rv b" id="gs1"></span></div>
-        <div class="rr"><span class="rl">OR Lumpsum Today</span><span class="rv" id="gs2"></span></div>
-        <div class="rr"><span class="rl">Total Invested (SIP)</span><span class="rv" id="gs3"></span></div>
-        <div class="rr"><span class="rl">Target Amount</span><span class="rv g" id="gs4"></span></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="cp" id="cp-sw">
-    <div class="cg">
-      <div class="ci"><h3>🏦 SWP Calculator</h3>
-        <div class="sg">
-          <div class="sh"><span class="sl">Initial Corpus</span><span class="sv" id="wv1">₹50,00,000</span></div>
-          <div class="sg-row"><input type="range" id="w1" min="100000" max="50000000" step="100000" value="5000000" oninput="cW()"><input type="number" id="nw1" class="sg-num" min="100000" max="50000000" step="100000" value="5000000" onchange="syncSlider('nw1','w1',cW)"></div>
-        </div>
-        <div class="sg">
-          <div class="sh"><span class="sl">Monthly Withdrawal</span><span class="sv" id="wv2">₹25,000</span></div>
-          <div class="sg-row"><input type="range" id="w2" min="1000" max="500000" step="1000" value="25000" oninput="cW()"><input type="number" id="nw2" class="sg-num" min="1000" max="500000" step="1000" value="25000" onchange="syncSlider('nw2','w2',cW)"></div>
-        </div>
-        <div class="sg">
-          <div class="sh"><span class="sl">Expected Return</span><span class="sv" id="wv3">8%</span></div>
-          <div class="sg-row"><input type="range" id="w3" min="1" max="20" step=".5" value="8" oninput="cW()"><input type="number" id="nw3" class="sg-num" min="1" max="20" step=".5" value="8" onchange="syncSlider('nw3','w3',cW)"></div>
-        </div>
-        <div class="sg">
-          <div class="sh"><span class="sl">Time Period (Years)</span><span class="sv" id="wv4">20</span></div>
-          <div class="sg-row"><input type="range" id="w4" min="1" max="40" step="1" value="20" oninput="cW()"><input type="number" id="nw4" class="sg-num" min="1" max="40" step="1" value="20" onchange="syncSlider('nw4','w4',cW)"></div>
-        </div>
-      </div>
-      <div class="cr"><h3>Results</h3>
-        <div class="rr"><span class="rl">Total Investment</span><span class="rv" id="ws1"></span></div>
-        <div class="rr"><span class="rl">Total Withdrawn</span><span class="rv" id="ws2"></span></div>
-        <div class="rr"><span class="rl">Remaining Corpus</span><span class="rv b" id="ws3"></span></div>
-        <div style="margin-top:16px;padding:14px;background:rgba(46,204,138,.06);border:1px solid rgba(46,204,138,.15);border-radius:8px"><div style="font-size:.82rem;font-weight:600" id="ws4">✓ Corpus lasts</div></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="cd">Disclaimer: Calculations are for illustration purposes only and assume constant rates. Actual returns may vary. Mutual fund investments are subject to market risks. Please read all scheme-related documents carefully before investing.</div>
-</div>
-
-<!-- ADVANCED CALCULATORS -->
-<section style="padding:60px 5% 80px;background:var(--bg2)">
-  <div style="max-width:1280px;margin:0 auto">
-    <div class="svc-head" style="margin-bottom:44px">
-      <div class="svc-tag">Advanced Tools</div>
-      <h2 class="svc-title">More <em>Calculators</em></h2>
-      <p class="svc-sub">Step-Up SIP, EMI, Retirement Corpus, Goal Planner, Cost of Delay, and Life Insurance Need — all built in.</p>
-    </div>
+  <!-- ── Category 1: SIP & Wealth ── -->
+  <div class="cat-pane on" id="cat-sip">
     <div class="xc-grid">
 
-      <!-- 1. STEP-UP SIP -->
-      <div class="xc-card">
+      <!-- SIP Calculator -->
+      <div class="xc-card" data-calc-key="sip">
+        <div class="xc-head"><div class="xc-ico">📈</div><div><div class="xc-name">SIP Calculator</div><div class="xc-sub">Project monthly SIP returns over time</div></div></div>
+        <div class="sg"><div class="sh"><span class="sl">Monthly Investment</span><span class="sv" id="v1">₹5,000</span></div><div class="sg-row"><input type="range" id="r1" min="500" max="100000" step="500" value="5000" oninput="cS()"><input type="number" id="nr1" class="sg-num" min="500" max="100000" step="500" value="5000" onchange="syncSlider('nr1','r1',cS)"></div></div>
+        <div class="sg"><div class="sh"><span class="sl">Expected Return (p.a.)</span><span class="sv" id="v2">12%</span></div><div class="sg-row"><input type="range" id="r2" min="1" max="30" step=".5" value="12" oninput="cS()"><input type="number" id="nr2" class="sg-num" min="1" max="30" step=".5" value="12" onchange="syncSlider('nr2','r2',cS)"></div></div>
+        <div class="sg"><div class="sh"><span class="sl">Time Period (Years)</span><span class="sv" id="v3">10</span></div><div class="sg-row"><input type="range" id="r3" min="1" max="40" step="1" value="10" oninput="cS()"><input type="number" id="nr3" class="sg-num" min="1" max="40" step="1" value="10" onchange="syncSlider('nr3','r3',cS)"></div></div>
+        <div class="xc-result-box" style="display:flex;justify-content:center;padding:10px">
+          <div class="dn" style="margin:0"><canvas id="d1" width="160" height="160"></canvas><div class="dc"><div class="dc-n" id="p1">—</div><div class="dc-l">Returns</div></div></div>
+        </div>
+        <div class="xc-sub-results" style="grid-template-columns:repeat(3,1fr)">
+          <div class="xc-sub-r"><div class="xc-sub-r-val" id="i1">—</div><div class="xc-sub-r-lbl">Invested</div></div>
+          <div class="xc-sub-r"><div class="xc-sub-r-val" id="e1" style="color:#4ade80">—</div><div class="xc-sub-r-lbl">Returns</div></div>
+          <div class="xc-sub-r"><div class="xc-sub-r-val" id="t1" style="color:var(--gold2)">—</div><div class="xc-sub-r-lbl">Final Value</div></div>
+        </div>
+        <a href="sip.html" class="xc-cta">Learn About SIP →</a>
+      </div>
+
+      <!-- Lumpsum Calculator -->
+      <div class="xc-card" data-calc-key="lumpsum">
+        <div class="xc-head"><div class="xc-ico">💰</div><div><div class="xc-name">Lumpsum Calculator</div><div class="xc-sub">One-time investment growth projector</div></div></div>
+        <div class="sg"><div class="sh"><span class="sl">Investment Amount</span><span class="sv" id="lv1">₹1,00,000</span></div><div class="sg-row"><input type="range" id="l1" min="10000" max="10000000" step="10000" value="100000" oninput="cL()"><input type="number" id="nl1" class="sg-num" min="10000" max="10000000" step="10000" value="100000" onchange="syncSlider('nl1','l1',cL)"></div></div>
+        <div class="sg"><div class="sh"><span class="sl">Expected Return (p.a.)</span><span class="sv" id="lv2">12%</span></div><div class="sg-row"><input type="range" id="l2" min="1" max="30" step=".5" value="12" oninput="cL()"><input type="number" id="nl2" class="sg-num" min="1" max="30" step=".5" value="12" onchange="syncSlider('nl2','l2',cL)"></div></div>
+        <div class="sg"><div class="sh"><span class="sl">Time Period (Years)</span><span class="sv" id="lv3">10</span></div><div class="sg-row"><input type="range" id="l3" min="1" max="40" step="1" value="10" oninput="cL()"><input type="number" id="nl3" class="sg-num" min="1" max="40" step="1" value="10" onchange="syncSlider('nl3','l3',cL)"></div></div>
+        <div class="xc-result-box" style="display:flex;justify-content:center;padding:10px">
+          <div class="dn" style="margin:0"><canvas id="d2" width="160" height="160"></canvas><div class="dc"><div class="dc-n" id="p2">—</div><div class="dc-l">Returns</div></div></div>
+        </div>
+        <div class="xc-sub-results" style="grid-template-columns:repeat(3,1fr)">
+          <div class="xc-sub-r"><div class="xc-sub-r-val" id="li1">—</div><div class="xc-sub-r-lbl">Invested</div></div>
+          <div class="xc-sub-r"><div class="xc-sub-r-val" id="le1" style="color:#4ade80">—</div><div class="xc-sub-r-lbl">Returns</div></div>
+          <div class="xc-sub-r"><div class="xc-sub-r-val" id="lt1" style="color:var(--gold2)">—</div><div class="xc-sub-r-lbl">Final Value</div></div>
+        </div>
+        <a href="sip.html" class="xc-cta">Invest Lumpsum →</a>
+      </div>
+
+      <!-- Step-Up SIP -->
+      <div class="xc-card" data-calc-key="stepup">
         <div class="xc-head"><div class="xc-ico">📈</div><div><div class="xc-name">Step-Up SIP Calculator</div><div class="xc-sub">Increase SIP annually and see the wealth multiplier effect</div></div></div>
         <div class="sg"><div class="sh"><span class="sl">Monthly SIP</span><span class="sv" id="su_v1">₹5,000</span></div><div class="sg-row"><input type="range" id="su_r1" min="500" max="100000" step="500" value="5000" oninput="xcSU()"><input type="number" id="su_n1" class="sg-num" min="500" max="100000" step="500" value="5000" onchange="document.getElementById('su_r1').value=this.value;xcSU()"></div></div>
         <div class="sg"><div class="sh"><span class="sl">Annual Step-Up %</span><span class="sv" id="su_v2">10%</span></div><div class="sg-row"><input type="range" id="su_r2" min="0" max="30" step="1" value="10" oninput="xcSU()"><input type="number" id="su_n2" class="sg-num" min="0" max="30" step="1" value="10" onchange="document.getElementById('su_r2').value=this.value;xcSU()"></div></div>
@@ -217,19 +141,29 @@
         <a href="sip.html" class="xc-cta">Learn About SIP →</a>
       </div>
 
-      <!-- 2. EMI CALCULATOR -->
-      <div class="xc-card">
-        <div class="xc-head"><div class="xc-ico">💳</div><div><div class="xc-name">EMI Calculator</div><div class="xc-sub">Calculate monthly instalment for any loan</div></div></div>
-        <div class="sg"><div class="sh"><span class="sl">Loan Amount</span><span class="sv" id="em_v1">₹20,00,000</span></div><div class="sg-row"><input type="range" id="em_r1" min="50000" max="50000000" step="50000" value="2000000" oninput="xcEM()"><input type="number" id="em_n1" class="sg-num" min="50000" max="50000000" step="50000" value="2000000" onchange="document.getElementById('em_r1').value=this.value;xcEM()"></div></div>
-        <div class="sg"><div class="sh"><span class="sl">Interest Rate (p.a.)</span><span class="sv" id="em_v2">8.5%</span></div><div class="sg-row"><input type="range" id="em_r2" min="1" max="24" step="0.1" value="8.5" oninput="xcEM()"><input type="number" id="em_n2" class="sg-num" min="1" max="24" step="0.1" value="8.5" onchange="document.getElementById('em_r2').value=this.value;xcEM()"></div></div>
-        <div class="sg"><div class="sh"><span class="sl">Tenure (Years)</span><span class="sv" id="em_v3">20</span></div><div class="sg-row"><input type="range" id="em_r3" min="1" max="30" step="1" value="20" oninput="xcEM()"><input type="number" id="em_n3" class="sg-num" min="1" max="30" step="1" value="20" onchange="document.getElementById('em_r3').value=this.value;xcEM()"></div></div>
-        <div class="xc-result-box"><div class="xc-result-val" id="em_emi">—</div><div class="xc-result-lbl">Monthly EMI</div></div>
-        <div class="xc-sub-results"><div class="xc-sub-r"><div class="xc-sub-r-val" id="em_total">—</div><div class="xc-sub-r-lbl">Total Payment</div></div><div class="xc-sub-r"><div class="xc-sub-r-val" id="em_interest" style="color:#f87171">—</div><div class="xc-sub-r-lbl">Total Interest</div></div></div>
-        <a href="loan.html" class="xc-cta">Loan Against Securities →</a>
+    </div>
+  </div>
+
+  <!-- ── Category 2: Goals & Retirement ── -->
+  <div class="cat-pane" id="cat-goals">
+    <div class="xc-grid">
+
+      <!-- Basic Goal Calculator -->
+      <div class="xc-card" data-calc-key="goal">
+        <div class="xc-head"><div class="xc-ico">🏁</div><div><div class="xc-name">Goal Calculator</div><div class="xc-sub">How much SIP or lumpsum to reach a fixed target</div></div></div>
+        <div class="sg"><div class="sh"><span class="sl">Target Amount</span><span class="sv" id="gv1">₹50,00,000</span></div><div class="sg-row"><input type="range" id="g1" min="100000" max="50000000" step="100000" value="5000000" oninput="cG()"><input type="number" id="ng1" class="sg-num" min="100000" max="50000000" step="100000" value="5000000" onchange="syncSlider('ng1','g1',cG)"></div></div>
+        <div class="sg"><div class="sh"><span class="sl">Expected Return</span><span class="sv" id="gv2">12%</span></div><div class="sg-row"><input type="range" id="g2" min="1" max="30" step=".5" value="12" oninput="cG()"><input type="number" id="ng2" class="sg-num" min="1" max="30" step=".5" value="12" onchange="syncSlider('ng2','g2',cG)"></div></div>
+        <div class="sg"><div class="sh"><span class="sl">Time Available (Years)</span><span class="sv" id="gv3">15</span></div><div class="sg-row"><input type="range" id="g3" min="1" max="40" step="1" value="15" oninput="cG()"><input type="number" id="ng3" class="sg-num" min="1" max="40" step="1" value="15" onchange="syncSlider('ng3','g3',cG)"></div></div>
+        <div class="xc-result-box"><div class="xc-result-val" id="gs1">—</div><div class="xc-result-lbl">Monthly SIP Needed</div></div>
+        <div class="xc-sub-results">
+          <div class="xc-sub-r"><div class="xc-sub-r-val" id="gs2">—</div><div class="xc-sub-r-lbl">OR Lumpsum Today</div></div>
+          <div class="xc-sub-r"><div class="xc-sub-r-val" id="gs4" style="color:var(--gold2)">—</div><div class="xc-sub-r-lbl">Target Amount</div></div>
+        </div>
+        <a href="contact.html" class="xc-cta">Plan My Goal →</a>
       </div>
 
-      <!-- 3. GOAL PLANNER -->
-      <div class="xc-card">
+      <!-- Goal Planner (inflation-adjusted) -->
+      <div class="xc-card" data-calc-key="goalplanner">
         <div class="xc-head"><div class="xc-ico">🎯</div><div><div class="xc-name">Goal Planner</div><div class="xc-sub">Education, wedding, property, vacation — any dream</div></div></div>
         <div class="sg"><div class="sh"><span class="sl">Goal Amount (Today's Value)</span><span class="sv" id="gp_v1">₹25,00,000</span></div><div class="sg-row"><input type="range" id="gp_r1" min="100000" max="100000000" step="100000" value="2500000" oninput="xcGP()"><input type="number" id="gp_n1" class="sg-num" min="100000" max="100000000" step="100000" value="2500000" onchange="document.getElementById('gp_r1').value=this.value;xcGP()"></div></div>
         <div class="sg"><div class="sh"><span class="sl">Years to Goal</span><span class="sv" id="gp_v2">10</span></div><div class="sg-row"><input type="range" id="gp_r2" min="1" max="30" step="1" value="10" oninput="xcGP()"><input type="number" id="gp_n2" class="sg-num" min="1" max="30" step="1" value="10" onchange="document.getElementById('gp_r2').value=this.value;xcGP()"></div></div>
@@ -240,8 +174,8 @@
         <a href="contact.html" class="xc-cta">Plan My Goal →</a>
       </div>
 
-      <!-- 4. RETIREMENT CORPUS -->
-      <div class="xc-card">
+      <!-- Retirement Corpus -->
+      <div class="xc-card" data-calc-key="retirement">
         <div class="xc-head"><div class="xc-ico">🌅</div><div><div class="xc-name">Retirement Corpus Calculator</div><div class="xc-sub">Find out exactly how much you need to retire comfortably</div></div></div>
         <div class="sg"><div class="sh"><span class="sl">Current Monthly Expense</span><span class="sv" id="rc_v1">₹50,000</span></div><div class="sg-row"><input type="range" id="rc_r1" min="10000" max="500000" step="5000" value="50000" oninput="xcRC()"><input type="number" id="rc_n1" class="sg-num" min="10000" max="500000" step="5000" value="50000" onchange="document.getElementById('rc_r1').value=this.value;xcRC()"></div></div>
         <div class="sg"><div class="sh"><span class="sl">Years to Retirement</span><span class="sv" id="rc_v2">25</span></div><div class="sg-row"><input type="range" id="rc_r2" min="1" max="40" step="1" value="25" oninput="xcRC()"><input type="number" id="rc_n2" class="sg-num" min="1" max="40" step="1" value="25" onchange="document.getElementById('rc_r2').value=this.value;xcRC()"></div></div>
@@ -252,8 +186,8 @@
         <a href="retirement.html" class="xc-cta">Retirement Planning →</a>
       </div>
 
-      <!-- 5. COST OF DELAY -->
-      <div class="xc-card">
+      <!-- Cost of Delay -->
+      <div class="xc-card" data-calc-key="delay">
         <div class="xc-head"><div class="xc-ico">⏰</div><div><div class="xc-name">Cost of Delay Calculator</div><div class="xc-sub">See how much wealth you lose by waiting to start</div></div></div>
         <div class="sg"><div class="sh"><span class="sl">Monthly SIP</span><span class="sv" id="cd_v1">₹10,000</span></div><div class="sg-row"><input type="range" id="cd_r1" min="500" max="100000" step="500" value="10000" oninput="xcCD()"><input type="number" id="cd_n1" class="sg-num" min="500" max="100000" step="500" value="10000" onchange="document.getElementById('cd_r1').value=this.value;xcCD()"></div></div>
         <div class="sg"><div class="sh"><span class="sl">Expected Return (p.a.)</span><span class="sv" id="cd_v2">12%</span></div><div class="sg-row"><input type="range" id="cd_r2" min="1" max="25" step="0.5" value="12" oninput="xcCD()"><input type="number" id="cd_n2" class="sg-num" min="1" max="25" step="0.5" value="12" onchange="document.getElementById('cd_r2').value=this.value;xcCD()"></div></div>
@@ -264,8 +198,39 @@
         <a href="contact.html" class="xc-cta">Start Investing Today →</a>
       </div>
 
-      <!-- 6. LIFE INSURANCE NEED -->
-      <div class="xc-card">
+    </div>
+  </div>
+
+  <!-- ── Category 3: Loans & Protection ── -->
+  <div class="cat-pane" id="cat-loans">
+    <div class="xc-grid">
+
+      <!-- SWP Calculator -->
+      <div class="xc-card" data-calc-key="swp">
+        <div class="xc-head"><div class="xc-ico">🏦</div><div><div class="xc-name">SWP Calculator</div><div class="xc-sub">Plan systematic monthly withdrawals from your corpus</div></div></div>
+        <div class="sg"><div class="sh"><span class="sl">Initial Corpus</span><span class="sv" id="wv1">₹50,00,000</span></div><div class="sg-row"><input type="range" id="w1" min="100000" max="50000000" step="100000" value="5000000" oninput="cW()"><input type="number" id="nw1" class="sg-num" min="100000" max="50000000" step="100000" value="5000000" onchange="syncSlider('nw1','w1',cW)"></div></div>
+        <div class="sg"><div class="sh"><span class="sl">Monthly Withdrawal</span><span class="sv" id="wv2">₹25,000</span></div><div class="sg-row"><input type="range" id="w2" min="1000" max="500000" step="1000" value="25000" oninput="cW()"><input type="number" id="nw2" class="sg-num" min="1000" max="500000" step="1000" value="25000" onchange="syncSlider('nw2','w2',cW)"></div></div>
+        <div class="sg"><div class="sh"><span class="sl">Expected Return</span><span class="sv" id="wv3">8%</span></div><div class="sg-row"><input type="range" id="w3" min="1" max="20" step=".5" value="8" oninput="cW()"><input type="number" id="nw3" class="sg-num" min="1" max="20" step=".5" value="8" onchange="syncSlider('nw3','w3',cW)"></div></div>
+        <div class="sg"><div class="sh"><span class="sl">Time Period (Years)</span><span class="sv" id="wv4">20</span></div><div class="sg-row"><input type="range" id="w4" min="1" max="40" step="1" value="20" oninput="cW()"><input type="number" id="nw4" class="sg-num" min="1" max="40" step="1" value="20" onchange="syncSlider('nw4','w4',cW)"></div></div>
+        <div class="xc-result-box"><div class="xc-result-val" id="ws3">—</div><div class="xc-result-lbl">Remaining Corpus</div></div>
+        <div class="xc-sub-results"><div class="xc-sub-r"><div class="xc-sub-r-val" id="ws1">—</div><div class="xc-sub-r-lbl">Initial Corpus</div></div><div class="xc-sub-r"><div class="xc-sub-r-val" id="ws2">—</div><div class="xc-sub-r-lbl">Total Withdrawn</div></div></div>
+        <div style="margin-top:10px;padding:10px 14px;background:rgba(46,204,138,.06);border:1px solid rgba(46,204,138,.15);border-radius:8px;font-size:.82rem;font-weight:600" id="ws4">✓ Corpus lasts</div>
+        <a href="retirement.html" class="xc-cta">Retirement Planning →</a>
+      </div>
+
+      <!-- EMI Calculator -->
+      <div class="xc-card" data-calc-key="emi">
+        <div class="xc-head"><div class="xc-ico">💳</div><div><div class="xc-name">EMI Calculator</div><div class="xc-sub">Calculate monthly instalment for any loan</div></div></div>
+        <div class="sg"><div class="sh"><span class="sl">Loan Amount</span><span class="sv" id="em_v1">₹20,00,000</span></div><div class="sg-row"><input type="range" id="em_r1" min="50000" max="50000000" step="50000" value="2000000" oninput="xcEM()"><input type="number" id="em_n1" class="sg-num" min="50000" max="50000000" step="50000" value="2000000" onchange="document.getElementById('em_r1').value=this.value;xcEM()"></div></div>
+        <div class="sg"><div class="sh"><span class="sl">Interest Rate (p.a.)</span><span class="sv" id="em_v2">8.5%</span></div><div class="sg-row"><input type="range" id="em_r2" min="1" max="24" step="0.1" value="8.5" oninput="xcEM()"><input type="number" id="em_n2" class="sg-num" min="1" max="24" step="0.1" value="8.5" onchange="document.getElementById('em_r2').value=this.value;xcEM()"></div></div>
+        <div class="sg"><div class="sh"><span class="sl">Tenure (Years)</span><span class="sv" id="em_v3">20</span></div><div class="sg-row"><input type="range" id="em_r3" min="1" max="30" step="1" value="20" oninput="xcEM()"><input type="number" id="em_n3" class="sg-num" min="1" max="30" step="1" value="20" onchange="document.getElementById('em_r3').value=this.value;xcEM()"></div></div>
+        <div class="xc-result-box"><div class="xc-result-val" id="em_emi">—</div><div class="xc-result-lbl">Monthly EMI</div></div>
+        <div class="xc-sub-results"><div class="xc-sub-r"><div class="xc-sub-r-val" id="em_total">—</div><div class="xc-sub-r-lbl">Total Payment</div></div><div class="xc-sub-r"><div class="xc-sub-r-val" id="em_interest" style="color:#f87171">—</div><div class="xc-sub-r-lbl">Total Interest</div></div></div>
+        <a href="loan.html" class="xc-cta">Loan Against Securities →</a>
+      </div>
+
+      <!-- Life Insurance Need -->
+      <div class="xc-card" data-calc-key="insurance">
         <div class="xc-head"><div class="xc-ico">🛡️</div><div><div class="xc-name">Life Insurance Need Calculator</div><div class="xc-sub">Find the right cover amount for your family</div></div></div>
         <div class="sg"><div class="sh"><span class="sl">Annual Income</span><span class="sv" id="li_v1">₹10,00,000</span></div><div class="sg-row"><input type="range" id="li_r1" min="200000" max="10000000" step="100000" value="1000000" oninput="xcLI()"><input type="number" id="li_n1" class="sg-num" min="200000" max="10000000" step="100000" value="1000000" onchange="document.getElementById('li_r1').value=this.value;xcLI()"></div></div>
         <div class="sg"><div class="sh"><span class="sl">Years to Retirement</span><span class="sv" id="li_v2">25</span></div><div class="sg-row"><input type="range" id="li_r2" min="5" max="40" step="1" value="25" oninput="xcLI()"><input type="number" id="li_n2" class="sg-num" min="5" max="40" step="1" value="25" onchange="document.getElementById('li_r2').value=this.value;xcLI()"></div></div>
@@ -278,10 +243,27 @@
 
     </div>
   </div>
-</section>
+
+  <div class="cd">Disclaimer: Calculations are for illustration purposes only and assume constant rates. Actual returns may vary. Mutual fund investments are subject to market risks. Please read all scheme-related documents carefully before investing.</div>
+</div>
 
 <style>
-.xc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:24px}
+/* ── Category tabs ── */
+.cat-nav{padding:0 5%;background:var(--bg)}
+.cat-tabs{display:flex;gap:10px;max-width:1280px;margin:0 auto;padding:28px 0 0;overflow-x:auto;scrollbar-width:none}
+.cat-tabs::-webkit-scrollbar{display:none}
+.cat-btn{flex-shrink:0;padding:11px 22px;border:1px solid rgba(201,168,76,.2);border-radius:30px;background:transparent;color:var(--t2);font-size:.84rem;font-family:'Outfit',sans-serif;cursor:pointer;transition:all .2s;white-space:nowrap}
+.cat-btn.on{background:rgba(201,168,76,.1);border-color:var(--gold);color:var(--gold);font-weight:500}
+.cat-btn:hover:not(.on){border-color:rgba(201,168,76,.4);color:var(--t1)}
+.cat-pane{display:none}
+.cat-pane.on{display:block}
+
+/* ── Calc section container ── */
+.calc-section{padding:28px 5% 80px;background:var(--bg)}
+.calc-section .xc-grid{max-width:1280px;margin:0 auto}
+
+/* ── xc-card styles ── */
+.xc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:24px}
 .xc-card{background:var(--bg3);border:1px solid rgba(201,168,76,.1);border-radius:16px;padding:28px;transition:border-color .3s}
 .xc-card:hover{border-color:rgba(201,168,76,.2)}
 .xc-head{display:flex;align-items:center;gap:14px;margin-bottom:18px}
@@ -297,35 +279,48 @@
 .xc-sub-r-lbl{font-size:.62rem;color:var(--t3);margin-top:2px}
 .xc-cta{display:block;text-align:center;margin-top:14px;padding:9px;border:1px solid rgba(201,168,76,.2);border-radius:8px;font-size:.78rem;color:var(--gold);text-decoration:none;transition:all .2s}
 .xc-cta:hover{background:rgba(201,168,76,.08);border-color:var(--gold)}
-@media(max-width:700px){.xc-grid{grid-template-columns:1fr}}
+
+/* ── Donut chart ── */
+.dn{position:relative;display:flex;justify-content:center;margin:6px 0}
+.dc{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;pointer-events:none}
+.dc-n{font-size:1.2rem;font-weight:700;color:var(--t1);font-family:'Cormorant Garamond',serif}
+.dc-l{font-size:.6rem;color:var(--t3);letter-spacing:.5px}
+
+/* ── Disclaimer ── */
+.cd{max-width:1280px;margin:28px auto 0;padding:14px 18px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:8px;font-size:.72rem;color:var(--t3);line-height:1.7}
+
+@media(max-width:700px){
+  .xc-grid{grid-template-columns:1fr}
+  .cat-btn{padding:9px 16px;font-size:.79rem}
+}
 </style>
 
 <script>
+function switchCat(id,el){
+  document.querySelectorAll('.cat-pane').forEach(p=>p.classList.remove('on'));
+  document.querySelectorAll('.cat-btn').forEach(b=>b.classList.remove('on'));
+  const pane=document.getElementById('cat-'+id);
+  if(pane)pane.classList.add('on');
+  el.classList.add('on');
+}
+
 function xcFmt(n){if(n>=1e7)return'₹'+(n/1e7).toFixed(2)+' Cr';if(n>=1e5)return'₹'+(n/1e5).toFixed(2)+' L';if(n>=1e3)return'₹'+(n/1e3).toFixed(1)+'K';return'₹'+Math.round(n).toLocaleString('en-IN')}
 function sipFV(monthly,rAnnual,yrs){var r=rAnnual/100/12,n=yrs*12;return monthly*(Math.pow(1+r,n)-1)/r*(1+r)}
 function sipRequired(fv,rAnnual,yrs){var r=rAnnual/100/12,n=yrs*12;return fv*r/((Math.pow(1+r,n)-1)*(1+r))}
 function pvLumpsum(fv,rAnnual,yrs){return fv/Math.pow(1+rAnnual/100,yrs)}
 
-// Step-Up SIP
 function xcSU(){
   var p=parseFloat(document.getElementById('su_r1').value),g=parseFloat(document.getElementById('su_r2').value),r=parseFloat(document.getElementById('su_r3').value),y=parseFloat(document.getElementById('su_r4').value);
   document.getElementById('su_v1').textContent=xcFmt(p);document.getElementById('su_v2').textContent=g+'%';document.getElementById('su_v3').textContent=r+'%';document.getElementById('su_v4').textContent=y;
   document.getElementById('su_n1').value=p;document.getElementById('su_n2').value=g;document.getElementById('su_n3').value=r;document.getElementById('su_n4').value=y;
   var mr=r/100/12,fv=0,sip=p;
-  for(var yr=0;yr<y;yr++){for(var m=0;m<12;m++){fv+=(fv+sip)*(1+mr);fv-=fv-fv;}/* correct loop */}
-  // proper calculation
-  fv=0;sip=p;
-  for(var yr=0;yr<y;yr++){
-    for(var m=0;m<12;m++){fv=(fv+sip)*(1+mr);}
-    sip*=(1+g/100);
-  }
+  for(var yr=0;yr<y;yr++){for(var m=0;m<12;m++){fv=(fv+sip)*(1+mr);}sip*=(1+g/100);}
   var normal=sipFV(p,r,y);
   document.getElementById('su_corpus').textContent=xcFmt(fv);
   document.getElementById('su_normal').textContent=xcFmt(normal);
   document.getElementById('su_extra').textContent='+'+xcFmt(Math.max(0,fv-normal));
 }
 
-// EMI
 function xcEM(){
   var P=parseFloat(document.getElementById('em_r1').value),rate=parseFloat(document.getElementById('em_r2').value),yrs=parseFloat(document.getElementById('em_r3').value);
   document.getElementById('em_v1').textContent=xcFmt(P);document.getElementById('em_v2').textContent=rate+'%';document.getElementById('em_v3').textContent=yrs;
@@ -338,7 +333,6 @@ function xcEM(){
   document.getElementById('em_interest').textContent=xcFmt(Math.round(interest));
 }
 
-// Goal Planner
 function xcGP(){
   var goal=parseFloat(document.getElementById('gp_r1').value),yrs=parseFloat(document.getElementById('gp_r2').value),inf=parseFloat(document.getElementById('gp_r3').value),ret=parseFloat(document.getElementById('gp_r4').value);
   document.getElementById('gp_v1').textContent=xcFmt(goal);document.getElementById('gp_v2').textContent=yrs;document.getElementById('gp_v3').textContent=inf+'%';document.getElementById('gp_v4').textContent=ret+'%';
@@ -351,13 +345,11 @@ function xcGP(){
   document.getElementById('gp_lumpsum').textContent=xcFmt(Math.round(ls));
 }
 
-// Retirement Corpus
 function xcRC(){
   var exp=parseFloat(document.getElementById('rc_r1').value),yrs=parseFloat(document.getElementById('rc_r2').value),inf=parseFloat(document.getElementById('rc_r3').value),ret=parseFloat(document.getElementById('rc_r4').value);
   document.getElementById('rc_v1').textContent=xcFmt(exp);document.getElementById('rc_v2').textContent=yrs;document.getElementById('rc_v3').textContent=inf+'%';document.getElementById('rc_v4').textContent=ret+'%';
   document.getElementById('rc_n1').value=exp;document.getElementById('rc_n2').value=yrs;document.getElementById('rc_n3').value=inf;document.getElementById('rc_n4').value=ret;
   var expAtRetire=exp*Math.pow(1+inf/100,yrs);
-  // Corpus = 25× annual expense at retirement (standard rule), adjusted for post-retirement 6% return
   var postRet=6/100/12,retYrs=25*12;
   var corpus=expAtRetire*(1-Math.pow(1+postRet,-retYrs))/postRet;
   var sip=sipRequired(corpus,ret,yrs);
@@ -366,7 +358,6 @@ function xcRC(){
   document.getElementById('rc_exp').textContent=xcFmt(Math.round(expAtRetire));
 }
 
-// Cost of Delay
 function xcCD(){
   var sip=parseFloat(document.getElementById('cd_r1').value),ret=parseFloat(document.getElementById('cd_r2').value),total=parseFloat(document.getElementById('cd_r3').value),delay=parseFloat(document.getElementById('cd_r4').value);
   document.getElementById('cd_v1').textContent=xcFmt(sip);document.getElementById('cd_v2').textContent=ret+'%';document.getElementById('cd_v3').textContent=total;document.getElementById('cd_v4').textContent=delay;
@@ -374,18 +365,15 @@ function xcCD(){
   document.getElementById('cd_delay_lbl').textContent=delay;
   var now=sipFV(sip,ret,total);
   var later=sipFV(sip,ret,Math.max(1,total-delay));
-  var loss=now-later;
   document.getElementById('cd_now').textContent=xcFmt(Math.round(now));
   document.getElementById('cd_later').textContent=xcFmt(Math.round(later));
-  document.getElementById('cd_loss').textContent=xcFmt(Math.round(loss));
+  document.getElementById('cd_loss').textContent=xcFmt(Math.round(Math.max(0,now-later)));
 }
 
-// Life Insurance Need
 function xcLI(){
   var income=parseFloat(document.getElementById('li_r1').value),yrs=parseFloat(document.getElementById('li_r2').value),loans=parseFloat(document.getElementById('li_r3').value),existing=parseFloat(document.getElementById('li_r4').value);
   document.getElementById('li_v1').textContent=xcFmt(income);document.getElementById('li_v2').textContent=yrs;document.getElementById('li_v3').textContent=xcFmt(loans);document.getElementById('li_v4').textContent=xcFmt(existing);
   document.getElementById('li_n1').value=income;document.getElementById('li_n2').value=yrs;document.getElementById('li_n3').value=loans;document.getElementById('li_n4').value=existing;
-  // Human Life Value = PV of future income stream at 6% discount rate
   var r=6/100,hlv=income*(1-Math.pow(1+r,-yrs))/r;
   var recommended=hlv+loans;
   var gap=Math.max(0,recommended-existing);
@@ -394,16 +382,15 @@ function xcLI(){
   document.getElementById('li_gap').textContent=gap>0?('Gap: '+xcFmt(Math.round(gap))):'✓ Covered';
 }
 
-// Init all on load
 xcSU();xcEM();xcGP();xcRC();xcCD();xcLI();
 </script>
 
 <footer>
   <div class="f-grid">
     <div><div class="f-brand-name">Akshay Maheshwari</div><div class="f-brand-sub">Investment Advisor</div><p class="f-about">Helping individuals and families grow their wealth through smart, disciplined, and transparent financial guidance across India.</p></div>
-    <div><h5 class="f-h">Services</h5><ul class="f-list f-list-2col"><li><a href="sip.html">SIP &amp; Mutual Funds</a></li><li><a href="stock.html">Stock Market</a></li><li><a href="insurance.html">Insurance</a></li><li><a href="retirement.html">Retirement</a></li><li><a href="pms.html">PMS</a></li><li><a href="private-equity.html">Private Equity</a></li><li><a href="bonds.html">Bonds</a></li><li><a href="loan.html">Loan Against Security</a></li><li><a href="aif.html">AIF</a></li><li><a href="unlisted.html">Unlisted Securities</a></li><li><a href="gift-city.html">Gift City</a></li><li><a href="international.html">International Equities</a></li><li><a href="will.html">Will</a></li><li><a href="trust.html">Trust</a></li><li><a href="family-office.html">Family Office</a></li><li><a href="debt-financing.html">Debt Financing</a></li><li><a href="equity-financing.html">Equity Financing</a></li><li><a href="exit-planning.html">Exit Planning</a></li><li><a href="succession-planning.html">Succession Planning</a></li><li><a href="estate-planning.html">Estate Planning</a></li><li><a href="elite.html">Elite Advisory</a></li></ul></div>
+    <div><h5 class="f-h">Services</h5><ul class="f-list"><li><a href="services.html#wealth">Wealth &amp; Investments</a></li><li><a href="services.html#protection">Insurance &amp; Protection</a></li><li><a href="services.html#planning">Retirement &amp; Goals</a></li><li><a href="services.html#global">Global &amp; Alternatives</a></li><li><a href="services.html#financing">Financing &amp; Capital</a></li><li><a href="services.html#elite">Elite &amp; Family Office</a></li><li><a href="services.html" style="color:var(--gold)">View All Services →</a></li></ul></div>
     <div><h5 class="f-h">Company</h5><ul class="f-list"><li><a href="about.html">About</a></li><li><a href="testimonials.html">Testimonials</a></li><li><a href="calculators.html">Calculators</a></li><li><a href="contact.html">Contact</a></li></ul></div>
-    <div><h5 class="f-h">Connect</h5><ul class="f-list"><li><a href="tel:+919827599966">📱 +91 98275 99966</a></li><li><a href="mailto:yourmail@gmail.com">📧 yourmail@gmail.com</a></li><li><a href="https://www.kotaksecurities.com/landing-page/franchisee/open-demat-account-partner-madhu-maheshwari-neo" target="_blank">📊 Open Demat Account</a></li><li><a href="https://wa.me/919827599966?text=Hi%20Akshay%2C%20I%20am%20interested%20in%20your%20financial%20services." target="_blank">💬 WhatsApp</a></li></ul></div>
+    <div><h5 class="f-h">Connect</h5><ul class="f-list"><li><a href="tel:+919827599966">📱 +91 98275 99966</a></li><li><a href="mailto:">📧 Email</a></li><li><a href="https://www.kotaksecurities.com/landing-page/franchisee/open-demat-account-partner-madhu-maheshwari-neo" target="_blank">📊 Open Demat Account</a></li><li><a href="https://wa.me/919827599966?text=Hi%20Akshay%2C%20I%20am%20interested%20in%20your%20financial%20services." target="_blank">💬 WhatsApp</a></li></ul></div>
   </div>
   <div class="f-disc"><p style="font-weight:700;color:var(--gold);font-size:.8rem">AMFI Registered Mutual Fund Distributor &nbsp;|&nbsp; ARN-268752 &nbsp;&amp;&nbsp; ARN-33209</p><p style="margin-top:4px">Risk Factors – Investments in Mutual Funds are subject to Market Risks. Read all scheme related documents carefully before investing.</p></div><div class="f-comp"><a href="https://duoakfinserv.com/home/importantlinks" target="_blank">Important Links</a><span class="f-sep">|</span><a href="https://duoakfinserv.com/home/disclaimer" target="_blank">Disclaimer</a><span class="f-sep">|</span><a href="https://duoakfinserv.com/home/disclosure" target="_blank">Disclosure</a><span class="f-sep">|</span><a href="https://duoakfinserv.com/home/privacypolicy" target="_blank">Privacy Policy</a><span class="f-sep">|</span><a href="https://www.sebi.gov.in/filings/mutual-funds.html" target="_blank">SID/SAI/KIM</a><span class="f-sep">|</span><a href="https://duoakfinserv.com/content/codeof_conduct.pdf" target="_blank">Code of Conduct</a><span class="f-sep">|</span><a href="https://www.sebi.gov.in/sebiweb/home/HomeAction.do?doListing=yes&amp;sid=1&amp;ssid=7&amp;smid=0" target="_blank">SEBI Circulars</a><span class="f-sep">|</span><a href="https://www.amfiindia.com/investor-corner/knowledge-center/risks-in-mutual-funds.html" target="_blank">AMFI Risk Factors</a></div><div class="f-bot"><p>© 2025 Akshay Maheshwari. All rights reserved.</p></div>
 </footer>

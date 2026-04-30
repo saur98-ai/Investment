@@ -333,6 +333,8 @@ function setWafMsg(){
 setWafMsg();
 
 // ═══════ SEARCH ═══════
+let _svcDisabled=false,_calcDisabled=false;
+let _disabledSvcPages=new Set();
 const CALCULATORS=[
   {name:'SIP Calculator',ico:'🧮',url:'calculators.html'},
   {name:'Loan Calculator',ico:'🏦',url:'calculators.html'},
@@ -370,8 +372,8 @@ function doSearch(q){
   const res=document.getElementById('srchRes');if(!res)return;
   const term=q.trim().toLowerCase();
   if(!term){res.classList.remove('open');return;}
-  const svcMatches=SERVICES.filter(s=>s.name.toLowerCase().includes(term));
-  const calcMatches=CALCULATORS.filter(c=>c.name.toLowerCase().includes(term));
+  const svcMatches=SERVICES.filter(s=>!_disabledSvcPages.has(s.url)&&s.name.toLowerCase().includes(term));
+  const calcMatches=_calcDisabled?[]:CALCULATORS.filter(c=>c.name.toLowerCase().includes(term));
   const all=[
     ...svcMatches.map(s=>`<a class="srch-item" href="${s.url}"><span class="srch-item-ico">${s.ico}</span><span class="srch-item-name">${s.name}</span><span class="srch-item-tag">Service</span></a>`),
     ...calcMatches.map(c=>`<a class="srch-item" href="${c.url}"><span class="srch-item-ico">${c.ico}</span><span class="srch-item-name">${c.name}</span><span class="srch-item-tag" style="color:var(--t2)">Calculator</span></a>`)
@@ -489,6 +491,87 @@ async function loadDynamicContent(){
       }
     }catch(_){}
   }
+
+  // ── Page visibility settings ──
+  try{
+    const r=await fetch(API+'?key=settings');
+    if(r.ok){
+      const s=await r.json();
+      const cur=(window.location.pathname.split('/').pop()||'index.html').toLowerCase();
+
+      // ── Per-service disable ──
+      const SVC_URLS={
+        sSip:'sip.html',sStock:'stock.html',sPms:'pms.html',sBonds:'bonds.html',
+        sAif:'aif.html',sPrivateEquity:'private-equity.html',
+        sInsurance:'insurance.html',sWill:'will.html',sTrust:'trust.html',
+        sEstatePlanning:'estate-planning.html',sRetirement:'retirement.html',
+        sSuccessionPlanning:'succession-planning.html',sInternational:'international.html',
+        sGiftCity:'gift-city.html',sUnlisted:'unlisted.html',sLoan:'loan.html',
+        sDebtFinancing:'debt-financing.html',sEquityFinancing:'equity-financing.html',
+        sExitPlanning:'exit-planning.html',sFamilyOffice:'family-office.html',
+        sElite:'elite.html'
+      };
+      if(s.services){
+        Object.entries(s.services).forEach(([k,v])=>{if(!v&&SVC_URLS[k])_disabledSvcPages.add(SVC_URLS[k]);});
+      }else if(s.servicesEnabled===false){
+        Object.values(SVC_URLS).forEach(u=>_disabledSvcPages.add(u));
+        _disabledSvcPages.add('services.html');
+      }
+      if(_disabledSvcPages.size){
+        if(_disabledSvcPages.has(cur)){window.location.replace('index.html');return;}
+        document.querySelectorAll('a[href]').forEach(a=>{
+          const href=(a.getAttribute('href')||'').split('?')[0].split('#')[0].split('/').pop();
+          if(!_disabledSvcPages.has(href))return;
+          a.style.opacity='.3';a.style.pointerEvents='none';a.style.cursor='not-allowed';
+          a.title='Service temporarily unavailable';
+          const navEl=a.closest('.dm-item,.dm-cat');
+          if(navEl)navEl.style.display='none';
+        });
+        document.querySelectorAll('.dm-col').forEach(col=>{
+          if([...col.querySelectorAll('.dm-item,.dm-cat')].every(i=>i.style.display==='none'))col.style.display='none';
+        });
+        document.querySelectorAll('.dd').forEach(dd=>{
+          if([...dd.querySelectorAll('.dm-col')].every(c=>c.style.display==='none'))dd.style.display='none';
+        });
+      }
+
+      // ── Per-calculator disable ──
+      const calcKeys=['sip','lumpsum','stepup','goal','goalplanner','retirement','delay','swp','emi','insurance'];
+      const disabledCalcs=new Set();
+      if(s.calculators){
+        calcKeys.forEach(k=>{if(s.calculators[k]===false)disabledCalcs.add(k);});
+      }else if(s.calculatorEnabled===false){
+        calcKeys.forEach(k=>disabledCalcs.add(k));
+      }
+      if(disabledCalcs.size){
+        document.querySelectorAll('[data-calc-key]').forEach(card=>{
+          if(disabledCalcs.has(card.dataset.calcKey))card.style.display='none';
+        });
+        // Hide category tab if all its calculators are disabled; switch active tab if needed
+        [{cat:'sip',keys:['sip','lumpsum','stepup']},{cat:'goals',keys:['goal','goalplanner','retirement','delay']},{cat:'loans',keys:['swp','emi','insurance']}].forEach(({cat,keys})=>{
+          if(!keys.every(k=>disabledCalcs.has(k)))return;
+          const pane=document.getElementById('cat-'+cat);
+          const btn=document.getElementById('cbtn-'+cat);
+          const wasActive=pane&&pane.classList.contains('on');
+          if(pane)pane.style.display='none';
+          if(btn)btn.style.display='none';
+          if(wasActive){
+            const fp=document.querySelector('.cat-pane:not([style*="display: none"])');
+            const fb=document.querySelector('.cat-btn:not([style*="display: none"])');
+            if(fp)fp.classList.add('on');
+            if(fb)fb.classList.add('on');
+          }
+        });
+      }
+      if(calcKeys.every(k=>disabledCalcs.has(k))){
+        if(cur==='calculators.html'){window.location.replace('index.html');return;}
+        document.querySelectorAll('a[href]').forEach(a=>{
+          const href=(a.getAttribute('href')||'').split('?')[0].split('#')[0].split('/').pop();
+          if(href==='calculators.html'){a.style.opacity='.3';a.style.pointerEvents='none';a.style.cursor='not-allowed';}
+        });
+      }
+    }
+  }catch(_){}
 }
 
 loadDynamicContent();

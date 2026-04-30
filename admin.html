@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -7,9 +7,27 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/styles.css">
 <meta name="robots" content="noindex,nofollow">
+<style>
+.adm-sec-hd{display:flex;justify-content:space-between;align-items:center;cursor:pointer;user-select:none;margin-bottom:0;padding-bottom:0}
+.adm-chev{font-size:.7rem;color:var(--t3);transition:transform .22s;flex-shrink:0;margin-left:10px}
+.adm-sec.collapsed .adm-chev{transform:rotate(-90deg)}
+.adm-sec.collapsed .adm-sec-body{display:none}
+.adm-sec-body{padding-top:18px}
+.adm-badge{font-size:.62rem;background:rgba(201,168,76,.13);color:var(--gold);padding:2px 8px;border-radius:10px;margin-left:8px;font-weight:600;vertical-align:middle}
+.adm-toggle{position:relative;display:inline-block;width:40px;height:22px;flex-shrink:0}
+.adm-toggle input{opacity:0;width:0;height:0;position:absolute}
+.adm-slider{position:absolute;top:0;left:0;right:0;bottom:0;background:rgba(255,255,255,.12);border-radius:22px;transition:.22s;cursor:pointer}
+.adm-slider:before{content:'';position:absolute;height:16px;width:16px;left:3px;bottom:3px;background:rgba(255,255,255,.4);border-radius:50%;transition:.22s}
+.adm-toggle input:checked+.adm-slider{background:var(--gold)}
+.adm-toggle input:checked+.adm-slider:before{transform:translateX(18px);background:#fff}
+.adm-row{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.04)}
+.adm-row:last-child{border-bottom:none}
+.adm-row-label{font-size:.83rem;color:var(--t1)}
+.vis-grp{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.05);border-radius:8px;padding:0 14px;margin-top:10px}
+.vis-grp-title{font-size:.62rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--t3);padding:11px 0 3px}
+</style>
 </head>
 <body>
-
 <div class="stars" id="stars"></div>
 
 <div class="adm-page">
@@ -19,8 +37,8 @@
     <div style="font-size:3rem;margin-bottom:12px">🔐</div>
     <h2>Admin Panel</h2>
     <p style="font-size:.85rem;color:var(--t2);margin-bottom:28px">Akshay Maheshwari — Investment Advisor</p>
-    <input type="password" class="adm-inp" id="admPwd" placeholder="Enter admin secret" onkeydown="if(event.key==='Enter')admLogin()">
-    <div class="adm-err" id="admErr" style="display:none">Incorrect password. Check Netlify → Environment Variables → ADMIN_SECRET.</div>
+    <input type="password" class="adm-inp" id="admPwd" placeholder="Enter admin password" onkeydown="if(event.key==='Enter')admLogin()">
+    <div id="admErr" style="display:none;font-size:.78rem;color:var(--red);margin-top:10px">Incorrect password.</div>
     <button class="adm-btn" onclick="admLogin()" style="margin-top:14px">Login →</button>
   </div>
 
@@ -28,150 +46,254 @@
   <div class="adm-panel" id="admPanel">
     <div class="adm-panel-hd">
       <h2>⚙️ Admin Panel</h2>
-      <button class="adm-btn sec" style="width:auto" onclick="admLogout()">Logout</button>
+      <button class="adm-btn del" style="width:auto;padding:8px 20px" onclick="admLogout()">Logout</button>
     </div>
 
-    <!-- STATUS NOTICES -->
-    <div id="noticeOk" style="display:none;background:rgba(46,204,138,.08);border:1px solid rgba(46,204,138,.25);border-radius:10px;padding:14px 20px;margin-bottom:8px;font-size:.82rem;color:#2ECC8A">
-      ✓ Saved — changes are live instantly on your website.
-    </div>
-    <div id="noticeErr" style="display:none;background:rgba(224,85,85,.08);border:1px solid rgba(224,85,85,.25);border-radius:10px;padding:14px 20px;margin-bottom:8px;font-size:.82rem;color:#E05555">
-      ✕ Save failed. Check that ADMIN_SECRET is set in Netlify → Environment Variables.
-    </div>
+    <div id="noticeOk" style="display:none;background:rgba(46,204,138,.08);border:1px solid rgba(46,204,138,.25);border-radius:10px;padding:11px 16px;margin-bottom:10px;font-size:.81rem;color:#2ECC8A">✓ Saved — changes are live.</div>
+    <div id="noticeErr" style="display:none;background:rgba(224,85,85,.08);border:1px solid rgba(224,85,85,.25);border-radius:10px;padding:11px 16px;margin-bottom:10px;font-size:.81rem;color:#E05555">✕ Save failed. Check your connection.</div>
 
-    <!-- CONTACT INFO -->
-    <div class="adm-sec">
-      <h3>📱 Contact & Links</h3>
-      <div class="adm-grid">
-        <div class="adm-field"><span class="adm-label">Phone Number</span><input class="adm-inp" id="cfgPhone" placeholder="9827599966"></div>
-        <div class="adm-field"><span class="adm-label">Email</span><input class="adm-inp" id="cfgEmail" placeholder="yourmail@gmail.com"></div>
-        <div class="adm-field"><span class="adm-label">WhatsApp Number</span><input class="adm-inp" id="cfgWhatsapp" placeholder="919827599966"></div>
-        <div class="adm-field"><span class="adm-label">WhatsApp Message</span><input class="adm-inp" id="cfgWaMsg" placeholder="I am interested in your financial services."></div>
-        <div class="adm-field"><span class="adm-label">Kotak Demat Link</span><input class="adm-inp" id="cfgKotak" placeholder="https://www.kotaksecurities.com/..."></div>
-        <div class="adm-field"><span class="adm-label">Instagram URL</span><input class="adm-inp" id="cfgInsta" placeholder="https://instagram.com/..."></div>
-        <div class="adm-field"><span class="adm-label">Facebook URL</span><input class="adm-inp" id="cfgFb" placeholder="https://facebook.com/..."></div>
-        <div class="adm-field"><span class="adm-label">LinkedIn URL</span><input class="adm-inp" id="cfgLi" placeholder="https://linkedin.com/..."></div>
+    <!-- ① CONTACT -->
+    <div class="adm-sec" id="secContact">
+      <div class="adm-sec-hd" onclick="toggleSec('secContact')">
+        <h3 style="margin:0">📱 Contact & Links</h3>
+        <span class="adm-chev">▼</span>
       </div>
-      <button class="adm-btn" id="saveCfgBtn" style="margin-top:20px;width:auto;padding:10px 28px" onclick="saveCfg()">Save Contact Info</button>
-    </div>
-
-    <!-- TESTIMONIALS -->
-    <div class="adm-sec">
-      <h3>⭐ Testimonials</h3>
-      <div class="adm-list" id="testList"></div>
-      <div style="background:var(--bg3);border:1px solid rgba(201,168,76,.08);border-radius:10px;padding:20px;margin-top:16px">
-        <p style="font-size:.72rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:16px">Add Testimonial</p>
-        <div class="adm-grid" style="margin-bottom:12px">
-          <div class="adm-field"><span class="adm-label">Client Name</span><input class="adm-inp" id="tName" placeholder="Rahul Sharma"></div>
-          <div class="adm-field"><span class="adm-label">Initials</span><input class="adm-inp" id="tInitials" placeholder="RS" style="max-width:80px"></div>
-          <div class="adm-field"><span class="adm-label">Role / City</span><input class="adm-inp" id="tRole" placeholder="IT Professional, Bangalore"></div>
-          <div class="adm-field"><span class="adm-label">Stars (1–5)</span><input class="adm-inp" id="tStars" type="number" min="1" max="5" value="5" style="max-width:80px"></div>
+      <div class="adm-sec-body">
+        <div class="adm-grid">
+          <div class="adm-field"><span class="adm-label">Phone</span><input class="adm-inp" id="cfgPhone" placeholder="9827599966"></div>
+          <div class="adm-field"><span class="adm-label">Email</span><input class="adm-inp" id="cfgEmail" placeholder="saurabhmaheshwaritest@gmail.com"></div>
+          <div class="adm-field"><span class="adm-label">WhatsApp Number</span><input class="adm-inp" id="cfgWhatsapp" placeholder="919827599966"></div>
+          <div class="adm-field"><span class="adm-label">WhatsApp Message</span><input class="adm-inp" id="cfgWaMsg" placeholder="I am interested in your financial services."></div>
+          <div class="adm-field"><span class="adm-label">Kotak Demat Link</span><input class="adm-inp" id="cfgKotak" placeholder="https://kotaksecurities.com/..."></div>
+          <div class="adm-field"><span class="adm-label">Instagram</span><input class="adm-inp" id="cfgInsta" placeholder="https://instagram.com/..."></div>
+          <div class="adm-field"><span class="adm-label">Facebook</span><input class="adm-inp" id="cfgFb" placeholder="https://facebook.com/..."></div>
+          <div class="adm-field"><span class="adm-label">LinkedIn</span><input class="adm-inp" id="cfgLi" placeholder="https://linkedin.com/..."></div>
         </div>
-        <div class="adm-field" style="margin-bottom:12px"><span class="adm-label">Quote</span><textarea class="adm-inp" id="tQuote" rows="3" placeholder="What did the client say about Akshay..."></textarea></div>
-        <label style="display:flex;align-items:center;gap:8px;font-size:.78rem;color:var(--t2);margin-bottom:16px;cursor:pointer">
-          <input type="checkbox" id="tFeatured" checked> Show on homepage (featured)
-        </label>
-        <button class="adm-btn" id="addTestBtn" style="width:auto;padding:10px 28px" onclick="addTestimonial()">Add Testimonial</button>
+        <button class="adm-btn" id="saveCfgBtn" style="margin-top:16px;width:auto;padding:9px 26px" onclick="saveCfg()">Save Contact Info</button>
       </div>
     </div>
 
-    <!-- BLOGS -->
-    <div class="adm-sec">
-      <h3>📰 Blog Posts</h3>
-      <div class="adm-list" id="blogList"></div>
-      <div style="background:var(--bg3);border:1px solid rgba(201,168,76,.08);border-radius:10px;padding:20px;margin-top:16px">
-        <p style="font-size:.72rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:16px">Add New Post</p>
-        <div class="adm-grid" style="margin-bottom:12px">
-          <div class="adm-field"><span class="adm-label">Title</span><input class="adm-inp" id="bTitle" placeholder="Post title"></div>
-          <div class="adm-field"><span class="adm-label">Category / Tag</span><input class="adm-inp" id="bTag" placeholder="e.g. Mutual Funds"></div>
-          <div class="adm-field"><span class="adm-label">Image URL (optional)</span><input class="adm-inp" id="bImg" placeholder="https://...jpg"></div>
-          <div class="adm-field"><span class="adm-label">Date</span><input class="adm-inp" type="date" id="bDate"></div>
+    <!-- ② TESTIMONIALS -->
+    <div class="adm-sec collapsed" id="secTest">
+      <div class="adm-sec-hd" onclick="toggleSec('secTest')">
+        <h3 style="margin:0">⭐ Testimonials <span class="adm-badge" id="testCount"></span></h3>
+        <span class="adm-chev">▼</span>
+      </div>
+      <div class="adm-sec-body">
+        <div class="adm-list" id="testList"></div>
+        <div style="background:var(--bg3);border:1px solid rgba(201,168,76,.08);border-radius:10px;padding:16px;margin-top:12px">
+          <p id="testFormTitle" style="font-size:.68rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:12px">Add Testimonial</p>
+          <div class="adm-grid" style="margin-bottom:8px">
+            <div class="adm-field"><span class="adm-label">Client Name</span><input class="adm-inp" id="tName" placeholder="Rahul Sharma"></div>
+            <div class="adm-field"><span class="adm-label">Initials</span><input class="adm-inp" id="tInitials" placeholder="RS" style="max-width:80px"></div>
+            <div class="adm-field"><span class="adm-label">Role / City</span><input class="adm-inp" id="tRole" placeholder="IT Professional, Bangalore"></div>
+            <div class="adm-field"><span class="adm-label">Stars (1–5)</span><input class="adm-inp" id="tStars" type="number" min="1" max="5" value="5" style="max-width:70px"></div>
+          </div>
+          <div class="adm-field" style="margin-bottom:8px"><span class="adm-label">Quote</span><textarea class="adm-inp" id="tQuote" rows="2" placeholder="What the client said..."></textarea></div>
+          <label style="display:flex;align-items:center;gap:8px;font-size:.77rem;color:var(--t2);margin-bottom:12px;cursor:pointer"><input type="checkbox" id="tFeatured" checked> Show on homepage</label>
+          <div style="display:flex;gap:8px">
+            <button class="adm-btn" id="addTestBtn" style="width:auto;padding:8px 22px" onclick="saveTestimonial()">Add</button>
+            <button class="adm-btn sec" id="cancelTestBtn" style="display:none;width:auto;padding:8px 18px" onclick="cancelTestEdit()">Cancel</button>
+          </div>
         </div>
-        <div class="adm-field" style="margin-bottom:12px"><span class="adm-label">Excerpt (1–2 lines)</span><input class="adm-inp" id="bExcerpt" placeholder="Short summary shown on listing page"></div>
-        <div class="adm-field" style="margin-bottom:16px"><span class="adm-label">Full Content</span><textarea class="adm-inp" id="bContent" rows="4" placeholder="Full blog post content..." style="resize:vertical"></textarea></div>
-        <button class="adm-btn" id="addBlogBtn" style="width:auto;padding:10px 28px" onclick="addBlog()">Add Post</button>
       </div>
     </div>
 
-    <!-- ADVISOR PHOTO -->
-    <div class="adm-sec">
-      <h3>🖼️ Advisor Profile Photo</h3>
-      <p style="font-size:.82rem;color:var(--t2);margin-bottom:16px">To update the profile photo, upload the new image to the <code>images/</code> folder in your GitHub repo and name it <strong>akshay.jpg</strong>. It will deploy automatically.</p>
-      <a href="https://github.com/saur98-ai/Investment/upload/main/images" target="_blank" class="adm-btn sec" style="width:auto;padding:10px 24px;display:inline-block;text-decoration:none">Open GitHub Images Folder →</a>
+    <!-- ③ BLOGS -->
+    <div class="adm-sec collapsed" id="secBlog">
+      <div class="adm-sec-hd" onclick="toggleSec('secBlog')">
+        <h3 style="margin:0">📰 Blog Posts <span class="adm-badge" id="blogCount"></span></h3>
+        <span class="adm-chev">▼</span>
+      </div>
+      <div class="adm-sec-body">
+        <div class="adm-list" id="blogList"></div>
+        <div style="background:var(--bg3);border:1px solid rgba(201,168,76,.08);border-radius:10px;padding:16px;margin-top:12px">
+          <p id="blogFormTitle" style="font-size:.68rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:12px">Add New Post</p>
+          <div class="adm-grid" style="margin-bottom:8px">
+            <div class="adm-field"><span class="adm-label">Title</span><input class="adm-inp" id="bTitle" placeholder="Post title"></div>
+            <div class="adm-field"><span class="adm-label">Category</span><input class="adm-inp" id="bTag" placeholder="e.g. Mutual Funds"></div>
+            <div class="adm-field"><span class="adm-label">Image URL</span><input class="adm-inp" id="bImg" placeholder="https://...jpg"></div>
+            <div class="adm-field"><span class="adm-label">Date</span><input class="adm-inp" type="date" id="bDate"></div>
+          </div>
+          <div class="adm-field" style="margin-bottom:8px"><span class="adm-label">Excerpt</span><input class="adm-inp" id="bExcerpt" placeholder="Short summary for the listing page"></div>
+          <div class="adm-field" style="margin-bottom:12px"><span class="adm-label">Full Content</span><textarea class="adm-inp" id="bContent" rows="3" placeholder="Full blog post..." style="resize:vertical"></textarea></div>
+          <div style="display:flex;gap:8px">
+            <button class="adm-btn" id="addBlogBtn" style="width:auto;padding:8px 22px" onclick="saveBlog()">Add Post</button>
+            <button class="adm-btn sec" id="cancelBlogBtn" style="display:none;width:auto;padding:8px 18px" onclick="cancelBlogEdit()">Cancel</button>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <!-- RESET -->
-    <div class="adm-sec" style="border-color:rgba(224,85,85,.15)">
-      <h3 style="color:var(--red)">⚠️ Session</h3>
-      <p style="font-size:.82rem;color:var(--t2);margin-bottom:16px">Clear your local session. Does not delete any data.</p>
-      <button class="adm-btn del" style="width:auto;padding:10px 28px" onclick="admLogout()">End Session</button>
+    <!-- ④ VISIBILITY -->
+    <div class="adm-sec collapsed" id="secVis">
+      <div class="adm-sec-hd" onclick="toggleSec('secVis')">
+        <h3 style="margin:0">👁 Visibility</h3>
+        <span class="adm-chev">▼</span>
+      </div>
+      <div class="adm-sec-body">
+        <p style="font-size:.79rem;color:var(--t3);margin-bottom:4px">Disabled pages are hidden in the nav and redirect visitors if accessed directly.</p>
+
+        <div class="vis-grp">
+          <div class="vis-grp-title">Wealth &amp; Investments</div>
+          <div class="adm-row"><div class="adm-row-label">SIP &amp; Mutual Funds</div><label class="adm-toggle"><input type="checkbox" id="sSip" checked onchange="saveSettings()"><span class="adm-slider"></span></label></div>
+          <div class="adm-row"><div class="adm-row-label">Stock Market</div><label class="adm-toggle"><input type="checkbox" id="sStock" checked onchange="saveSettings()"><span class="adm-slider"></span></label></div>
+          <div class="adm-row"><div class="adm-row-label">PMS</div><label class="adm-toggle"><input type="checkbox" id="sPms" checked onchange="saveSettings()"><span class="adm-slider"></span></label></div>
+          <div class="adm-row"><div class="adm-row-label">Bonds</div><label class="adm-toggle"><input type="checkbox" id="sBonds" checked onchange="saveSettings()"><span class="adm-slider"></span></label></div>
+          <div class="adm-row"><div class="adm-row-label">AIF</div><label class="adm-toggle"><input type="checkbox" id="sAif" checked onchange="saveSettings()"><span class="adm-slider"></span></label></div>
+          <div class="adm-row"><div class="adm-row-label">Private Equity</div><label class="adm-toggle"><input type="checkbox" id="sPrivateEquity" checked onchange="saveSettings()"><span class="adm-slider"></span></label></div>
+        </div>
+
+        <div class="vis-grp">
+          <div class="vis-grp-title">Insurance &amp; Protection</div>
+          <div class="adm-row"><div class="adm-row-label">Insurance</div><label class="adm-toggle"><input type="checkbox" id="sInsurance" checked onchange="saveSettings()"><span class="adm-slider"></span></label></div>
+          <div class="adm-row"><div class="adm-row-label">Will</div><label class="adm-toggle"><input type="checkbox" id="sWill" checked onchange="saveSettings()"><span class="adm-slider"></span></label></div>
+          <div class="adm-row"><div class="adm-row-label">Trust</div><label class="adm-toggle"><input type="checkbox" id="sTrust" checked onchange="saveSettings()"><span class="adm-slider"></span></label></div>
+          <div class="adm-row"><div class="adm-row-label">Estate Planning</div><label class="adm-toggle"><input type="checkbox" id="sEstatePlanning" checked onchange="saveSettings()"><span class="adm-slider"></span></label></div>
+        </div>
+
+        <div class="vis-grp">
+          <div class="vis-grp-title">Retirement &amp; Goals</div>
+          <div class="adm-row"><div class="adm-row-label">Retirement Planning</div><label class="adm-toggle"><input type="checkbox" id="sRetirement" checked onchange="saveSettings()"><span class="adm-slider"></span></label></div>
+          <div class="adm-row"><div class="adm-row-label">Succession Planning</div><label class="adm-toggle"><input type="checkbox" id="sSuccessionPlanning" checked onchange="saveSettings()"><span class="adm-slider"></span></label></div>
+        </div>
+
+        <div class="vis-grp">
+          <div class="vis-grp-title">Global &amp; Alternatives</div>
+          <div class="adm-row"><div class="adm-row-label">International Equities</div><label class="adm-toggle"><input type="checkbox" id="sInternational" checked onchange="saveSettings()"><span class="adm-slider"></span></label></div>
+          <div class="adm-row"><div class="adm-row-label">Gift City</div><label class="adm-toggle"><input type="checkbox" id="sGiftCity" checked onchange="saveSettings()"><span class="adm-slider"></span></label></div>
+          <div class="adm-row"><div class="adm-row-label">Unlisted Securities</div><label class="adm-toggle"><input type="checkbox" id="sUnlisted" checked onchange="saveSettings()"><span class="adm-slider"></span></label></div>
+        </div>
+
+        <div class="vis-grp">
+          <div class="vis-grp-title">Financing &amp; Capital</div>
+          <div class="adm-row"><div class="adm-row-label">Loan Against Security</div><label class="adm-toggle"><input type="checkbox" id="sLoan" checked onchange="saveSettings()"><span class="adm-slider"></span></label></div>
+          <div class="adm-row"><div class="adm-row-label">Debt Financing</div><label class="adm-toggle"><input type="checkbox" id="sDebtFinancing" checked onchange="saveSettings()"><span class="adm-slider"></span></label></div>
+          <div class="adm-row"><div class="adm-row-label">Equity Financing</div><label class="adm-toggle"><input type="checkbox" id="sEquityFinancing" checked onchange="saveSettings()"><span class="adm-slider"></span></label></div>
+          <div class="adm-row"><div class="adm-row-label">Exit Planning</div><label class="adm-toggle"><input type="checkbox" id="sExitPlanning" checked onchange="saveSettings()"><span class="adm-slider"></span></label></div>
+        </div>
+
+        <div class="vis-grp">
+          <div class="vis-grp-title">Elite &amp; Family Office</div>
+          <div class="adm-row"><div class="adm-row-label">Family Office</div><label class="adm-toggle"><input type="checkbox" id="sFamilyOffice" checked onchange="saveSettings()"><span class="adm-slider"></span></label></div>
+          <div class="adm-row"><div class="adm-row-label">Elite Advisory</div><label class="adm-toggle"><input type="checkbox" id="sElite" checked onchange="saveSettings()"><span class="adm-slider"></span></label></div>
+        </div>
+
+        <div class="vis-grp">
+          <div class="vis-grp-title">SIP &amp; Wealth Calculators</div>
+          <div class="adm-row"><div class="adm-row-label">SIP Calculator</div><label class="adm-toggle"><input type="checkbox" id="calcSip" checked onchange="saveSettings()"><span class="adm-slider"></span></label></div>
+          <div class="adm-row"><div class="adm-row-label">Lumpsum Calculator</div><label class="adm-toggle"><input type="checkbox" id="calcLs" checked onchange="saveSettings()"><span class="adm-slider"></span></label></div>
+          <div class="adm-row"><div class="adm-row-label">Step-Up SIP</div><label class="adm-toggle"><input type="checkbox" id="calcStepup" checked onchange="saveSettings()"><span class="adm-slider"></span></label></div>
+        </div>
+
+        <div class="vis-grp">
+          <div class="vis-grp-title">Goals &amp; Retirement Calculators</div>
+          <div class="adm-row"><div class="adm-row-label">Goal Calculator</div><label class="adm-toggle"><input type="checkbox" id="calcGoal" checked onchange="saveSettings()"><span class="adm-slider"></span></label></div>
+          <div class="adm-row"><div class="adm-row-label">Goal Planner (Inflation-adjusted)</div><label class="adm-toggle"><input type="checkbox" id="calcGoalplanner" checked onchange="saveSettings()"><span class="adm-slider"></span></label></div>
+          <div class="adm-row"><div class="adm-row-label">Retirement Corpus</div><label class="adm-toggle"><input type="checkbox" id="calcRetirement" checked onchange="saveSettings()"><span class="adm-slider"></span></label></div>
+          <div class="adm-row"><div class="adm-row-label">Cost of Delay</div><label class="adm-toggle"><input type="checkbox" id="calcDelay" checked onchange="saveSettings()"><span class="adm-slider"></span></label></div>
+        </div>
+
+        <div class="vis-grp">
+          <div class="vis-grp-title">Loans &amp; Protection Calculators</div>
+          <div class="adm-row"><div class="adm-row-label">SWP Calculator</div><label class="adm-toggle"><input type="checkbox" id="calcSwp" checked onchange="saveSettings()"><span class="adm-slider"></span></label></div>
+          <div class="adm-row"><div class="adm-row-label">EMI Calculator</div><label class="adm-toggle"><input type="checkbox" id="calcEmi" checked onchange="saveSettings()"><span class="adm-slider"></span></label></div>
+          <div class="adm-row"><div class="adm-row-label">Life Insurance Need</div><label class="adm-toggle"><input type="checkbox" id="calcInsurance" checked onchange="saveSettings()"><span class="adm-slider"></span></label></div>
+        </div>
+      </div>
     </div>
 
-  </div><!-- /adm-panel -->
-</div><!-- /adm-page -->
+    <!-- ⑤ ACCOUNT -->
+    <div class="adm-sec collapsed" id="secAccount">
+      <div class="adm-sec-hd" onclick="toggleSec('secAccount')">
+        <h3 style="margin:0">⚙️ Account</h3>
+        <span class="adm-chev">▼</span>
+      </div>
+      <div class="adm-sec-body">
+        <div style="font-size:.82rem;color:var(--t2);margin-bottom:10px"><strong style="color:var(--t1)">Change password</strong> — edit <code>js/admin-config.js</code> and <code>netlify/functions/save-data.js</code> in GitHub with the same new value.</div>
+        <a href="https://github.com/saur98-ai/Investment/edit/main/js/admin-config.js" target="_blank" class="adm-btn sec" style="width:auto;padding:8px 18px;display:inline-block;text-decoration:none;margin-bottom:16px">Edit Password on GitHub →</a>
+        <div style="font-size:.82rem;color:var(--t2);margin-bottom:10px"><strong style="color:var(--t1)">Update profile photo</strong> — upload <code>akshay.jpg</code> to the <code>images/</code> folder on GitHub.</div>
+        <a href="https://github.com/saur98-ai/Investment/upload/main/images" target="_blank" class="adm-btn sec" style="width:auto;padding:8px 18px;display:inline-block;text-decoration:none">Upload Photo on GitHub →</a>
+      </div>
+    </div>
+
+    <div style="margin-top:10px;padding-top:16px;border-top:1px solid rgba(255,255,255,.06);display:flex;justify-content:flex-end">
+      <button class="adm-btn del" style="width:auto;padding:8px 22px" onclick="admLogout()">End Session</button>
+    </div>
+  </div>
+</div>
 
 <script src="js/main.js"></script>
+<script src="js/admin-config.js"></script>
 <script>
 const API_GET  = '/.netlify/functions/get-data';
 const API_SAVE = '/.netlify/functions/save-data';
-const SESSION_KEY = 'admSecret';
 
-let _secret = '';
 let _testimonials = [], _blogs = [];
+let _editTestIdx = -1, _editBlogIdx = -1;
+
+// Service key → page URL map (single source of truth)
+const SVC_MAP = {
+  sSip:'sip.html', sStock:'stock.html', sPms:'pms.html', sBonds:'bonds.html',
+  sAif:'aif.html', sPrivateEquity:'private-equity.html',
+  sInsurance:'insurance.html', sWill:'will.html', sTrust:'trust.html',
+  sEstatePlanning:'estate-planning.html', sRetirement:'retirement.html',
+  sSuccessionPlanning:'succession-planning.html', sInternational:'international.html',
+  sGiftCity:'gift-city.html', sUnlisted:'unlisted.html', sLoan:'loan.html',
+  sDebtFinancing:'debt-financing.html', sEquityFinancing:'equity-financing.html',
+  sExitPlanning:'exit-planning.html', sFamilyOffice:'family-office.html',
+  sElite:'elite.html'
+};
+const CALC_MAP = {
+  calcSip:'sip', calcLs:'lumpsum', calcStepup:'stepup',
+  calcGoal:'goal', calcGoalplanner:'goalplanner', calcRetirement:'retirement', calcDelay:'delay',
+  calcSwp:'swp', calcEmi:'emi', calcInsurance:'insurance'
+};
+
+let _settings = {
+  services: Object.fromEntries(Object.keys(SVC_MAP).map(k=>[k,true])),
+  calculators: { sip:true, lumpsum:true, stepup:true, goal:true, goalplanner:true, retirement:true, delay:true, swp:true, emi:true, insurance:true }
+};
+
+// ── Accordion ──────────────────────────────────────────
+function toggleSec(id) {
+  document.getElementById(id).classList.toggle('collapsed');
+}
 
 // ── Auth ───────────────────────────────────────────────
 function admLogin() {
   const pwd = document.getElementById('admPwd').value.trim();
   if (!pwd) return;
-  // Verify against the function (function returns 401 if wrong)
-  fetch(API_SAVE, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + pwd },
-    body: JSON.stringify({ key: 'contact', data: null, _ping: true })
-  }).then(r => {
-    if (r.status === 401) {
-      document.getElementById('admErr').style.display = 'block';
-      document.getElementById('admPwd').value = '';
-    } else {
-      _secret = pwd;
-      sessionStorage.setItem(SESSION_KEY, pwd);
-      showPanel();
-    }
-  }).catch(() => {
-    // Network error - accept the password and try later
-    _secret = pwd;
-    sessionStorage.setItem(SESSION_KEY, pwd);
-    showPanel();
-  });
+  if (typeof ADMIN_PASSWORD !== 'undefined' && pwd !== ADMIN_PASSWORD) {
+    document.getElementById('admErr').style.display = 'block';
+    return;
+  }
+  document.getElementById('admErr').style.display = 'none';
+  sessionStorage.setItem('admS', '1');
+  showPanel();
 }
 
 function admLogout() {
-  sessionStorage.removeItem(SESSION_KEY);
-  _secret = '';
+  sessionStorage.removeItem('admS');
   document.getElementById('admLogin').style.display = '';
   document.getElementById('admPanel').classList.remove('show');
   document.getElementById('admPwd').value = '';
 }
 
-// Auto-restore session
-window.addEventListener('DOMContentLoaded', () => {
-  const saved = sessionStorage.getItem(SESSION_KEY);
-  if (saved) { _secret = saved; showPanel(); }
-});
+(function() { if (sessionStorage.getItem('admS') === '1') showPanel(); })();
 
-// ── API helpers ────────────────────────────────────────
+// ── API ────────────────────────────────────────────────
 async function apiGet(key) {
-  try {
-    const r = await fetch(`${API_GET}?key=${key}`);
-    return r.ok ? await r.json() : null;
-  } catch { return null; }
+  try { const r = await fetch(`${API_GET}?key=${key}`); return r.ok ? r.json() : null; }
+  catch { return null; }
 }
 
 async function apiSave(key, data) {
   try {
+    const pwd = (typeof ADMIN_PASSWORD !== 'undefined') ? ADMIN_PASSWORD : '';
     const r = await fetch(API_SAVE, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + _secret },
+      headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + pwd },
       body: JSON.stringify({ key, data })
     });
     return r.ok;
@@ -195,131 +317,229 @@ function setBusy(id, busy, label) {
 async function showPanel() {
   document.getElementById('admLogin').style.display = 'none';
   document.getElementById('admPanel').classList.add('show');
-  const [cfgData, testData, blogData] = await Promise.all([
-    apiGet('contact'), apiGet('testimonials'), apiGet('blogs')
+  const [cfgData, testData, blogData, settingsData] = await Promise.all([
+    apiGet('contact'), apiGet('testimonials'), apiGet('blogs'), apiGet('settings')
   ]);
   if (cfgData) loadCfgFields(cfgData);
-  _testimonials = (testData && testData.items) ? testData.items : [];
-  _blogs = (blogData && blogData.items) ? blogData.items : [];
+  _testimonials = (testData?.items) ?? [];
+  _blogs = (blogData?.items) ?? [];
+  if (settingsData) _settings = settingsData;
   renderTestList();
   renderBlogList();
+  applySettings();
 }
 
 // ── Contact ────────────────────────────────────────────
 function loadCfgFields(cfg) {
   const map = { Phone:'phone', Email:'email', Whatsapp:'whatsapp', WaMsg:'waMsg', Kotak:'kotak', Insta:'instagram', Fb:'facebook', Li:'linkedin' };
-  Object.entries(map).forEach(([id, key]) => {
-    const el = document.getElementById('cfg' + id);
-    if (el) el.value = cfg[key] || '';
-  });
+  Object.entries(map).forEach(([id, key]) => { const el = document.getElementById('cfg'+id); if (el) el.value = cfg[key]||''; });
 }
 
 async function saveCfg() {
   setBusy('saveCfgBtn', true, 'Save Contact Info');
   const map = { Phone:'phone', Email:'email', Whatsapp:'whatsapp', WaMsg:'waMsg', Kotak:'kotak', Insta:'instagram', Fb:'facebook', Li:'linkedin' };
   const cfg = {};
-  Object.entries(map).forEach(([id, key]) => {
-    const el = document.getElementById('cfg' + id);
-    if (el) cfg[key] = el.value.trim();
-  });
-  const ok = await apiSave('contact', cfg);
+  Object.entries(map).forEach(([id, key]) => { const el = document.getElementById('cfg'+id); if (el) cfg[key] = el.value.trim(); });
+  showNotice(await apiSave('contact', cfg));
   setBusy('saveCfgBtn', false, 'Save Contact Info');
-  showNotice(ok);
 }
 
 // ── Testimonials ───────────────────────────────────────
 function renderTestList() {
+  const badge = document.getElementById('testCount');
+  if (badge) badge.textContent = _testimonials.length || '';
   const el = document.getElementById('testList');
-  if (!_testimonials.length) { el.innerHTML = '<p style="font-size:.82rem;color:var(--t3);margin-bottom:12px">No testimonials yet.</p>'; return; }
+  if (!_testimonials.length) { el.innerHTML = '<p style="font-size:.81rem;color:var(--t3);margin-bottom:10px">No testimonials yet.</p>'; return; }
   el.innerHTML = _testimonials.map((t, i) => `
     <div class="adm-item">
       <div class="adm-item-info">
-        <div>${t.name}${t.featured ? ' <span style="font-size:.62rem;background:var(--gold);color:var(--bg);padding:2px 7px;border-radius:10px">Featured</span>' : ''}</div>
-        <div class="adm-item-sub">${t.role || ''} · ${'★'.repeat(parseInt(t.stars)||5)}</div>
+        <div>${t.name}${t.featured ? ' <span style="font-size:.59rem;background:var(--gold);color:var(--bg);padding:2px 6px;border-radius:8px">Featured</span>' : ''}</div>
+        <div class="adm-item-sub">${t.role||''} · ${'★'.repeat(parseInt(t.stars)||5)}</div>
       </div>
-      <button class="adm-btn del" style="width:auto;padding:6px 16px;font-size:.75rem" onclick="deleteTestimonial(${i})">Delete</button>
+      <div style="display:flex;gap:6px">
+        <button class="adm-btn sec" style="width:auto;padding:5px 12px;font-size:.73rem" onclick="editTestimonial(${i})">Edit</button>
+        <button class="adm-btn del" style="width:auto;padding:5px 12px;font-size:.73rem" onclick="removeTestimonial(${i})">Remove</button>
+      </div>
     </div>`).join('');
 }
 
-async function addTestimonial() {
+function editTestimonial(idx) {
+  const t = _testimonials[idx];
+  _editTestIdx = idx;
+  document.getElementById('tName').value = t.name||'';
+  document.getElementById('tInitials').value = t.initials||'';
+  document.getElementById('tRole').value = t.role||'';
+  document.getElementById('tStars').value = t.stars||'5';
+  document.getElementById('tQuote').value = t.quote||'';
+  document.getElementById('tFeatured').checked = !!t.featured;
+  document.getElementById('testFormTitle').textContent = 'Edit Testimonial';
+  document.getElementById('addTestBtn').textContent = 'Update';
+  document.getElementById('cancelTestBtn').style.display = 'inline-block';
+  document.getElementById('secTest').classList.remove('collapsed');
+  document.getElementById('tName').scrollIntoView({ behavior:'smooth', block:'center' });
+}
+
+function cancelTestEdit() {
+  _editTestIdx = -1;
+  ['tName','tInitials','tRole','tQuote'].forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
+  document.getElementById('tStars').value = '5';
+  document.getElementById('tFeatured').checked = true;
+  document.getElementById('testFormTitle').textContent = 'Add Testimonial';
+  document.getElementById('addTestBtn').textContent = 'Add';
+  document.getElementById('cancelTestBtn').style.display = 'none';
+}
+
+async function saveTestimonial() {
   const name = document.getElementById('tName').value.trim();
   if (!name) { alert('Name is required'); return; }
-  setBusy('addTestBtn', true, 'Add Testimonial');
-  _testimonials.unshift({
+  const isEdit = _editTestIdx >= 0;
+  setBusy('addTestBtn', true, isEdit ? 'Update' : 'Add');
+  const item = {
     name,
     initials: document.getElementById('tInitials').value.trim() || name.split(' ').map(w=>w[0]).join('').toUpperCase(),
     role: document.getElementById('tRole').value.trim(),
     quote: document.getElementById('tQuote').value.trim(),
     stars: document.getElementById('tStars').value || '5',
     featured: document.getElementById('tFeatured').checked
-  });
-  const ok = await apiSave('testimonials', { items: _testimonials });
-  if (ok) {
-    ['tName','tInitials','tRole','tQuote'].forEach(id => { const el=document.getElementById(id); if(el) el.value=''; });
-    document.getElementById('tStars').value = '5';
-    document.getElementById('tFeatured').checked = true;
-    renderTestList();
+  };
+  if (isEdit) {
+    const old = _testimonials[_editTestIdx];
+    _testimonials[_editTestIdx] = item;
+    const ok = await apiSave('testimonials', { items: _testimonials });
+    if (!ok) _testimonials[_editTestIdx] = old;
+    setBusy('addTestBtn', false, 'Update');
+    showNotice(ok);
+    if (ok) cancelTestEdit();
   } else {
-    _testimonials.shift(); // rollback
+    _testimonials.unshift(item);
+    const ok = await apiSave('testimonials', { items: _testimonials });
+    if (ok) {
+      ['tName','tInitials','tRole','tQuote'].forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
+      document.getElementById('tStars').value = '5';
+      document.getElementById('tFeatured').checked = true;
+    } else { _testimonials.shift(); }
+    setBusy('addTestBtn', false, 'Add');
+    showNotice(ok);
   }
-  setBusy('addTestBtn', false, 'Add Testimonial');
-  showNotice(ok);
+  renderTestList();
 }
 
-async function deleteTestimonial(idx) {
-  if (!confirm('Delete this testimonial?')) return;
+async function removeTestimonial(idx) {
+  if (!confirm('Remove this testimonial?')) return;
   const removed = _testimonials.splice(idx, 1);
   const ok = await apiSave('testimonials', { items: _testimonials });
-  if (!ok) _testimonials.splice(idx, 0, removed[0]); // rollback
+  if (!ok) _testimonials.splice(idx, 0, removed[0]);
   renderTestList();
   showNotice(ok);
 }
 
 // ── Blogs ──────────────────────────────────────────────
 function renderBlogList() {
+  const badge = document.getElementById('blogCount');
+  if (badge) badge.textContent = _blogs.length || '';
   const el = document.getElementById('blogList');
-  if (!_blogs.length) { el.innerHTML = '<p style="font-size:.82rem;color:var(--t3);margin-bottom:12px">No blog posts yet.</p>'; return; }
+  if (!_blogs.length) { el.innerHTML = '<p style="font-size:.81rem;color:var(--t3);margin-bottom:10px">No blog posts yet.</p>'; return; }
   el.innerHTML = _blogs.map((b, i) => `
     <div class="adm-item">
       <div class="adm-item-info">
         <div>${b.title}</div>
         <div class="adm-item-sub">${b.tag||''} · ${b.date||''}</div>
       </div>
-      <button class="adm-btn del" style="width:auto;padding:6px 16px;font-size:.75rem" onclick="deleteBlog(${i})">Delete</button>
+      <div style="display:flex;gap:6px">
+        <button class="adm-btn sec" style="width:auto;padding:5px 12px;font-size:.73rem" onclick="editBlog(${i})">Edit</button>
+        <button class="adm-btn del" style="width:auto;padding:5px 12px;font-size:.73rem" onclick="removeBlog(${i})">Remove</button>
+      </div>
     </div>`).join('');
 }
 
-async function addBlog() {
+function editBlog(idx) {
+  const b = _blogs[idx];
+  _editBlogIdx = idx;
+  document.getElementById('bTitle').value = b.title||'';
+  document.getElementById('bTag').value = b.tag||'';
+  document.getElementById('bImg').value = b.imgUrl||'';
+  document.getElementById('bDate').value = b.date||'';
+  document.getElementById('bExcerpt').value = b.excerpt||'';
+  document.getElementById('bContent').value = b.content||'';
+  document.getElementById('blogFormTitle').textContent = 'Edit Post';
+  document.getElementById('addBlogBtn').textContent = 'Update';
+  document.getElementById('cancelBlogBtn').style.display = 'inline-block';
+  document.getElementById('secBlog').classList.remove('collapsed');
+  document.getElementById('bTitle').scrollIntoView({ behavior:'smooth', block:'center' });
+}
+
+function cancelBlogEdit() {
+  _editBlogIdx = -1;
+  ['bTitle','bTag','bImg','bDate','bExcerpt','bContent'].forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
+  document.getElementById('blogFormTitle').textContent = 'Add New Post';
+  document.getElementById('addBlogBtn').textContent = 'Add Post';
+  document.getElementById('cancelBlogBtn').style.display = 'none';
+}
+
+async function saveBlog() {
   const title = document.getElementById('bTitle').value.trim();
   if (!title) { alert('Title is required'); return; }
-  setBusy('addBlogBtn', true, 'Add Post');
-  _blogs.unshift({
-    id: Date.now(),
+  const isEdit = _editBlogIdx >= 0;
+  setBusy('addBlogBtn', true, isEdit ? 'Update' : 'Add Post');
+  const post = {
+    id: isEdit ? _blogs[_editBlogIdx].id : Date.now(),
     title,
     tag: document.getElementById('bTag').value.trim(),
     imgUrl: document.getElementById('bImg').value.trim(),
     date: document.getElementById('bDate').value,
     excerpt: document.getElementById('bExcerpt').value.trim(),
     content: document.getElementById('bContent').value.trim()
-  });
-  const ok = await apiSave('blogs', { items: _blogs });
-  if (ok) {
-    ['bTitle','bTag','bImg','bDate','bExcerpt','bContent'].forEach(id => { const el=document.getElementById(id); if(el) el.value=''; });
-    renderBlogList();
+  };
+  if (isEdit) {
+    const old = _blogs[_editBlogIdx];
+    _blogs[_editBlogIdx] = post;
+    const ok = await apiSave('blogs', { items: _blogs });
+    if (!ok) _blogs[_editBlogIdx] = old;
+    setBusy('addBlogBtn', false, 'Update');
+    showNotice(ok);
+    if (ok) cancelBlogEdit();
   } else {
-    _blogs.shift(); // rollback
+    _blogs.unshift(post);
+    const ok = await apiSave('blogs', { items: _blogs });
+    if (ok) {
+      ['bTitle','bTag','bImg','bDate','bExcerpt','bContent'].forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
+    } else { _blogs.shift(); }
+    setBusy('addBlogBtn', false, 'Add Post');
+    showNotice(ok);
   }
-  setBusy('addBlogBtn', false, 'Add Post');
+  renderBlogList();
+}
+
+async function removeBlog(idx) {
+  if (!confirm('Remove this post?')) return;
+  const removed = _blogs.splice(idx, 1);
+  const ok = await apiSave('blogs', { items: _blogs });
+  if (!ok) _blogs.splice(idx, 0, removed[0]);
+  renderBlogList();
   showNotice(ok);
 }
 
-async function deleteBlog(idx) {
-  if (!confirm('Delete this post?')) return;
-  const removed = _blogs.splice(idx, 1);
-  const ok = await apiSave('blogs', { items: _blogs });
-  if (!ok) _blogs.splice(idx, 0, removed[0]); // rollback
-  renderBlogList();
-  showNotice(ok);
+// ── Settings ───────────────────────────────────────────
+function applySettings() {
+  const sv = _settings.services || {};
+  Object.keys(SVC_MAP).forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.checked = sv[id] !== false;
+  });
+  const cl = _settings.calculators || {};
+  Object.keys(CALC_MAP).forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.checked = cl[CALC_MAP[id]] !== false;
+  });
+}
+
+async function saveSettings() {
+  const sv = {};
+  Object.keys(SVC_MAP).forEach(id => { const el = document.getElementById(id); if (el) sv[id] = el.checked; });
+  const cl = {};
+  Object.keys(CALC_MAP).forEach(id => { const el = document.getElementById(id); if (el) cl[CALC_MAP[id]] = el.checked; });
+  _settings = { services: sv, calculators: cl };
+  showNotice(await apiSave('settings', _settings));
 }
 </script>
 </body>
