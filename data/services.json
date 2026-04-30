@@ -1,0 +1,26 @@
+{
+  "items": [
+    { "title": "SIP & Mutual Funds", "icon": "📈", "description": "Build long-term wealth through disciplined, goal-oriented SIP investments in carefully selected mutual funds.", "link": "sip.html", "cta": "Learn More →", "order": 1 },
+    { "title": "Stock Market", "icon": "📊", "description": "Direct equity strategies and portfolio management for growth-focused investors seeking market-beating returns.", "link": "stock.html", "cta": "Learn More →", "order": 2 },
+    { "title": "Insurance", "icon": "🛡️", "description": "Comprehensive life, health, and general insurance planning to protect your family and wealth from the unexpected.", "link": "insurance.html", "cta": "Learn More →", "order": 3 },
+    { "title": "Tax Planning", "icon": "💼", "description": "Strategic tax-saving investment planning under 80C, 80D, and other provisions to maximise your take-home income.", "link": "tax.html", "cta": "Learn More →", "order": 4 },
+    { "title": "Retirement Planning", "icon": "🌅", "description": "Build a retirement corpus that funds the life you've earned — through NPS, MFs, and systematic withdrawal plans.", "link": "retirement.html", "cta": "Learn More →", "order": 5 },
+    { "title": "PMS", "icon": "💎", "description": "Portfolio Management Services for HNI investors seeking personalized, actively managed equity strategies.", "link": "pms.html", "cta": "Learn More →", "order": 6 },
+    { "title": "Private Equity", "icon": "🚀", "description": "Access curated pre-IPO and private equity opportunities with strong growth potential ahead of public listings.", "link": "private-equity.html", "cta": "Learn More →", "order": 7 },
+    { "title": "Bonds", "icon": "📜", "description": "Fixed-income and debt instruments offering predictable returns — government bonds, NCDs, and corporate bonds.", "link": "bonds.html", "cta": "Learn More →", "order": 8 },
+    { "title": "Loan Against Security", "icon": "🏦", "description": "Unlock liquidity from your existing portfolio without selling — borrow against your mutual funds or shares.", "link": "loan.html", "cta": "Learn More →", "order": 9 },
+    { "title": "AIF", "icon": "🏛️", "description": "Alternative Investment Funds for sophisticated investors seeking diversification beyond traditional assets.", "link": "aif.html", "cta": "Learn More →", "order": 10 },
+    { "title": "Unlisted Securities", "icon": "📋", "description": "Invest in high-growth unlisted shares before they go public and capture early-stage appreciation.", "link": "unlisted.html", "cta": "Learn More →", "order": 11 },
+    { "title": "Gift City", "icon": "🌐", "description": "Access international markets and global funds through India's GIFT City IFSC with tax-efficient structures.", "link": "gift-city.html", "cta": "Learn More →", "order": 12 },
+    { "title": "International Equities", "icon": "🌍", "description": "Diversify your portfolio globally with curated access to US, European, and Asian market opportunities.", "link": "international.html", "cta": "Learn More →", "order": 13 },
+    { "title": "Will", "icon": "📝", "description": "Legally sound will drafting and estate documentation services to ensure your assets reach the right hands.", "link": "will.html", "cta": "Learn More →", "order": 14 },
+    { "title": "Trust", "icon": "🔐", "description": "Generational wealth protection through private family trusts — structured for tax efficiency and seamless transfer.", "link": "trust.html", "cta": "Learn More →", "order": 15 },
+    { "title": "Family Office", "icon": "👑", "description": "Complete wealth management for ultra-HNI families — investment, tax, legal, estate, and philanthropy under one roof.", "link": "family-office.html", "cta": "Learn More →", "order": 16 },
+    { "title": "Debt Financing", "icon": "💰", "description": "Structured debt solutions for businesses — NCDs, private bonds, and corporate debt with 9–14% yields.", "link": "debt-financing.html", "cta": "Learn More →", "order": 17 },
+    { "title": "Equity Financing", "icon": "📐", "description": "Private equity and PIPE deal facilitation for businesses seeking growth capital from institutional investors.", "link": "equity-financing.html", "cta": "Learn More →", "order": 18 },
+    { "title": "Exit Planning", "icon": "🚪", "description": "Strategic business exit planning — valuation, buyer identification, tax structuring, and deal execution.", "link": "exit-planning.html", "cta": "Learn More →", "order": 19 },
+    { "title": "Succession Planning", "icon": "🔄", "description": "Family business continuity planning — leadership transition, shareholding structures, and governance frameworks.", "link": "succession-planning.html", "cta": "Learn More →", "order": 20 },
+    { "title": "Estate Planning", "icon": "🏠", "description": "Comprehensive five-pillar estate planning: Will, Trust, Nominees, Insurance, and Tax-efficient transfer structures.", "link": "estate-planning.html", "cta": "Learn More →", "order": 21 },
+    { "title": "Elite Advisory", "icon": "⭐", "description": "Bespoke ₹5 Cr+ wealth advisory with dedicated management, alternative assets, and 12–16% targeted yields.", "link": "elite.html", "cta": "Learn More →", "order": 22 }
+  ]
+}

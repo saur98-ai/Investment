@@ -189,13 +189,10 @@
     <h2 class="svc-title">Trusted by <em>Hundreds of Families</em></h2>
     <p class="svc-sub">Real journeys from people who started their financial transformation with us.</p>
   </div>
-  <div class="test-grid">
-    <div class="tc"><div class="tc-quote-mark">"</div><div class="tc-q">Akshay made investing feel approachable. He designed a SIP plan within our budget — within 2 years, we've already seen meaningful growth.</div><div class="tc-a"><div class="tc-av">RS</div><div><div class="tc-n">Rahul Sharma</div><div class="tc-r">IT Professional, Bangalore</div></div><div class="tc-stars">★★★★★</div></div></div>
-    <div class="tc"><div class="tc-quote-mark">"</div><div class="tc-q">I was confused about where to start. Akshay explained everything plainly and helped set up my first mutual fund portfolio. Quarterly reviews give peace of mind.</div><div class="tc-a"><div class="tc-av">PM</div><div><div class="tc-n">Priya Mehta</div><div class="tc-r">Business Owner, Mumbai</div></div><div class="tc-stars">★★★★★</div></div></div>
-    <div class="tc"><div class="tc-quote-mark">"</div><div class="tc-q">Planning for my daughter's education felt overwhelming. Akshay created a goal-based plan, and I finally feel confident about her future.</div><div class="tc-a"><div class="tc-av">AV</div><div><div class="tc-n">Anil Verma</div><div class="tc-r">Govt Employee, Delhi</div></div><div class="tc-stars">★★★★★</div></div></div>
-    <div class="tc"><div class="tc-quote-mark">"</div><div class="tc-q">No hidden charges, no jargon. Disciplined, results-driven approach to portfolio management. I've referred Akshay to several friends.</div><div class="tc-a"><div class="tc-av">NK</div><div><div class="tc-n">Neha Kulkarni</div><div class="tc-r">Doctor, Pune</div></div><div class="tc-stars">★★★★★</div></div></div>
-    <div class="tc"><div class="tc-quote-mark">"</div><div class="tc-q">Started ₹3,000/month SIP three years ago. My corpus has grown beyond expectations. He truly understands compounding.</div><div class="tc-a"><div class="tc-av">VG</div><div><div class="tc-n">Vikram Gupta</div><div class="tc-r">Engineer, Hyderabad</div></div><div class="tc-stars">★★★★★</div></div></div>
-    <div class="tc"><div class="tc-quote-mark">"</div><div class="tc-q">Close to retirement, I needed safe yet growth-oriented planning. Akshay balanced my portfolio beautifully — I feel completely secure now.</div><div class="tc-a"><div class="tc-av">SJ</div><div><div class="tc-n">Sunita Joshi</div><div class="tc-r">Sr. Manager, Chennai</div></div><div class="tc-stars">★★★★★</div></div></div>
+  <div class="test-grid" id="testFeatured">
+    <div class="tc-skeleton"></div>
+    <div class="tc-skeleton"></div>
+    <div class="tc-skeleton"></div>
   </div>
 </section>
 
@@ -266,6 +263,14 @@
 
 <a href="https://wa.me/919827599966?text=i%20am%20intereseted%20in%20your%20financial%20advice" target="_blank" class="waf">💬</a>
 
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<script>
+if(window.netlifyIdentity){
+  window.netlifyIdentity.on('init',u=>{
+    if(!u)window.netlifyIdentity.on('login',()=>{document.location.href='/admin/';});
+  });
+}
+</script>
 <script src="js/main.js"></script>
 </body>
 </html>

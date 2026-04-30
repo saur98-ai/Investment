@@ -293,48 +293,85 @@ function doSearch(q){
 }
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeSearch();});
 
-// ═══════ ADMIN / localStorage OVERRIDES ═══════
-(function applyAdminSettings(){
-  const cfg=JSON.parse(localStorage.getItem('amCfg')||'{}');
-  if(cfg.phone){document.querySelectorAll('a[href^="tel:"]').forEach(a=>{a.href='tel:+91'+cfg.phone.replace(/\D/g,'');a.textContent='📱 +91 '+cfg.phone;});}
-  if(cfg.email){document.querySelectorAll('a[href^="mailto:"]').forEach(a=>{a.href='mailto:'+cfg.email;a.textContent='📧 '+cfg.email;});}
-  if(cfg.whatsapp||cfg.waMsg){
-    const ph=(cfg.whatsapp||'919827599966').replace(/\D/g,'');
-    const msg=encodeURIComponent(cfg.waMsg||'i am intereseted in your financial advice');
-    const url=`https://wa.me/${ph}?text=${msg}`;
-    document.querySelectorAll('a[href^="https://wa.me/"]').forEach(a=>{a.href=url;});
+// ═══════ DYNAMIC CONTENT (Decap CMS / JSON) ═══════
+
+function _tc(t){
+  const stars='★'.repeat(Math.max(1,Math.min(5,parseInt(t.stars)||5)));
+  return`<div class="tc"><div class="tc-quote-mark">"</div><div class="tc-q">${t.quote}</div><div class="tc-a"><div class="tc-av">${t.initials}</div><div><div class="tc-n">${t.name}</div><div class="tc-r">${t.role}</div></div><div class="tc-stars">${stars}</div></div></div>`;
+}
+
+function applyContact(c){
+  if(!c)return;
+  // WhatsApp URL (update all wa.me links including FAB)
+  const ph=(c.whatsapp||'919827599966').replace(/\D/g,'');
+  const msg=encodeURIComponent(c.waMsg||'i am intereseted in your financial advice');
+  const waUrl=`https://wa.me/${ph}?text=${msg}`;
+  document.querySelectorAll('a[href^="https://wa.me/"]').forEach(a=>a.href=waUrl);
+
+  // Phone links — update href + visible text/value
+  if(c.phone){
+    const digits=c.phone.replace(/\D/g,'');
+    const display='+91 '+c.phone;
+    document.querySelectorAll('a[href^="tel:"]').forEach(a=>{
+      a.href='tel:+91'+digits;
+      const v=a.querySelector('[data-cv]');
+      if(v)v.textContent=display;
+      else if(!a.querySelector('div'))a.textContent='📱 '+display;
+    });
   }
-  if(cfg.kotak){document.querySelectorAll('a[href*="kotaksecurities"]').forEach(a=>{a.href=cfg.kotak;});}
-  if(cfg.insta){document.querySelectorAll('a[href*="instagram"]').forEach(a=>{a.href=cfg.insta;});}
-  if(cfg.fb){document.querySelectorAll('a[href*="facebook"]').forEach(a=>{a.href=cfg.fb;});}
-  if(cfg.li){document.querySelectorAll('a[href*="linkedin"]').forEach(a=>{a.href=cfg.li;});}
-  if(cfg.dp){document.querySelectorAll('.avi-img,img[data-admin-dp]').forEach(img=>{img.src=cfg.dp;});}
-})();
 
-// ── Render admin-managed blogs on home/blogs pages ──
-function renderBlogsSection(containerId,limit){
-  const el=document.getElementById(containerId);if(!el)return;
-  const blogs=JSON.parse(localStorage.getItem('amBlogs')||'[]');
-  const list=limit?blogs.slice(0,limit):blogs;
-  if(!list.length){el.innerHTML='<div class="blog-empty">No blog posts yet.</div>';return;}
-  el.innerHTML=list.map(b=>`
-    <a class="blog-card" href="blogs.html#blog-${b.id}">
-      <div class="blog-card-img">${b.imgUrl?`<img src="${b.imgUrl}" alt="${b.title}" loading="lazy">`:'📰'}</div>
-      <div class="blog-card-body">
-        <div class="blog-card-tag">${b.tag||'Insights'}</div>
-        <div class="blog-card-title">${b.title}</div>
-        <div class="blog-card-excerpt">${b.excerpt||''}</div>
-        <div class="blog-card-date">${b.date||''}</div>
-      </div>
-    </a>`).join('');
-}
-renderBlogsSection('blogScroll',3);
-renderBlogsSection('blogScrollAll',0);
+  // Email links
+  if(c.email){
+    document.querySelectorAll('a[href^="mailto:"]').forEach(a=>{
+      a.href='mailto:'+c.email;
+      const v=a.querySelector('[data-cv]');
+      if(v)v.textContent=c.email;
+      else if(!a.querySelector('div'))a.textContent='📧 '+c.email;
+    });
+  }
 
-// ── Render admin-managed about photos ──
-function renderAboutPhotos(containerId){
-  const el=document.getElementById(containerId);if(!el)return;
-  const photos=JSON.parse(localStorage.getItem('amPhotos')||'[]');
-  el.innerHTML=photos.map(p=>`<div class="abt-photo"><img src="${p.url}" alt="${p.caption||'Photo'}" loading="lazy"></div>`).join('');
+  // Kotak link
+  if(c.kotak)document.querySelectorAll('a[href*="kotaksecurities"]').forEach(a=>a.href=c.kotak);
+
+  // Social links (targeted by data-social attribute)
+  if(c.instagram)document.querySelectorAll('a[data-social="instagram"]').forEach(a=>a.href=c.instagram);
+  if(c.linkedin)document.querySelectorAll('a[data-social="linkedin"]').forEach(a=>a.href=c.linkedin);
+  if(c.facebook)document.querySelectorAll('a[data-social="facebook"]').forEach(a=>a.href=c.facebook);
 }
-renderAboutPhotos('abtPhotoScroll');
+
+async function loadDynamicContent(){
+  // ── Contact info (runs on every page) ──
+  try{
+    const r=await fetch('/data/contact.json');
+    if(r.ok)applyContact(await r.json());
+  }catch(_){}
+
+  // ── Testimonials (full grid on testimonials.html) ──
+  const fullGrid=document.getElementById('testGrid');
+  // ── Testimonials (featured on index.html) ──
+  const featGrid=document.getElementById('testFeatured');
+
+  if(fullGrid||featGrid){
+    try{
+      const r=await fetch('/data/testimonials.json');
+      if(r.ok){
+        const data=await r.json();
+        const items=Array.isArray(data)?data:(data.items||[]);
+        if(fullGrid){
+          fullGrid.innerHTML=items.length
+            ?items.map(_tc).join('')
+            :'<p style="color:var(--t3);text-align:center;padding:40px 0;grid-column:1/-1">No testimonials yet.</p>';
+        }
+        if(featGrid){
+          const featured=items.filter(t=>t.featured).slice(0,6);
+          const shown=featured.length?featured:items.slice(0,3);
+          featGrid.innerHTML=shown.length
+            ?shown.map(_tc).join('')
+            :'<p style="color:var(--t3);text-align:center;padding:40px 0;grid-column:1/-1">No testimonials yet.</p>';
+        }
+      }
+    }catch(_){}
+  }
+}
+
+loadDynamicContent();

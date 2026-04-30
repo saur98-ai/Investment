@@ -1,0 +1,96 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: images
+public_folder: /images
+
+collections:
+  - name: settings
+    label: "⚙️ Site Settings"
+    files:
+      - name: contact
+        label: "Contact & Social Links"
+        file: data/contact.json
+        format: json
+        fields:
+          - label: "Phone Number (digits only, e.g. 9827599966)"
+            name: phone
+            widget: string
+            default: "9827599966"
+          - label: "Email Address"
+            name: email
+            widget: string
+            default: "yourmail@gmail.com"
+          - label: "WhatsApp Number (with country code, e.g. 919827599966)"
+            name: whatsapp
+            widget: string
+            default: "919827599966"
+          - label: "WhatsApp Pre-filled Message"
+            name: waMsg
+            widget: string
+            default: "i am intereseted in your financial advice"
+          - label: "Kotak Demat Account Link"
+            name: kotak
+            widget: string
+            required: false
+            default: "https://www.kotaksecurities.com/landing-page/franchisee/open-demat-account-partner-madhu-maheshwari-neo"
+          - label: "Instagram URL"
+            name: instagram
+            widget: string
+            required: false
+            default: ""
+          - label: "LinkedIn URL"
+            name: linkedin
+            widget: string
+            required: false
+            default: ""
+          - label: "Facebook URL"
+            name: facebook
+            widget: string
+            required: false
+            default: ""
+
+  - name: testimonials
+    label: "💬 Testimonials"
+    files:
+      - name: all
+        label: "All Testimonials"
+        file: data/testimonials.json
+        format: json
+        fields:
+          - label: "Testimonials"
+            name: items
+            widget: list
+            summary: "{{fields.name}} — {{fields.role}}"
+            fields:
+              - { label: "Client Name", name: name, widget: string }
+              - { label: "Initials (2–3 letters, e.g. RS)", name: initials, widget: string }
+              - { label: "Role & City (e.g. IT Professional, Bangalore)", name: role, widget: string }
+              - { label: "Testimonial Quote", name: quote, widget: text }
+              - label: "Star Rating"
+                name: stars
+                widget: select
+                options: ["1", "2", "3", "4", "5"]
+                default: "5"
+              - { label: "Show on Homepage (Featured)", name: featured, widget: boolean, default: false }
+
+  - name: services
+    label: "🏢 Services"
+    files:
+      - name: all
+        label: "All Services"
+        file: data/services.json
+        format: json
+        fields:
+          - label: "Services"
+            name: items
+            widget: list
+            summary: "{{fields.title}}"
+            fields:
+              - { label: "Title", name: title, widget: string }
+              - { label: "Icon (emoji)", name: icon, widget: string }
+              - { label: "Short Description", name: description, widget: text }
+              - { label: "Page Link (e.g. sip.html)", name: link, widget: string }
+              - { label: "CTA Button Text", name: cta, widget: string, default: "Learn More →" }
+              - { label: "Display Order (lower = first)", name: order, widget: number, default: 0 }

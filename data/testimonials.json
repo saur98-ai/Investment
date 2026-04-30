@@ -1,0 +1,52 @@
+{
+  "items": [
+    {
+      "name": "Rahul Sharma",
+      "initials": "RS",
+      "role": "IT Professional, Bangalore",
+      "quote": "Akshay made investing feel approachable. He designed a SIP plan within our budget — within 2 years, we've already seen meaningful growth in our portfolio.",
+      "stars": "5",
+      "featured": true
+    },
+    {
+      "name": "Priya Mehta",
+      "initials": "PM",
+      "role": "Business Owner, Mumbai",
+      "quote": "I was confused about where to start. Akshay explained everything plainly and helped set up my first mutual fund portfolio. Quarterly reviews give peace of mind.",
+      "stars": "5",
+      "featured": true
+    },
+    {
+      "name": "Anil Verma",
+      "initials": "AV",
+      "role": "Govt Employee, Delhi",
+      "quote": "Planning for my daughter's education felt overwhelming. Akshay created a goal-based plan, and I finally feel confident about her future studies abroad.",
+      "stars": "5",
+      "featured": true
+    },
+    {
+      "name": "Neha Kulkarni",
+      "initials": "NK",
+      "role": "Doctor, Pune",
+      "quote": "No hidden charges, no jargon. Disciplined, results-driven approach to portfolio management. I've referred Akshay to several friends and family.",
+      "stars": "5",
+      "featured": false
+    },
+    {
+      "name": "Vikram Gupta",
+      "initials": "VG",
+      "role": "Engineer, Hyderabad",
+      "quote": "Started with ₹3,000/month SIP three years ago. My corpus has grown beyond expectations. He truly understands compounding and patience.",
+      "stars": "5",
+      "featured": false
+    },
+    {
+      "name": "Sunita Joshi",
+      "initials": "SJ",
+      "role": "Sr. Manager, Chennai",
+      "quote": "Close to retirement, I needed safe yet growth-oriented planning. Akshay balanced my portfolio beautifully — I feel completely secure now.",
+      "stars": "5",
+      "featured": false
+    }
+  ]
+}
