@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -26,7 +26,6 @@
         <a href="sip.html"><span>📈</span>SIP &amp; Mutual Funds</a>
         <a href="stock.html"><span>📊</span>Stock Market</a>
         <a href="insurance.html"><span>🛡️</span>Insurance</a>
-        <a href="tax.html"><span>💼</span>Tax Planning</a>
         <a href="retirement.html"><span>🌅</span>Retirement</a>
         <a href="pms.html"><span>💎</span>PMS</a>
         <a href="private-equity.html"><span>🚀</span>Private Equity</a>
@@ -45,6 +44,7 @@
         <a href="succession-planning.html"><span>🔄</span>Succession Planning</a>
         <a href="estate-planning.html"><span>🏠</span>Estate Planning</a>
         <a href="elite.html"><span>⭐</span>Elite Advisory</a>
+        <a href="services.html" style="border-top:1px solid rgba(201,168,76,.1);margin-top:4px;padding-top:12px;color:var(--gold2)"><span>📋</span>All Services →</a>
       </div>
     </div>
     <a href="calculators.html">Calculators</a>
@@ -52,15 +52,8 @@
     <a href="contact.html">Contact</a>
     <a href="contact.html" class="ncta">Free Consultation</a>
   </div>
-  <button class="srch-btn" onclick="openSearch()" aria-label="Search services">🔍</button><div class="ham"><span></span><span></span><span></span></div>
+  <div class="srch-wrap" id="srchWrap"><input type="text" class="srch-bar" id="srchInp" placeholder="🔍 Search services..." oninput="doSearch(this.value)" autocomplete="off"><div class="srch-drop" id="srchRes"></div></div><div class="ham"><span></span><span></span><span></span></div>
 </nav>
-<div class="srch-ovl" id="srchOvl">
-  <div class="srch-box">
-    <div class="srch-hd"><span>Search Services</span><button onclick="closeSearch()">✕</button></div>
-    <input type="text" class="srch-inp" id="srchInp" placeholder="Type to search services..." oninput="doSearch(this.value)">
-    <div class="srch-res" id="srchRes"></div>
-  </div>
-</div>
 
 <!-- HERO -->
 <section class="home-hero">
@@ -70,7 +63,7 @@
     <p class="hh-sub">Expert guidance across mutual funds, stock markets, insurance, tax planning, and retirement — designed to grow your wealth and protect your future.</p>
     <div class="hh-ctas">
       <a href="contact.html" class="b-gold">Book Free Consultation →</a>
-      <a href="sip.html" class="b-out">Explore Services</a>
+      <a href="services.html" class="b-out">Explore Services</a>
     </div>
     <div class="hh-trust">
       <div><div class="hh-t-num">5+</div><div class="hh-t-lbl">Service Verticals</div></div>
@@ -130,41 +123,42 @@
   <div class="svc-grid">
     <a href="sip.html" class="svc-card">
       <div class="svc-c-icon">📈</div>
-      <h3 class="svc-c-title">SIP &amp; Mutual Funds</h3>
-      <p class="svc-c-body">Build wealth systematically. Disciplined SIP planning and mutual fund selection tailored to your goals and risk profile.</p>
-      <div class="svc-c-link">Explore Journey →</div>
-    </a>
-    <a href="stock.html" class="svc-card">
-      <div class="svc-c-icon">📊</div>
-      <h3 class="svc-c-title">Stock Market</h3>
-      <p class="svc-c-body">Direct equity investing with research-backed insights. Long-term wealth creation through quality stock picking.</p>
-      <div class="svc-c-link">Learn More →</div>
+      <h3 class="svc-c-title">Wealth &amp; Investments</h3>
+      <p class="svc-c-body">Mutual funds, SIP, stocks, PMS, bonds, AIF, and private equity — comprehensive strategies to grow your wealth across every asset class.</p>
+      <div class="svc-c-link">Explore →</div>
     </a>
     <a href="insurance.html" class="svc-card">
       <div class="svc-c-icon">🛡️</div>
-      <h3 class="svc-c-title">Insurance</h3>
-      <p class="svc-c-body">Protect what matters most. Term life, health, and asset insurance plans to safeguard your family's future.</p>
-      <div class="svc-c-link">Explore Coverage →</div>
-    </a>
-    <a href="tax.html" class="svc-card">
-      <div class="svc-c-icon">💼</div>
-      <h3 class="svc-c-title">Tax Planning</h3>
-      <p class="svc-c-body">Save smarter, not harder. Strategic use of 80C, 80D, ELSS, and NPS to maximize savings and minimize taxes.</p>
-      <div class="svc-c-link">Save More →</div>
+      <h3 class="svc-c-title">Insurance &amp; Protection</h3>
+      <p class="svc-c-body">Life, health, and asset insurance combined with will drafting, trust structuring, and estate planning to safeguard your legacy.</p>
+      <div class="svc-c-link">Explore →</div>
     </a>
     <a href="retirement.html" class="svc-card">
       <div class="svc-c-icon">🌅</div>
-      <h3 class="svc-c-title">Retirement Planning</h3>
-      <p class="svc-c-body">Plan for the long game. Build a corpus that supports your lifestyle through every chapter of retirement.</p>
-      <div class="svc-c-link">Plan Ahead →</div>
+      <h3 class="svc-c-title">Retirement &amp; Goals</h3>
+      <p class="svc-c-body">Retirement planning, goal-based investing, and succession planning to secure every milestone — today, tomorrow, and beyond.</p>
+      <div class="svc-c-link">Explore →</div>
     </a>
-    <a href="contact.html" class="svc-card">
-      <div class="svc-c-icon">🎯</div>
-      <h3 class="svc-c-title">Goal-Based Planning</h3>
-      <p class="svc-c-body">Home, education, travel — every dream deserves a roadmap. Personalized goal planning for life's biggest moments.</p>
-      <div class="svc-c-link">Set Your Goals →</div>
+    <a href="international.html" class="svc-card">
+      <div class="svc-c-icon">🌍</div>
+      <h3 class="svc-c-title">Global &amp; Alternatives</h3>
+      <p class="svc-c-body">Diversify beyond borders — international equities, GIFT City investments, and unlisted securities for sophisticated portfolios.</p>
+      <div class="svc-c-link">Explore →</div>
+    </a>
+    <a href="loan.html" class="svc-card">
+      <div class="svc-c-icon">💰</div>
+      <h3 class="svc-c-title">Financing &amp; Capital</h3>
+      <p class="svc-c-body">Loan against securities, debt financing, equity financing, and exit planning — smart capital solutions for individuals and businesses.</p>
+      <div class="svc-c-link">Explore →</div>
+    </a>
+    <a href="family-office.html" class="svc-card">
+      <div class="svc-c-icon">👑</div>
+      <h3 class="svc-c-title">Elite &amp; Family Office</h3>
+      <p class="svc-c-body">Exclusive family office services and elite advisory for HNIs — holistic, private, and comprehensive wealth management.</p>
+      <div class="svc-c-link">Explore →</div>
     </a>
   </div>
+  <div style="text-align:center;margin-top:44px"><a href="services.html" class="b-out">View All 21 Services →</a></div>
 </section>
 
 <!-- WHY CHOOSE -->
@@ -175,10 +169,10 @@
     <p class="svc-sub">Investing should feel empowering, not intimidating. Here's the difference we bring.</p>
   </div>
   <div class="why-grid">
-    <div class="why-card"><div class="why-num">01</div><h3 class="why-h">Personalized Strategy</h3><p class="why-p">No generic templates. Every plan is built around your unique goals, life stage, and risk appetite.</p></div>
-    <div class="why-card"><div class="why-num">02</div><h3 class="why-h">Transparent Process</h3><p class="why-p">Clear, jargon-free guidance. You'll always understand exactly where your money goes and why.</p></div>
-    <div class="why-card"><div class="why-num">03</div><h3 class="why-h">Goal-Oriented</h3><p class="why-p">Every rupee has a purpose. We don't just build portfolios — we build the life you want.</p></div>
-    <div class="why-card"><div class="why-num">04</div><h3 class="why-h">Long-Term Vision</h3><p class="why-p">We think in decades, not days. Wealth that compounds, lasts, and creates lasting impact.</p></div>
+    <div class="why-card"><div class="why-dot"><span>01</span></div><h3 class="why-h">Personalized Strategy</h3><p class="why-p">No generic templates. Every plan is built around your unique goals, life stage, and risk appetite.</p></div>
+    <div class="why-card"><div class="why-dot"><span>02</span></div><h3 class="why-h">Transparent Process</h3><p class="why-p">Clear, jargon-free guidance. You'll always understand exactly where your money goes and why.</p></div>
+    <div class="why-card"><div class="why-dot"><span>03</span></div><h3 class="why-h">Goal-Oriented</h3><p class="why-p">Every rupee has a purpose. We don't just build portfolios — we build the life you want.</p></div>
+    <div class="why-card"><div class="why-dot"><span>04</span></div><h3 class="why-h">Long-Term Vision</h3><p class="why-p">We think in decades, not days. Wealth that compounds, lasts, and creates lasting impact.</p></div>
   </div>
 </section>
 
@@ -255,10 +249,8 @@
       </ul>
     </div>
   </div>
-  <div class="f-bot">
-    <p>© 2025 Akshay Maheshwari. All rights reserved.</p>
-    <p>AMFI Registered Mutual Fund Distributor – ARN-268752, ARN-33209</p><p>Risk Factors – Investments in Mutual Funds are subject to Market Risks. Read all scheme related documents carefully before investing.</p>
-  </div>
+  <div class="f-disc"><p>AMFI Registered Mutual Fund Distributor – ARN-268752, ARN-33209 &nbsp;|&nbsp; Risk Factors – Investments in Mutual Funds are subject to Market Risks. Read all scheme related documents carefully before investing.</p></div>
+  <div class="f-bot"><p>© 2025 Akshay Maheshwari. All rights reserved.</p></div>
 </footer>
 
 <a href="https://wa.me/919827599966?text=i%20am%20intereseted%20in%20your%20financial%20advice" target="_blank" class="waf">💬</a>

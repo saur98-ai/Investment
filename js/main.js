@@ -257,7 +257,6 @@ const SERVICES=[
   {name:'SIP & Mutual Funds',ico:'📈',url:'sip.html'},
   {name:'Stock Market',ico:'📊',url:'stock.html'},
   {name:'Insurance',ico:'🛡️',url:'insurance.html'},
-  {name:'Tax Planning',ico:'💼',url:'tax.html'},
   {name:'Retirement',ico:'🌅',url:'retirement.html'},
   {name:'PMS',ico:'💎',url:'pms.html'},
   {name:'Private Equity',ico:'🚀',url:'private-equity.html'},
@@ -277,21 +276,20 @@ const SERVICES=[
   {name:'Estate Planning',ico:'🏠',url:'estate-planning.html'},
   {name:'Elite Advisory',ico:'⭐',url:'elite.html'}
 ];
-function openSearch(){
-  const o=document.getElementById('srchOvl');if(!o)return;
-  o.classList.add('open');
-  const inp=document.getElementById('srchInp');if(inp){inp.value='';inp.focus();}
-  doSearch('');
-}
-function closeSearch(){const o=document.getElementById('srchOvl');if(o)o.classList.remove('open');}
 function doSearch(q){
   const res=document.getElementById('srchRes');if(!res)return;
   const term=q.trim().toLowerCase();
-  const matches=term?SERVICES.filter(s=>s.name.toLowerCase().includes(term)):SERVICES;
-  if(!matches.length){res.innerHTML='<div class="srch-empty">No services found</div>';return;}
-  res.innerHTML=matches.map(s=>`<a class="srch-item" href="${s.url}"><span class="srch-item-ico">${s.ico}</span><span class="srch-item-name">${s.name}</span></a>`).join('');
+  if(!term){res.classList.remove('open');return;}
+  const matches=SERVICES.filter(s=>s.name.toLowerCase().includes(term));
+  res.innerHTML=matches.length?matches.map(s=>`<a class="srch-item" href="${s.url}"><span class="srch-item-ico">${s.ico}</span><span class="srch-item-name">${s.name}</span></a>`).join(''):'<div class="srch-empty">No services found</div>';
+  res.classList.add('open');
 }
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closeSearch();});
+document.addEventListener('click',e=>{
+  const w=document.getElementById('srchWrap');
+  const r=document.getElementById('srchRes');
+  if(w&&r&&!w.contains(e.target))r.classList.remove('open');
+});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){const r=document.getElementById('srchRes');if(r)r.classList.remove('open');}});
 
 // ═══════ DYNAMIC CONTENT (Decap CMS / JSON) ═══════
 

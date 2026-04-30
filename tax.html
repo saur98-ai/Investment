@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -51,6 +51,7 @@
         <a href="succession-planning.html"><span>🔄</span>Succession Planning</a>
         <a href="estate-planning.html"><span>🏠</span>Estate Planning</a>
         <a href="elite.html"><span>⭐</span>Elite Advisory</a>
+        <a href="services.html" style="border-top:1px solid rgba(201,168,76,.1);margin-top:4px;padding-top:12px;color:var(--gold2)"><span>📋</span>All Services →</a>
       </div>
     </div>
     <a href="calculators.html">Calculators</a>
@@ -58,15 +59,8 @@
     <a href="contact.html">Contact</a>
     <a href="contact.html" class="ncta">Free Consultation</a>
   </div>
-  <button class="srch-btn" onclick="openSearch()" aria-label="Search services">🔍</button><div class="ham"><span></span><span></span><span></span></div>
+  <div class="srch-wrap" id="srchWrap"><input type="text" class="srch-bar" id="srchInp" placeholder="🔍 Search services..." oninput="doSearch(this.value)" autocomplete="off"><div class="srch-drop" id="srchRes"></div></div><div class="ham"><span></span><span></span><span></span></div>
 </nav>
-<div class="srch-ovl" id="srchOvl">
-  <div class="srch-box">
-    <div class="srch-hd"><span>Search Services</span><button onclick="closeSearch()">✕</button></div>
-    <input type="text" class="srch-inp" id="srchInp" placeholder="Type to search services..." oninput="doSearch(this.value)">
-    <div class="srch-res" id="srchRes"></div>
-  </div>
-</div>
 
 <!-- INTRO -->
 <section class="scene intro">
@@ -269,11 +263,11 @@
 <footer>
   <div class="f-grid">
     <div><div class="f-brand-name">Akshay Maheshwari</div><div class="f-brand-sub">Investment Advisor</div><p class="f-about">Helping individuals and families grow their wealth through smart, disciplined, and transparent financial guidance across India.</p></div>
-    <div><h5 class="f-h">Services</h5><ul class="f-list"><li><a href="sip.html">SIP &amp; Mutual Funds</a></li><li><a href="stock.html">Stock Market</a></li><li><a href="insurance.html">Insurance</a></li><li><a href="tax.html">Tax Planning</a></li><li><a href="retirement.html">Retirement</a></li><li><a href="pms.html">PMS</a></li><li><a href="private-equity.html">Private Equity</a></li><li><a href="bonds.html">Bonds</a></li><li><a href="loan.html">Loan Against Security</a></li></ul></div>
+    <div><h5 class="f-h">Services</h5><ul class="f-list f-list-2col"><li><a href="sip.html">SIP &amp; Mutual Funds</a></li><li><a href="stock.html">Stock Market</a></li><li><a href="insurance.html">Insurance</a></li><li><a href="retirement.html">Retirement</a></li><li><a href="pms.html">PMS</a></li><li><a href="private-equity.html">Private Equity</a></li><li><a href="bonds.html">Bonds</a></li><li><a href="loan.html">Loan Against Security</a></li><li><a href="aif.html">AIF</a></li><li><a href="unlisted.html">Unlisted Securities</a></li><li><a href="gift-city.html">Gift City</a></li><li><a href="international.html">International Equities</a></li><li><a href="will.html">Will</a></li><li><a href="trust.html">Trust</a></li><li><a href="family-office.html">Family Office</a></li><li><a href="debt-financing.html">Debt Financing</a></li><li><a href="equity-financing.html">Equity Financing</a></li><li><a href="exit-planning.html">Exit Planning</a></li><li><a href="succession-planning.html">Succession Planning</a></li><li><a href="estate-planning.html">Estate Planning</a></li><li><a href="elite.html">Elite Advisory</a></li></ul></div>
     <div><h5 class="f-h">Company</h5><ul class="f-list"><li><a href="about.html">About</a></li><li><a href="testimonials.html">Testimonials</a></li><li><a href="calculators.html">Calculators</a></li><li><a href="contact.html">Contact</a></li></ul></div>
     <div><h5 class="f-h">Connect</h5><ul class="f-list"><li><a href="tel:+919827599966">📱 +91 98275 99966</a></li><li><a href="mailto:yourmail@gmail.com">📧 yourmail@gmail.com</a></li><li><a href="https://www.kotaksecurities.com/landing-page/franchisee/open-demat-account-partner-madhu-maheshwari-neo" target="_blank">📊 Open Demat Account</a></li><li><a href="https://wa.me/919827599966?text=i%20am%20intereseted%20in%20your%20financial%20advice" target="_blank">💬 WhatsApp</a></li></ul></div>
   </div>
-  <div class="f-bot"><p>© 2025 Akshay Maheshwari. All rights reserved.</p><p>AMFI Registered Mutual Fund Distributor – ARN-268752, ARN-33209</p><p>Risk Factors – Investments in Mutual Funds are subject to Market Risks. Read all scheme related documents carefully before investing.</p></div>
+  <div class="f-disc"><p>AMFI Registered Mutual Fund Distributor – ARN-268752, ARN-33209 &nbsp;|&nbsp; Risk Factors – Investments in Mutual Funds are subject to Market Risks. Read all scheme related documents carefully before investing.</p></div><div class="f-bot"><p>© 2025 Akshay Maheshwari. All rights reserved.</p></div>
 </footer>
 
 <a href="https://wa.me/919827599966?text=i%20am%20intereseted%20in%20your%20financial%20advice" target="_blank" class="waf">💬</a>
