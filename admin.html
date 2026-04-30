@@ -210,8 +210,8 @@
         <span class="adm-chev">▼</span>
       </div>
       <div class="adm-sec-body">
-        <div style="font-size:.82rem;color:var(--t2);margin-bottom:10px"><strong style="color:var(--t1)">Change password</strong> — edit <code>js/admin-config.js</code> and <code>netlify/functions/save-data.js</code> in GitHub with the same new value.</div>
-        <a href="https://github.com/saur98-ai/Investment/edit/main/js/admin-config.js" target="_blank" class="adm-btn sec" style="width:auto;padding:8px 18px;display:inline-block;text-decoration:none;margin-bottom:16px">Edit Password on GitHub →</a>
+        <div style="font-size:.82rem;color:var(--t2);margin-bottom:10px"><strong style="color:var(--t1)">Access</strong> — use a GitHub Fine-grained Personal Access Token with <code>Contents: Read & Write</code> permission on this repo. Generate one at GitHub → Settings → Developer Settings → Personal Access Tokens.</div>
+        <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" class="adm-btn sec" style="width:auto;padding:8px 18px;display:inline-block;text-decoration:none;margin-bottom:16px">Create GitHub Token →</a>
         <div style="font-size:.82rem;color:var(--t2);margin-bottom:10px"><strong style="color:var(--t1)">Update profile photo</strong> — upload <code>akshay.jpg</code> to the <code>images/</code> folder on GitHub.</div>
         <a href="https://github.com/saur98-ai/Investment/upload/main/images" target="_blank" class="adm-btn sec" style="width:auto;padding:8px 18px;display:inline-block;text-decoration:none">Upload Photo on GitHub →</a>
       </div>
@@ -224,10 +224,17 @@
 </div>
 
 <script src="js/main.js"></script>
-<script src="js/admin-config.js"></script>
 <script>
-const API_GET  = '/.netlify/functions/get-data';
-const API_SAVE = '/.netlify/functions/save-data';
+const API_GET  = null; // replaced by GitHub API below
+const API_SAVE = null; // replaced by GitHub API below
+
+// ── GitHub API Config ──────────────────────────────────
+// ── Config — fill these in ─────────────────────────────
+const GH_OWNER  = 'saur98-ai';
+const GH_REPO   = 'Investment';
+const GH_BRANCH = 'main';
+const GH_TOKEN  = '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';
+const ADMIN_PWD = 'Akshay@Surbhi';
 
 let _testimonials = [], _blogs = [];
 let _editTestIdx = -1, _editBlogIdx = -1;
@@ -261,10 +268,10 @@ function toggleSec(id) {
 }
 
 // ── Auth ───────────────────────────────────────────────
-function admLogin() {
+async function admLogin() {
   const pwd = document.getElementById('admPwd').value.trim();
   if (!pwd) return;
-  if (typeof ADMIN_PASSWORD !== 'undefined' && pwd !== ADMIN_PASSWORD) {
+  if (pwd !== ADMIN_PWD) {
     document.getElementById('admErr').style.display = 'block';
     return;
   }
@@ -282,21 +289,40 @@ function admLogout() {
 
 (function() { if (sessionStorage.getItem('admS') === '1') showPanel(); })();
 
-// ── API ────────────────────────────────────────────────
+// ── GitHub API helpers ─────────────────────────────────
+function ghToken() { return GH_TOKEN; }
+
 async function apiGet(key) {
-  try { const r = await fetch(`${API_GET}?key=${key}`); return r.ok ? r.json() : null; }
-  catch { return null; }
+  // First try reading from data/*.json in the repo via GitHub raw
+  try {
+    const url = `https://raw.githubusercontent.com/${GH_OWNER}/${GH_REPO}/${GH_BRANCH}/data/${key}.json?_=${Date.now()}`;
+    const r = await fetch(url);
+    if (r.ok) return r.json();
+  } catch {}
+  return null;
 }
 
 async function apiSave(key, data) {
+  // Write data/*.json back to GitHub via Contents API
   try {
-    const pwd = (typeof ADMIN_PASSWORD !== 'undefined') ? ADMIN_PASSWORD : '';
-    const r = await fetch(API_SAVE, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + pwd },
-      body: JSON.stringify({ key, data })
+    const token = ghToken();
+    if (!token) return false;
+    const apiUrl = `https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/data/${key}.json`;
+    // Get current SHA (needed for update)
+    let sha = null;
+    try {
+      const cur = await fetch(apiUrl, { headers: { 'Authorization': 'token ' + token, 'Accept': 'application/vnd.github.v3+json' } });
+      if (cur.ok) { const j = await cur.json(); sha = j.sha; }
+    } catch {}
+    const content = btoa(unescape(encodeURIComponent(JSON.stringify(data, null, 2))));
+    const body = { message: `admin: update ${key}`, content, branch: GH_BRANCH };
+    if (sha) body.sha = sha;
+    const r = await fetch(apiUrl, {
+      method: 'PUT',
+      headers: { 'Authorization': 'token ' + token, 'Content-Type': 'application/json', 'Accept': 'application/vnd.github.v3+json' },
+      body: JSON.stringify(body)
     });
-    return r.ok;
+    return r.ok || r.status === 201;
   } catch { return false; }
 }
 
