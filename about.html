@@ -52,8 +52,15 @@
     <a href="contact.html">Contact</a>
     <a href="contact.html" class="ncta">Free Consultation</a>
   </div>
-  <div class="ham"><span></span><span></span><span></span></div>
+  <button class="srch-btn" onclick="openSearch()" aria-label="Search services">🔍</button><div class="ham"><span></span><span></span><span></span></div>
 </nav>
+<div class="srch-ovl" id="srchOvl">
+  <div class="srch-box">
+    <div class="srch-hd"><span>Search Services</span><button onclick="closeSearch()">✕</button></div>
+    <input type="text" class="srch-inp" id="srchInp" placeholder="Type to search services..." oninput="doSearch(this.value)">
+    <div class="srch-res" id="srchRes"></div>
+  </div>
+</div>
 
 <section class="abt-sec">
   <div class="abt-g">
@@ -88,6 +95,16 @@
         <a href="contact.html" class="b-gold">Book Consultation →</a>
         <a href="testimonials.html" class="b-out">Read Reviews</a>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- PHOTO GALLERY -->
+<section style="padding:60px 5%;background:var(--bg2)">
+  <div style="max-width:1280px;margin:0 auto">
+    <div class="abt-gallery">
+      <div class="abt-gallery-hd">Photo Gallery</div>
+      <div class="abt-photo-scroll" id="abtPhotoScroll"></div>
     </div>
   </div>
 </section>

@@ -154,6 +154,20 @@ document.querySelectorAll('.fbtn').forEach(btn=>{
 });
 
 // ═══════ CALCULATORS ═══════
+function syncNum(sliderId,numId){
+  const s=document.getElementById(sliderId),n=document.getElementById(numId);
+  if(!s||!n)return;
+  n.value=s.value;
+}
+function syncSlider(numId,sliderId,calcFn){
+  const n=document.getElementById(numId),s=document.getElementById(sliderId);
+  if(!n||!s)return;
+  let v=parseFloat(n.value);
+  if(isNaN(v))return;
+  v=Math.max(parseFloat(s.min),Math.min(parseFloat(s.max),v));
+  s.value=v;n.value=v;
+  calcFn();
+}
 function sT(id,el){
   document.querySelectorAll('.cp').forEach(p=>p.classList.remove('on'));
   document.querySelectorAll('.ctb').forEach(t=>t.classList.remove('on'));
@@ -163,14 +177,19 @@ function sT(id,el){
 function fc(n){if(n>=1e7)return'₹'+(n/1e7).toFixed(2)+' Cr';if(n>=1e5)return'₹'+(n/1e5).toFixed(2)+' Lakhs';return'₹'+Math.round(n).toLocaleString('en-IN')}
 function dn(c,a,b){
   const cv=document.getElementById(c);if(!cv)return;
-  const x=cv.getContext('2d'),w=160,h=160,cx=w/2,cy=h/2,r=60,lw=20;
-  cv.width=w;cv.height=h;x.clearRect(0,0,w,h);
+  const dpr=window.devicePixelRatio||1,size=160;
+  cv.width=size*dpr;cv.height=size*dpr;
+  cv.style.width=size+'px';cv.style.height=size+'px';
+  const x=cv.getContext('2d');
+  x.scale(dpr,dpr);
+  const cx=size/2,cy=size/2,r=60,lw=20;
   const t=a+b,an=(a/t)*2*Math.PI;
   x.beginPath();x.arc(cx,cy,r,-Math.PI/2,-Math.PI/2+an);x.strokeStyle='#C9A84C';x.lineWidth=lw;x.stroke();
   x.beginPath();x.arc(cx,cy,r,-Math.PI/2+an,-Math.PI/2+2*Math.PI);x.strokeStyle='#2ECC8A';x.lineWidth=lw;x.stroke();
 }
 function cS(){
   if(!document.getElementById('r1'))return;
+  ['r1','r2','r3'].forEach(id=>syncNum(id,'n'+id));
   const P=+document.getElementById('r1').value,r=+document.getElementById('r2').value/100/12,n=+document.getElementById('r3').value*12;
   const fv=P*(((Math.pow(1+r,n)-1)/r)*(1+r)),inv=P*n,ret=fv-inv;
   document.getElementById('v1').textContent=fc(P);
@@ -184,6 +203,7 @@ function cS(){
 }
 function cL(){
   if(!document.getElementById('l1'))return;
+  ['l1','l2','l3'].forEach(id=>syncNum(id,'n'+id));
   const P=+document.getElementById('l1').value,r=+document.getElementById('l2').value/100,n=+document.getElementById('l3').value;
   const fv=P*Math.pow(1+r,n),ret=fv-P;
   document.getElementById('lv1').textContent=fc(P);
@@ -197,6 +217,7 @@ function cL(){
 }
 function cG(){
   if(!document.getElementById('g1'))return;
+  ['g1','g2','g3'].forEach(id=>syncNum(id,'n'+id));
   const T=+document.getElementById('g1').value,r=+document.getElementById('g2').value/100,n=+document.getElementById('g3').value,mr=r/12,mn=n*12;
   const sip=T/(((Math.pow(1+mr,mn)-1)/mr)*(1+mr)),ls=T/Math.pow(1+r,n);
   document.getElementById('gv1').textContent=fc(T);
@@ -209,6 +230,7 @@ function cG(){
 }
 function cW(){
   if(!document.getElementById('w1'))return;
+  ['w1','w2','w3','w4'].forEach(id=>syncNum(id,'n'+id));
   const C=+document.getElementById('w1').value,wd=+document.getElementById('w2').value,r=+document.getElementById('w3').value/100/12,n=+document.getElementById('w4').value*12;
   let b=C;for(let i=0;i<n;i++){b=b*(1+r)-wd;if(b<=0){b=0;break}}
   document.getElementById('wv1').textContent=fc(C);
@@ -225,7 +247,94 @@ function cW(){
   }
 }
 // Init calculators if on calc page
-if(document.getElementById('r1'))cS();
-if(document.getElementById('l1'))cL();
-if(document.getElementById('g1'))cG();
-if(document.getElementById('w1'))cW();
+if(document.getElementById('r1')){['r1','r2','r3'].forEach(id=>syncNum(id,'n'+id));cS();}
+if(document.getElementById('l1')){['l1','l2','l3'].forEach(id=>syncNum(id,'n'+id));cL();}
+if(document.getElementById('g1')){['g1','g2','g3'].forEach(id=>syncNum(id,'n'+id));cG();}
+if(document.getElementById('w1')){['w1','w2','w3','w4'].forEach(id=>syncNum(id,'n'+id));cW();}
+
+// ═══════ SEARCH ═══════
+const SERVICES=[
+  {name:'SIP & Mutual Funds',ico:'📈',url:'sip.html'},
+  {name:'Stock Market',ico:'📊',url:'stock.html'},
+  {name:'Insurance',ico:'🛡️',url:'insurance.html'},
+  {name:'Tax Planning',ico:'💼',url:'tax.html'},
+  {name:'Retirement',ico:'🌅',url:'retirement.html'},
+  {name:'PMS',ico:'💎',url:'pms.html'},
+  {name:'Private Equity',ico:'🚀',url:'private-equity.html'},
+  {name:'Bonds',ico:'📜',url:'bonds.html'},
+  {name:'Loan Against Security',ico:'🏦',url:'loan.html'},
+  {name:'AIF',ico:'🏛️',url:'aif.html'},
+  {name:'Unlisted Securities',ico:'📋',url:'unlisted.html'},
+  {name:'Gift City',ico:'🌐',url:'gift-city.html'},
+  {name:'International Equities',ico:'🌍',url:'international.html'},
+  {name:'Will',ico:'📝',url:'will.html'},
+  {name:'Trust',ico:'🔐',url:'trust.html'},
+  {name:'Family Office',ico:'👑',url:'family-office.html'},
+  {name:'Debt Financing',ico:'💰',url:'debt-financing.html'},
+  {name:'Equity Financing',ico:'📐',url:'equity-financing.html'},
+  {name:'Exit Planning',ico:'🚪',url:'exit-planning.html'},
+  {name:'Succession Planning',ico:'🔄',url:'succession-planning.html'},
+  {name:'Estate Planning',ico:'🏠',url:'estate-planning.html'},
+  {name:'Elite Advisory',ico:'⭐',url:'elite.html'}
+];
+function openSearch(){
+  const o=document.getElementById('srchOvl');if(!o)return;
+  o.classList.add('open');
+  const inp=document.getElementById('srchInp');if(inp){inp.value='';inp.focus();}
+  doSearch('');
+}
+function closeSearch(){const o=document.getElementById('srchOvl');if(o)o.classList.remove('open');}
+function doSearch(q){
+  const res=document.getElementById('srchRes');if(!res)return;
+  const term=q.trim().toLowerCase();
+  const matches=term?SERVICES.filter(s=>s.name.toLowerCase().includes(term)):SERVICES;
+  if(!matches.length){res.innerHTML='<div class="srch-empty">No services found</div>';return;}
+  res.innerHTML=matches.map(s=>`<a class="srch-item" href="${s.url}"><span class="srch-item-ico">${s.ico}</span><span class="srch-item-name">${s.name}</span></a>`).join('');
+}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeSearch();});
+
+// ═══════ ADMIN / localStorage OVERRIDES ═══════
+(function applyAdminSettings(){
+  const cfg=JSON.parse(localStorage.getItem('amCfg')||'{}');
+  if(cfg.phone){document.querySelectorAll('a[href^="tel:"]').forEach(a=>{a.href='tel:+91'+cfg.phone.replace(/\D/g,'');a.textContent='📱 +91 '+cfg.phone;});}
+  if(cfg.email){document.querySelectorAll('a[href^="mailto:"]').forEach(a=>{a.href='mailto:'+cfg.email;a.textContent='📧 '+cfg.email;});}
+  if(cfg.whatsapp||cfg.waMsg){
+    const ph=(cfg.whatsapp||'919827599966').replace(/\D/g,'');
+    const msg=encodeURIComponent(cfg.waMsg||'i am intereseted in your financial advice');
+    const url=`https://wa.me/${ph}?text=${msg}`;
+    document.querySelectorAll('a[href^="https://wa.me/"]').forEach(a=>{a.href=url;});
+  }
+  if(cfg.kotak){document.querySelectorAll('a[href*="kotaksecurities"]').forEach(a=>{a.href=cfg.kotak;});}
+  if(cfg.insta){document.querySelectorAll('a[href*="instagram"]').forEach(a=>{a.href=cfg.insta;});}
+  if(cfg.fb){document.querySelectorAll('a[href*="facebook"]').forEach(a=>{a.href=cfg.fb;});}
+  if(cfg.li){document.querySelectorAll('a[href*="linkedin"]').forEach(a=>{a.href=cfg.li;});}
+  if(cfg.dp){document.querySelectorAll('.avi-img,img[data-admin-dp]').forEach(img=>{img.src=cfg.dp;});}
+})();
+
+// ── Render admin-managed blogs on home/blogs pages ──
+function renderBlogsSection(containerId,limit){
+  const el=document.getElementById(containerId);if(!el)return;
+  const blogs=JSON.parse(localStorage.getItem('amBlogs')||'[]');
+  const list=limit?blogs.slice(0,limit):blogs;
+  if(!list.length){el.innerHTML='<div class="blog-empty">No blog posts yet.</div>';return;}
+  el.innerHTML=list.map(b=>`
+    <a class="blog-card" href="blogs.html#blog-${b.id}">
+      <div class="blog-card-img">${b.imgUrl?`<img src="${b.imgUrl}" alt="${b.title}" loading="lazy">`:'📰'}</div>
+      <div class="blog-card-body">
+        <div class="blog-card-tag">${b.tag||'Insights'}</div>
+        <div class="blog-card-title">${b.title}</div>
+        <div class="blog-card-excerpt">${b.excerpt||''}</div>
+        <div class="blog-card-date">${b.date||''}</div>
+      </div>
+    </a>`).join('');
+}
+renderBlogsSection('blogScroll',3);
+renderBlogsSection('blogScrollAll',0);
+
+// ── Render admin-managed about photos ──
+function renderAboutPhotos(containerId){
+  const el=document.getElementById(containerId);if(!el)return;
+  const photos=JSON.parse(localStorage.getItem('amPhotos')||'[]');
+  el.innerHTML=photos.map(p=>`<div class="abt-photo"><img src="${p.url}" alt="${p.caption||'Photo'}" loading="lazy"></div>`).join('');
+}
+renderAboutPhotos('abtPhotoScroll');

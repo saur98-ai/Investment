@@ -53,8 +53,15 @@
     <a href="contact.html">Contact</a>
     <a href="contact.html" class="ncta">Free Consultation</a>
   </div>
-  <div class="ham"><span></span><span></span><span></span></div>
+  <button class="srch-btn" onclick="openSearch()" aria-label="Search services">🔍</button><div class="ham"><span></span><span></span><span></span></div>
 </nav>
+<div class="srch-ovl" id="srchOvl">
+  <div class="srch-box">
+    <div class="srch-hd"><span>Search Services</span><button onclick="closeSearch()">✕</button></div>
+    <input type="text" class="srch-inp" id="srchInp" placeholder="Type to search services..." oninput="doSearch(this.value)">
+    <div class="srch-res" id="srchRes"></div>
+  </div>
+</div>
 <section class="scene intro">
   <div class="hero-coin"><div class="hc-ring"></div><div class="hc-ring2"></div><div class="hc-c">🏛️</div></div>
   <div class="intro-ey">ALTERNATIVE INVESTMENT FUND · BEYOND CONVENTIONAL MARKETS</div>

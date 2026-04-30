@@ -52,8 +52,15 @@
     <a href="contact.html">Contact</a>
     <a href="contact.html" class="ncta">Free Consultation</a>
   </div>
-  <div class="ham"><span></span><span></span><span></span></div>
+  <button class="srch-btn" onclick="openSearch()" aria-label="Search services">🔍</button><div class="ham"><span></span><span></span><span></span></div>
 </nav>
+<div class="srch-ovl" id="srchOvl">
+  <div class="srch-box">
+    <div class="srch-hd"><span>Search Services</span><button onclick="closeSearch()">✕</button></div>
+    <input type="text" class="srch-inp" id="srchInp" placeholder="Type to search services..." oninput="doSearch(this.value)">
+    <div class="srch-res" id="srchRes"></div>
+  </div>
+</div>
 
 <div class="ch">
   <div class="sc-step" style="opacity:1;transform:none;justify-content:center">Financial Tools</div>
@@ -71,9 +78,18 @@
   <div class="cp on" id="cp-sip">
     <div class="cg">
       <div class="ci"><h3>📈 SIP Calculator</h3>
-        <div class="sg"><div class="sh"><span class="sl">Monthly Investment</span><span class="sv" id="v1">₹5,000</span></div><input type="range" id="r1" min="500" max="100000" step="500" value="5000" oninput="cS()"></div>
-        <div class="sg"><div class="sh"><span class="sl">Expected Return (p.a.)</span><span class="sv" id="v2">12%</span></div><input type="range" id="r2" min="1" max="30" step=".5" value="12" oninput="cS()"></div>
-        <div class="sg"><div class="sh"><span class="sl">Time Period (Years)</span><span class="sv" id="v3">10</span></div><input type="range" id="r3" min="1" max="40" step="1" value="10" oninput="cS()"></div>
+        <div class="sg">
+          <div class="sh"><span class="sl">Monthly Investment</span><span class="sv" id="v1">₹5,000</span></div>
+          <div class="sg-row"><input type="range" id="r1" min="500" max="100000" step="500" value="5000" oninput="cS()"><input type="number" id="nr1" class="sg-num" min="500" max="100000" step="500" value="5000" onchange="syncSlider('nr1','r1',cS)"></div>
+        </div>
+        <div class="sg">
+          <div class="sh"><span class="sl">Expected Return (p.a.)</span><span class="sv" id="v2">12%</span></div>
+          <div class="sg-row"><input type="range" id="r2" min="1" max="30" step=".5" value="12" oninput="cS()"><input type="number" id="nr2" class="sg-num" min="1" max="30" step=".5" value="12" onchange="syncSlider('nr2','r2',cS)"></div>
+        </div>
+        <div class="sg">
+          <div class="sh"><span class="sl">Time Period (Years)</span><span class="sv" id="v3">10</span></div>
+          <div class="sg-row"><input type="range" id="r3" min="1" max="40" step="1" value="10" oninput="cS()"><input type="number" id="nr3" class="sg-num" min="1" max="40" step="1" value="10" onchange="syncSlider('nr3','r3',cS)"></div>
+        </div>
       </div>
       <div class="cr"><h3>Results</h3>
         <div class="dn"><canvas id="d1" width="160" height="160"></canvas><div class="dc"><div class="dc-n" id="p1">63%</div><div class="dc-l">Returns</div></div></div>
@@ -88,9 +104,18 @@
   <div class="cp" id="cp-ls">
     <div class="cg">
       <div class="ci"><h3>💰 Lumpsum Calculator</h3>
-        <div class="sg"><div class="sh"><span class="sl">Investment Amount</span><span class="sv" id="lv1">₹1,00,000</span></div><input type="range" id="l1" min="10000" max="10000000" step="10000" value="100000" oninput="cL()"></div>
-        <div class="sg"><div class="sh"><span class="sl">Expected Return (p.a.)</span><span class="sv" id="lv2">12%</span></div><input type="range" id="l2" min="1" max="30" step=".5" value="12" oninput="cL()"></div>
-        <div class="sg"><div class="sh"><span class="sl">Time Period (Years)</span><span class="sv" id="lv3">10</span></div><input type="range" id="l3" min="1" max="40" step="1" value="10" oninput="cL()"></div>
+        <div class="sg">
+          <div class="sh"><span class="sl">Investment Amount</span><span class="sv" id="lv1">₹1,00,000</span></div>
+          <div class="sg-row"><input type="range" id="l1" min="10000" max="10000000" step="10000" value="100000" oninput="cL()"><input type="number" id="nl1" class="sg-num" min="10000" max="10000000" step="10000" value="100000" onchange="syncSlider('nl1','l1',cL)"></div>
+        </div>
+        <div class="sg">
+          <div class="sh"><span class="sl">Expected Return (p.a.)</span><span class="sv" id="lv2">12%</span></div>
+          <div class="sg-row"><input type="range" id="l2" min="1" max="30" step=".5" value="12" oninput="cL()"><input type="number" id="nl2" class="sg-num" min="1" max="30" step=".5" value="12" onchange="syncSlider('nl2','l2',cL)"></div>
+        </div>
+        <div class="sg">
+          <div class="sh"><span class="sl">Time Period (Years)</span><span class="sv" id="lv3">10</span></div>
+          <div class="sg-row"><input type="range" id="l3" min="1" max="40" step="1" value="10" oninput="cL()"><input type="number" id="nl3" class="sg-num" min="1" max="40" step="1" value="10" onchange="syncSlider('nl3','l3',cL)"></div>
+        </div>
       </div>
       <div class="cr"><h3>Results</h3>
         <div class="dn"><canvas id="d2" width="160" height="160"></canvas><div class="dc"><div class="dc-n" id="p2">68%</div><div class="dc-l">Returns</div></div></div>
@@ -105,9 +130,18 @@
   <div class="cp" id="cp-gl">
     <div class="cg">
       <div class="ci"><h3>🎯 Goal Planning</h3>
-        <div class="sg"><div class="sh"><span class="sl">Target Amount</span><span class="sv" id="gv1">₹50,00,000</span></div><input type="range" id="g1" min="100000" max="50000000" step="100000" value="5000000" oninput="cG()"></div>
-        <div class="sg"><div class="sh"><span class="sl">Expected Return</span><span class="sv" id="gv2">12%</span></div><input type="range" id="g2" min="1" max="30" step=".5" value="12" oninput="cG()"></div>
-        <div class="sg"><div class="sh"><span class="sl">Time Available (Years)</span><span class="sv" id="gv3">15</span></div><input type="range" id="g3" min="1" max="40" step="1" value="15" oninput="cG()"></div>
+        <div class="sg">
+          <div class="sh"><span class="sl">Target Amount</span><span class="sv" id="gv1">₹50,00,000</span></div>
+          <div class="sg-row"><input type="range" id="g1" min="100000" max="50000000" step="100000" value="5000000" oninput="cG()"><input type="number" id="ng1" class="sg-num" min="100000" max="50000000" step="100000" value="5000000" onchange="syncSlider('ng1','g1',cG)"></div>
+        </div>
+        <div class="sg">
+          <div class="sh"><span class="sl">Expected Return</span><span class="sv" id="gv2">12%</span></div>
+          <div class="sg-row"><input type="range" id="g2" min="1" max="30" step=".5" value="12" oninput="cG()"><input type="number" id="ng2" class="sg-num" min="1" max="30" step=".5" value="12" onchange="syncSlider('ng2','g2',cG)"></div>
+        </div>
+        <div class="sg">
+          <div class="sh"><span class="sl">Time Available (Years)</span><span class="sv" id="gv3">15</span></div>
+          <div class="sg-row"><input type="range" id="g3" min="1" max="40" step="1" value="15" oninput="cG()"><input type="number" id="ng3" class="sg-num" min="1" max="40" step="1" value="15" onchange="syncSlider('ng3','g3',cG)"></div>
+        </div>
       </div>
       <div class="cr"><h3>Required Investment</h3>
         <div class="rr"><span class="rl">Monthly SIP Needed</span><span class="rv b" id="gs1"></span></div>
@@ -121,10 +155,22 @@
   <div class="cp" id="cp-sw">
     <div class="cg">
       <div class="ci"><h3>🏦 SWP Calculator</h3>
-        <div class="sg"><div class="sh"><span class="sl">Initial Corpus</span><span class="sv" id="wv1">₹50,00,000</span></div><input type="range" id="w1" min="100000" max="50000000" step="100000" value="5000000" oninput="cW()"></div>
-        <div class="sg"><div class="sh"><span class="sl">Monthly Withdrawal</span><span class="sv" id="wv2">₹25,000</span></div><input type="range" id="w2" min="1000" max="500000" step="1000" value="25000" oninput="cW()"></div>
-        <div class="sg"><div class="sh"><span class="sl">Expected Return</span><span class="sv" id="wv3">8%</span></div><input type="range" id="w3" min="1" max="20" step=".5" value="8" oninput="cW()"></div>
-        <div class="sg"><div class="sh"><span class="sl">Time Period (Years)</span><span class="sv" id="wv4">20</span></div><input type="range" id="w4" min="1" max="40" step="1" value="20" oninput="cW()"></div>
+        <div class="sg">
+          <div class="sh"><span class="sl">Initial Corpus</span><span class="sv" id="wv1">₹50,00,000</span></div>
+          <div class="sg-row"><input type="range" id="w1" min="100000" max="50000000" step="100000" value="5000000" oninput="cW()"><input type="number" id="nw1" class="sg-num" min="100000" max="50000000" step="100000" value="5000000" onchange="syncSlider('nw1','w1',cW)"></div>
+        </div>
+        <div class="sg">
+          <div class="sh"><span class="sl">Monthly Withdrawal</span><span class="sv" id="wv2">₹25,000</span></div>
+          <div class="sg-row"><input type="range" id="w2" min="1000" max="500000" step="1000" value="25000" oninput="cW()"><input type="number" id="nw2" class="sg-num" min="1000" max="500000" step="1000" value="25000" onchange="syncSlider('nw2','w2',cW)"></div>
+        </div>
+        <div class="sg">
+          <div class="sh"><span class="sl">Expected Return</span><span class="sv" id="wv3">8%</span></div>
+          <div class="sg-row"><input type="range" id="w3" min="1" max="20" step=".5" value="8" oninput="cW()"><input type="number" id="nw3" class="sg-num" min="1" max="20" step=".5" value="8" onchange="syncSlider('nw3','w3',cW)"></div>
+        </div>
+        <div class="sg">
+          <div class="sh"><span class="sl">Time Period (Years)</span><span class="sv" id="wv4">20</span></div>
+          <div class="sg-row"><input type="range" id="w4" min="1" max="40" step="1" value="20" oninput="cW()"><input type="number" id="nw4" class="sg-num" min="1" max="40" step="1" value="20" onchange="syncSlider('nw4','w4',cW)"></div>
+        </div>
       </div>
       <div class="cr"><h3>Results</h3>
         <div class="rr"><span class="rl">Total Investment</span><span class="rv" id="ws1"></span></div>
@@ -141,7 +187,30 @@
 <footer>
   <div class="f-grid">
     <div><div class="f-brand-name">Akshay Maheshwari</div><div class="f-brand-sub">Investment Advisor</div><p class="f-about">Helping individuals and families grow their wealth through smart, disciplined, and transparent financial guidance across India.</p></div>
-    <div><h5 class="f-h">Services</h5><ul class="f-list"><li><a href="sip.html">SIP &amp; Mutual Funds</a></li><li><a href="stock.html">Stock Market</a></li><li><a href="insurance.html">Insurance</a></li><li><a href="tax.html">Tax Planning</a></li><li><a href="retirement.html">Retirement</a></li><li><a href="pms.html">PMS</a></li><li><a href="private-equity.html">Private Equity</a></li><li><a href="bonds.html">Bonds</a></li><li><a href="loan.html">Loan Against Security</a></li></ul></div>
+    <div><h5 class="f-h">Services</h5><ul class="f-list">
+      <li><a href="sip.html">SIP &amp; Mutual Funds</a></li>
+      <li><a href="stock.html">Stock Market</a></li>
+      <li><a href="insurance.html">Insurance</a></li>
+      <li><a href="tax.html">Tax Planning</a></li>
+      <li><a href="retirement.html">Retirement</a></li>
+      <li><a href="pms.html">PMS</a></li>
+      <li><a href="private-equity.html">Private Equity</a></li>
+      <li><a href="bonds.html">Bonds</a></li>
+      <li><a href="loan.html">Loan Against Security</a></li>
+      <li><a href="aif.html">AIF</a></li>
+      <li><a href="unlisted.html">Unlisted Securities</a></li>
+      <li><a href="gift-city.html">Gift City</a></li>
+      <li><a href="international.html">International Equities</a></li>
+      <li><a href="will.html">Will</a></li>
+      <li><a href="trust.html">Trust</a></li>
+      <li><a href="family-office.html">Family Office</a></li>
+      <li><a href="debt-financing.html">Debt Financing</a></li>
+      <li><a href="equity-financing.html">Equity Financing</a></li>
+      <li><a href="exit-planning.html">Exit Planning</a></li>
+      <li><a href="succession-planning.html">Succession Planning</a></li>
+      <li><a href="estate-planning.html">Estate Planning</a></li>
+      <li><a href="elite.html">Elite Advisory</a></li>
+    </ul></div>
     <div><h5 class="f-h">Company</h5><ul class="f-list"><li><a href="about.html">About</a></li><li><a href="testimonials.html">Testimonials</a></li><li><a href="calculators.html">Calculators</a></li><li><a href="contact.html">Contact</a></li></ul></div>
     <div><h5 class="f-h">Connect</h5><ul class="f-list"><li><a href="tel:+919827599966">📱 +91 98275 99966</a></li><li><a href="mailto:yourmail@gmail.com">📧 yourmail@gmail.com</a></li><li><a href="https://www.kotaksecurities.com/landing-page/franchisee/open-demat-account-partner-madhu-maheshwari-neo" target="_blank">📊 Open Demat Account</a></li><li><a href="https://wa.me/919827599966?text=i%20am%20intereseted%20in%20your%20financial%20advice" target="_blank">💬 WhatsApp</a></li></ul></div>
   </div>

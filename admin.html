@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin | Akshay Maheshwari</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+<meta name="robots" content="noindex,nofollow">
+</head>
+<body>
+
+<div class="stars" id="stars"></div>
+
+<div class="adm-page">
+
+  <!-- LOGIN -->
+  <div class="adm-login" id="admLogin">
+    <div style="font-size:3rem;margin-bottom:12px">🔐</div>
+    <h2>Admin Panel</h2>
+    <p style="font-size:.85rem;color:var(--t2);margin-bottom:28px">Akshay Maheshwari — Investment Advisor</p>
+    <input type="password" class="adm-inp" id="admPwd" placeholder="Enter admin password" onkeydown="if(event.key==='Enter')admLogin()">
+    <div class="adm-err" id="admErr" style="display:none">Incorrect password</div>
+    <button class="adm-btn" onclick="admLogin()" style="margin-top:14px">Login →</button>
+  </div>
+
+  <!-- PANEL -->
+  <div class="adm-panel" id="admPanel">
+    <div class="adm-panel-hd">
+      <h2>⚙️ Admin Panel</h2>
+      <button class="adm-btn sec" style="width:auto" onclick="admLogout()">Logout</button>
+    </div>
+
+    <!-- CONTACT INFO -->
+    <div class="adm-sec">
+      <h3>📱 Contact & Links</h3>
+      <div class="adm-grid">
+        <div class="adm-field"><span class="adm-label">Phone Number</span><input class="adm-inp" id="cfgPhone" placeholder="9827599966"></div>
+        <div class="adm-field"><span class="adm-label">Email</span><input class="adm-inp" id="cfgEmail" placeholder="yourmail@gmail.com"></div>
+        <div class="adm-field"><span class="adm-label">WhatsApp Number</span><input class="adm-inp" id="cfgWhatsapp" placeholder="919827599966"></div>
+        <div class="adm-field"><span class="adm-label">WhatsApp Message</span><input class="adm-inp" id="cfgWaMsg" placeholder="i am intereseted in your financial advice"></div>
+        <div class="adm-field"><span class="adm-label">Kotak Demat Link</span><input class="adm-inp" id="cfgKotak" placeholder="https://www.kotaksecurities.com/..."></div>
+        <div class="adm-field"><span class="adm-label">Instagram URL</span><input class="adm-inp" id="cfgInsta" placeholder="https://instagram.com/..."></div>
+        <div class="adm-field"><span class="adm-label">Facebook URL</span><input class="adm-inp" id="cfgFb" placeholder="https://facebook.com/..."></div>
+        <div class="adm-field"><span class="adm-label">LinkedIn URL</span><input class="adm-inp" id="cfgLi" placeholder="https://linkedin.com/..."></div>
+      </div>
+      <button class="adm-btn" style="margin-top:20px;width:auto;padding:10px 28px" onclick="saveCfg()">Save Contact Info</button>
+      <span class="adm-ok" id="cfgOk" style="display:none">✓ Saved</span>
+    </div>
+
+    <!-- ADVISOR PHOTO (DP) -->
+    <div class="adm-sec">
+      <h3>🖼️ Advisor Profile Photo</h3>
+      <div style="display:flex;align-items:center;gap:24px;flex-wrap:wrap">
+        <img class="adm-dp" id="admDpPreview" src="images/akshay.jpg" alt="DP" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22120%22 height=%22120%22><rect fill=%22%230B1526%22 width=%22120%22 height=%22120%22/><text x=%2250%25%22 y=%2255%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 fill=%22%23C9A84C%22 font-size=%2248%22>AM</text></svg>'">
+        <div>
+          <p style="font-size:.8rem;color:var(--t2);margin-bottom:12px">Upload a new profile photo. It will appear on the About page.</p>
+          <input type="file" id="dpFile" accept="image/*" style="display:none" onchange="previewDp(this)">
+          <button class="adm-btn" style="width:auto;padding:10px 24px" onclick="document.getElementById('dpFile').click()">Choose Photo</button>
+          <button class="adm-btn sec" style="width:auto;padding:10px 24px;margin-top:8px" onclick="saveDp()">Save Photo</button>
+          <button class="adm-btn del" style="width:auto;padding:10px 24px;margin-top:8px" onclick="removeDp()">Reset to Default</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- BLOGS -->
+    <div class="adm-sec">
+      <h3>📰 Blog Posts</h3>
+      <div class="adm-list" id="blogList"></div>
+      <div style="background:var(--bg3);border:1px solid rgba(201,168,76,.08);border-radius:10px;padding:20px">
+        <p style="font-size:.72rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:16px">Add New Post</p>
+        <div class="adm-grid" style="margin-bottom:12px">
+          <div class="adm-field"><span class="adm-label">Title</span><input class="adm-inp" id="bTitle" placeholder="Post title"></div>
+          <div class="adm-field"><span class="adm-label">Category / Tag</span><input class="adm-inp" id="bTag" placeholder="e.g. Mutual Funds"></div>
+          <div class="adm-field"><span class="adm-label">Image URL (optional)</span><input class="adm-inp" id="bImg" placeholder="https://...jpg"></div>
+          <div class="adm-field"><span class="adm-label">Date</span><input class="adm-inp" type="date" id="bDate"></div>
+        </div>
+        <div class="adm-field" style="margin-bottom:12px"><span class="adm-label">Excerpt (1–2 lines)</span><input class="adm-inp" id="bExcerpt" placeholder="Short summary shown on home page"></div>
+        <div class="adm-field" style="margin-bottom:16px"><span class="adm-label">Full Content</span><textarea class="adm-inp" id="bContent" rows="4" placeholder="Full blog post content..." style="resize:vertical"></textarea></div>
+        <button class="adm-btn" style="width:auto;padding:10px 28px" onclick="addBlog()">Add Post</button>
+        <span class="adm-ok" id="blogOk" style="display:none">✓ Added</span>
+      </div>
+    </div>
+
+    <!-- PHOTOS -->
+    <div class="adm-sec">
+      <h3>📷 About Page Photo Gallery</h3>
+      <div class="adm-photo-grid" id="photoGrid"></div>
+      <div style="background:var(--bg3);border:1px solid rgba(201,168,76,.08);border-radius:10px;padding:20px">
+        <p style="font-size:.72rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:14px">Add Photo</p>
+        <div class="adm-grid" style="margin-bottom:12px">
+          <div class="adm-field"><span class="adm-label">Image URL</span><input class="adm-inp" id="pUrl" placeholder="https://...jpg"></div>
+          <div class="adm-field"><span class="adm-label">Caption (optional)</span><input class="adm-inp" id="pCaption" placeholder="e.g. Client Meeting 2024"></div>
+        </div>
+        <button class="adm-btn" style="width:auto;padding:10px 24px" onclick="addPhotoByUrl()">Add by URL</button>
+        <span style="margin:0 12px;color:var(--t3);font-size:.8rem">or</span>
+        <input type="file" id="pFile" accept="image/*" style="display:none" onchange="addPhotoByFile(this)">
+        <button class="adm-btn sec" style="width:auto;padding:10px 24px" onclick="document.getElementById('pFile').click()">Upload File</button>
+        <span class="adm-ok" id="photoOk" style="display:none">✓ Added</span>
+      </div>
+    </div>
+
+    <!-- DANGER ZONE -->
+    <div class="adm-sec" style="border-color:rgba(224,85,85,.15)">
+      <h3 style="color:var(--red)">⚠️ Reset</h3>
+      <p style="font-size:.82rem;color:var(--t2);margin-bottom:16px">Clear all admin customizations and restore site defaults. This cannot be undone.</p>
+      <button class="adm-btn del" style="width:auto;padding:10px 28px" onclick="resetAll()">Clear All Admin Data</button>
+    </div>
+
+  </div><!-- /adm-panel -->
+</div><!-- /adm-page -->
+
+<script src="js/main.js"></script>
+<script>
+const ADM_PWD = 'akshay2024';
+const ADM_KEY = 'amAdmAuth';
+
+function admLogin(){
+  const pwd = document.getElementById('admPwd').value;
+  if(pwd === ADM_PWD){
+    localStorage.setItem(ADM_KEY,'1');
+    showPanel();
+  } else {
+    document.getElementById('admErr').style.display='block';
+    document.getElementById('admPwd').value='';
+  }
+}
+
+function admLogout(){
+  localStorage.removeItem(ADM_KEY);
+  location.reload();
+}
+
+function showPanel(){
+  document.getElementById('admLogin').style.display='none';
+  document.getElementById('admPanel').classList.add('show');
+  loadCfg();
+  renderBlogList();
+  renderPhotoGrid();
+}
+
+function loadCfg(){
+  const cfg=JSON.parse(localStorage.getItem('amCfg')||'{}');
+  ['Phone','Email','Whatsapp','WaMsg','Kotak','Insta','Fb','Li'].forEach(k=>{
+    const el=document.getElementById('cfg'+k);
+    if(el)el.value=cfg[k.toLowerCase()]||'';
+  });
+  const dp=cfg.dp;
+  if(dp)document.getElementById('admDpPreview').src=dp;
+}
+
+function saveCfg(){
+  const cfg=JSON.parse(localStorage.getItem('amCfg')||'{}');
+  ['Phone','Email','Whatsapp','WaMsg','Kotak','Insta','Fb','Li'].forEach(k=>{
+    const el=document.getElementById('cfg'+k);
+    if(el)cfg[k.toLowerCase()]=el.value.trim();
+  });
+  localStorage.setItem('amCfg',JSON.stringify(cfg));
+  const ok=document.getElementById('cfgOk');
+  ok.style.display='inline';
+  setTimeout(()=>ok.style.display='none',2000);
+}
+
+function previewDp(input){
+  const f=input.files[0];if(!f)return;
+  const r=new FileReader();
+  r.onload=e=>{document.getElementById('admDpPreview').src=e.target.result;};
+  r.readAsDataURL(f);
+}
+
+function saveDp(){
+  const src=document.getElementById('admDpPreview').src;
+  if(!src)return;
+  const cfg=JSON.parse(localStorage.getItem('amCfg')||'{}');
+  cfg.dp=src;
+  localStorage.setItem('amCfg',JSON.stringify(cfg));
+  alert('Profile photo saved.');
+}
+
+function removeDp(){
+  const cfg=JSON.parse(localStorage.getItem('amCfg')||'{}');
+  delete cfg.dp;
+  localStorage.setItem('amCfg',JSON.stringify(cfg));
+  document.getElementById('admDpPreview').src='images/akshay.jpg';
+}
+
+function renderBlogList(){
+  const blogs=JSON.parse(localStorage.getItem('amBlogs')||'[]');
+  const el=document.getElementById('blogList');
+  if(!blogs.length){el.innerHTML='<p style="font-size:.82rem;color:var(--t3)">No blog posts yet.</p>';return;}
+  el.innerHTML=blogs.map((b,i)=>`
+    <div class="adm-item">
+      <div class="adm-item-info">
+        <div>${b.title}</div>
+        <div class="adm-item-sub">${b.tag||''} · ${b.date||''}</div>
+      </div>
+      <button class="adm-btn del" style="width:auto;padding:6px 16px;font-size:.75rem" onclick="deleteBlog(${i})">Delete</button>
+    </div>`).join('');
+}
+
+function addBlog(){
+  const title=document.getElementById('bTitle').value.trim();
+  if(!title){alert('Title is required');return;}
+  const blogs=JSON.parse(localStorage.getItem('amBlogs')||'[]');
+  const b={
+    id:Date.now(),
+    title,
+    tag:document.getElementById('bTag').value.trim(),
+    imgUrl:document.getElementById('bImg').value.trim(),
+    date:document.getElementById('bDate').value,
+    excerpt:document.getElementById('bExcerpt').value.trim(),
+    content:document.getElementById('bContent').value.trim()
+  };
+  blogs.unshift(b);
+  localStorage.setItem('amBlogs',JSON.stringify(blogs));
+  ['bTitle','bTag','bImg','bDate','bExcerpt','bContent'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
+  renderBlogList();
+  const ok=document.getElementById('blogOk');ok.style.display='inline';setTimeout(()=>ok.style.display='none',2000);
+}
+
+function deleteBlog(idx){
+  if(!confirm('Delete this post?'))return;
+  const blogs=JSON.parse(localStorage.getItem('amBlogs')||'[]');
+  blogs.splice(idx,1);
+  localStorage.setItem('amBlogs',JSON.stringify(blogs));
+  renderBlogList();
+}
+
+function renderPhotoGrid(){
+  const photos=JSON.parse(localStorage.getItem('amPhotos')||'[]');
+  const el=document.getElementById('photoGrid');
+  if(!photos.length){el.innerHTML='<p style="font-size:.82rem;color:var(--t3);grid-column:1/-1">No photos added yet.</p>';return;}
+  el.innerHTML=photos.map((p,i)=>`
+    <div class="adm-photo-item">
+      <img src="${p.url}" alt="${p.caption||''}">
+      <button class="adm-photo-del" onclick="deletePhoto(${i})" title="Remove">✕</button>
+    </div>`).join('');
+}
+
+function addPhotoByUrl(){
+  const url=document.getElementById('pUrl').value.trim();
+  const caption=document.getElementById('pCaption').value.trim();
+  if(!url){alert('Please enter an image URL');return;}
+  const photos=JSON.parse(localStorage.getItem('amPhotos')||'[]');
+  photos.push({url,caption});
+  localStorage.setItem('amPhotos',JSON.stringify(photos));
+  document.getElementById('pUrl').value='';
+  document.getElementById('pCaption').value='';
+  renderPhotoGrid();
+  const ok=document.getElementById('photoOk');ok.style.display='inline';setTimeout(()=>ok.style.display='none',2000);
+}
+
+function addPhotoByFile(input){
+  const f=input.files[0];if(!f)return;
+  const caption=document.getElementById('pCaption').value.trim();
+  const r=new FileReader();
+  r.onload=e=>{
+    const photos=JSON.parse(localStorage.getItem('amPhotos')||'[]');
+    photos.push({url:e.target.result,caption});
+    localStorage.setItem('amPhotos',JSON.stringify(photos));
+    document.getElementById('pCaption').value='';
+    input.value='';
+    renderPhotoGrid();
+    const ok=document.getElementById('photoOk');ok.style.display='inline';setTimeout(()=>ok.style.display='none',2000);
+  };
+  r.readAsDataURL(f);
+}
+
+function deletePhoto(idx){
+  if(!confirm('Remove this photo?'))return;
+  const photos=JSON.parse(localStorage.getItem('amPhotos')||'[]');
+  photos.splice(idx,1);
+  localStorage.setItem('amPhotos',JSON.stringify(photos));
+  renderPhotoGrid();
+}
+
+function resetAll(){
+  if(!confirm('This will clear ALL admin data (contact overrides, blogs, photos, DP). Continue?'))return;
+  ['amCfg','amBlogs','amPhotos'].forEach(k=>localStorage.removeItem(k));
+  alert('All admin data cleared. Refreshing...');
+  location.reload();
+}
+
+// Auto-check auth on load
+if(localStorage.getItem(ADM_KEY)==='1') showPanel();
+</script>
+</body>
+</html>

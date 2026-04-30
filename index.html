@@ -52,8 +52,15 @@
     <a href="contact.html">Contact</a>
     <a href="contact.html" class="ncta">Free Consultation</a>
   </div>
-  <div class="ham"><span></span><span></span><span></span></div>
+  <button class="srch-btn" onclick="openSearch()" aria-label="Search services">🔍</button><div class="ham"><span></span><span></span><span></span></div>
 </nav>
+<div class="srch-ovl" id="srchOvl">
+  <div class="srch-box">
+    <div class="srch-hd"><span>Search Services</span><button onclick="closeSearch()">✕</button></div>
+    <input type="text" class="srch-inp" id="srchInp" placeholder="Type to search services..." oninput="doSearch(this.value)">
+    <div class="srch-res" id="srchRes"></div>
+  </div>
+</div>
 
 <!-- HERO -->
 <section class="home-hero">
@@ -202,6 +209,15 @@
       <a href="calculators.html" class="b-out">Try Calculators</a>
     </div>
   </div>
+</section>
+
+<!-- BLOG SECTION -->
+<section class="blog-sec">
+  <div class="blog-sec-hd">
+    <div class="blog-sec-title">Latest <span>Insights</span></div>
+    <a href="blogs.html" class="blog-all-btn">View All Posts →</a>
+  </div>
+  <div class="blog-scroll" id="blogScroll"></div>
 </section>
 
 <!-- FOOTER -->
