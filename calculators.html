@@ -383,6 +383,31 @@ function xcLI(){
 }
 
 xcSU();xcEM();xcGP();xcRC();xcCD();xcLI();
+
+// ── Deep-link routing: calculators.html#sip opens the right tab & scrolls to card ──
+(function(){
+  const calcTabMap={
+    sip:'sip',lumpsum:'sip',stepup:'sip',
+    goal:'goals',goalplanner:'goals',retirement:'goals',delay:'goals',
+    swp:'loans',emi:'loans',insurance:'loans'
+  };
+  function activateHash(){
+    const hash=(location.hash||'').replace('#','').toLowerCase();
+    if(!hash)return;
+    const tab=calcTabMap[hash];
+    if(tab){
+      const btn=document.getElementById('cbtn-'+tab);
+      if(btn)switchCat(tab,btn);
+      // scroll to the specific card after a tick
+      setTimeout(()=>{
+        const card=document.querySelector('[data-calc-key="'+hash+'"]');
+        if(card)card.scrollIntoView({behavior:'smooth',block:'start'});
+      },80);
+    }
+  }
+  activateHash();
+  window.addEventListener('hashchange',activateHash);
+})();
 </script>
 
 <footer>
