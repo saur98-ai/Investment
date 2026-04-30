@@ -361,8 +361,12 @@ footer{background:var(--bg);border-top:1px solid rgba(201,168,76,.05);padding:50
 .f-list a:hover{color:var(--gold2)}
 .f-disc{max-width:1280px;margin:30px auto 0;padding:14px 20px;background:rgba(255,255,255,.02);border-radius:8px;text-align:center}
 .f-disc p{font-size:.72rem;color:rgba(255,255,255,.2);line-height:1.8}
-.f-bot{max-width:1280px;margin:16px auto 0;padding-top:18px;border-top:1px solid rgba(255,255,255,.05);display:flex;justify-content:center;align-items:center}
-.f-bot p{font-size:.74rem;color:rgba(255,255,255,.2)}
+.f-comp{max-width:1280px;margin:12px auto 0;padding:12px 20px;display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:4px 2px;border-top:1px solid rgba(255,255,255,.04)}
+.f-comp a{font-size:.68rem;color:rgba(255,255,255,.28);text-decoration:none;transition:color .2s;white-space:nowrap;padding:0 6px}
+.f-comp a:hover{color:var(--gold)}
+.f-sep{font-size:.68rem;color:rgba(201,168,76,.18);flex-shrink:0}
+.f-bot{max-width:1280px;margin:10px auto 0;padding-top:14px;border-top:1px solid rgba(255,255,255,.04);display:flex;justify-content:center;align-items:center}
+.f-bot p{font-size:.72rem;color:rgba(255,255,255,.18)}
 
 /* WHATSAPP FAB */
 .waf{position:fixed;bottom:26px;right:26px;z-index:200;width:54px;height:54px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.5rem;color:var(--w);text-decoration:none;box-shadow:0 6px 20px rgba(0,0,0,.3);transition:all .3s;animation:fp 2s infinite}
@@ -564,6 +568,29 @@ footer{background:var(--bg);border-top:1px solid rgba(201,168,76,.05);padding:50
 .cred-sub{font-size:.7rem;color:var(--t2);white-space:nowrap}
 @media(max-width:900px){.cred-inner{gap:0}.cred-item{padding:10px 16px}.cred-div{height:28px}}
 @media(max-width:600px){.cred-div{display:none}.cred-inner{justify-content:flex-start;gap:4px}.cred-item{flex:0 0 50%;padding:10px 14px;border-bottom:1px solid rgba(201,168,76,.06)}}
+
+/* INDIA REACH MAP */
+.map-sec{padding:90px 5%;background:var(--bg)}
+.map-inner{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center}
+.map-sub{font-size:.92rem;color:var(--t2);line-height:1.72;margin:16px 0 32px}
+.map-stats{display:flex;gap:0}
+.map-stat{padding:0 28px 0 0;margin-right:28px;border-right:1px solid rgba(201,168,76,.15)}
+.map-stat:last-child{border-right:none;padding-right:0;margin-right:0}
+.map-stat-n{font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:700;color:var(--gold2);line-height:1}
+.map-stat-l{font-size:.7rem;color:var(--t3);margin-top:5px;letter-spacing:.3px}
+.map-svg-wrap{display:flex;justify-content:center;align-items:center}
+.india-svg{width:100%;max-width:380px;height:auto;filter:drop-shadow(0 0 50px rgba(201,168,76,.12))}
+.india-land{fill:rgba(201,168,76,.08);stroke:rgba(201,168,76,.38);stroke-width:1.5;stroke-linejoin:round;stroke-linecap:round}
+.city-dot .ring{fill:none;stroke:rgba(201,168,76,.5);stroke-width:1.2;transform-box:fill-box;transform-origin:center;animation:mapRing 2.8s ease-out infinite;animation-delay:var(--d,0s)}
+.city-dot .dot{fill:rgba(201,168,76,.88)}
+.home-dot .ring{stroke:rgba(224,198,110,.75);stroke-width:2;animation-name:mapRingHome;animation-duration:2.2s}
+.home-core{fill:var(--gold2)!important}
+.city-label{font-family:'Outfit',sans-serif;font-size:8.5px;fill:rgba(255,255,255,.5);pointer-events:none}
+.home-label{fill:var(--gold2);font-size:9.5px;font-weight:700}
+@keyframes mapRing{0%{transform:scale(1);opacity:.7}100%{transform:scale(4.5);opacity:0}}
+@keyframes mapRingHome{0%{transform:scale(1);opacity:.9}100%{transform:scale(5.5);opacity:0}}
+@media(max-width:1000px){.map-inner{grid-template-columns:1fr;gap:40px}.map-svg-wrap{order:-1}.india-svg{max-width:300px}}
+@media(max-width:600px){.india-svg{max-width:260px}}
 
 /* FIND YOUR PATH */
 .path-sec{padding:80px 5%;background:var(--bg2)}

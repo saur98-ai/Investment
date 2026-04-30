@@ -19,8 +19,8 @@
     <div style="font-size:3rem;margin-bottom:12px">🔐</div>
     <h2>Admin Panel</h2>
     <p style="font-size:.85rem;color:var(--t2);margin-bottom:28px">Akshay Maheshwari — Investment Advisor</p>
-    <input type="password" class="adm-inp" id="admPwd" placeholder="Enter admin password" onkeydown="if(event.key==='Enter')admLogin()">
-    <div class="adm-err" id="admErr" style="display:none">Incorrect password</div>
+    <input type="password" class="adm-inp" id="admPwd" placeholder="Enter admin secret" onkeydown="if(event.key==='Enter')admLogin()">
+    <div class="adm-err" id="admErr" style="display:none">Incorrect password. Check Netlify → Environment Variables → ADMIN_SECRET.</div>
     <button class="adm-btn" onclick="admLogin()" style="margin-top:14px">Login →</button>
   </div>
 
@@ -31,6 +31,14 @@
       <button class="adm-btn sec" style="width:auto" onclick="admLogout()">Logout</button>
     </div>
 
+    <!-- STATUS NOTICES -->
+    <div id="noticeOk" style="display:none;background:rgba(46,204,138,.08);border:1px solid rgba(46,204,138,.25);border-radius:10px;padding:14px 20px;margin-bottom:8px;font-size:.82rem;color:#2ECC8A">
+      ✓ Saved — changes are live instantly on your website.
+    </div>
+    <div id="noticeErr" style="display:none;background:rgba(224,85,85,.08);border:1px solid rgba(224,85,85,.25);border-radius:10px;padding:14px 20px;margin-bottom:8px;font-size:.82rem;color:#E05555">
+      ✕ Save failed. Check that ADMIN_SECRET is set in Netlify → Environment Variables.
+    </div>
+
     <!-- CONTACT INFO -->
     <div class="adm-sec">
       <h3>📱 Contact & Links</h3>
@@ -38,28 +46,32 @@
         <div class="adm-field"><span class="adm-label">Phone Number</span><input class="adm-inp" id="cfgPhone" placeholder="9827599966"></div>
         <div class="adm-field"><span class="adm-label">Email</span><input class="adm-inp" id="cfgEmail" placeholder="yourmail@gmail.com"></div>
         <div class="adm-field"><span class="adm-label">WhatsApp Number</span><input class="adm-inp" id="cfgWhatsapp" placeholder="919827599966"></div>
-        <div class="adm-field"><span class="adm-label">WhatsApp Message</span><input class="adm-inp" id="cfgWaMsg" placeholder="i am intereseted in your financial advice"></div>
+        <div class="adm-field"><span class="adm-label">WhatsApp Message</span><input class="adm-inp" id="cfgWaMsg" placeholder="I am interested in your financial services."></div>
         <div class="adm-field"><span class="adm-label">Kotak Demat Link</span><input class="adm-inp" id="cfgKotak" placeholder="https://www.kotaksecurities.com/..."></div>
         <div class="adm-field"><span class="adm-label">Instagram URL</span><input class="adm-inp" id="cfgInsta" placeholder="https://instagram.com/..."></div>
         <div class="adm-field"><span class="adm-label">Facebook URL</span><input class="adm-inp" id="cfgFb" placeholder="https://facebook.com/..."></div>
         <div class="adm-field"><span class="adm-label">LinkedIn URL</span><input class="adm-inp" id="cfgLi" placeholder="https://linkedin.com/..."></div>
       </div>
-      <button class="adm-btn" style="margin-top:20px;width:auto;padding:10px 28px" onclick="saveCfg()">Save Contact Info</button>
-      <span class="adm-ok" id="cfgOk" style="display:none">✓ Saved</span>
+      <button class="adm-btn" id="saveCfgBtn" style="margin-top:20px;width:auto;padding:10px 28px" onclick="saveCfg()">Save Contact Info</button>
     </div>
 
-    <!-- ADVISOR PHOTO (DP) -->
+    <!-- TESTIMONIALS -->
     <div class="adm-sec">
-      <h3>🖼️ Advisor Profile Photo</h3>
-      <div style="display:flex;align-items:center;gap:24px;flex-wrap:wrap">
-        <img class="adm-dp" id="admDpPreview" src="images/akshay.jpg" alt="DP" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22120%22 height=%22120%22><rect fill=%22%230B1526%22 width=%22120%22 height=%22120%22/><text x=%2250%25%22 y=%2255%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 fill=%22%23C9A84C%22 font-size=%2248%22>AM</text></svg>'">
-        <div>
-          <p style="font-size:.8rem;color:var(--t2);margin-bottom:12px">Upload a new profile photo. It will appear on the About page.</p>
-          <input type="file" id="dpFile" accept="image/*" style="display:none" onchange="previewDp(this)">
-          <button class="adm-btn" style="width:auto;padding:10px 24px" onclick="document.getElementById('dpFile').click()">Choose Photo</button>
-          <button class="adm-btn sec" style="width:auto;padding:10px 24px;margin-top:8px" onclick="saveDp()">Save Photo</button>
-          <button class="adm-btn del" style="width:auto;padding:10px 24px;margin-top:8px" onclick="removeDp()">Reset to Default</button>
+      <h3>⭐ Testimonials</h3>
+      <div class="adm-list" id="testList"></div>
+      <div style="background:var(--bg3);border:1px solid rgba(201,168,76,.08);border-radius:10px;padding:20px;margin-top:16px">
+        <p style="font-size:.72rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:16px">Add Testimonial</p>
+        <div class="adm-grid" style="margin-bottom:12px">
+          <div class="adm-field"><span class="adm-label">Client Name</span><input class="adm-inp" id="tName" placeholder="Rahul Sharma"></div>
+          <div class="adm-field"><span class="adm-label">Initials</span><input class="adm-inp" id="tInitials" placeholder="RS" style="max-width:80px"></div>
+          <div class="adm-field"><span class="adm-label">Role / City</span><input class="adm-inp" id="tRole" placeholder="IT Professional, Bangalore"></div>
+          <div class="adm-field"><span class="adm-label">Stars (1–5)</span><input class="adm-inp" id="tStars" type="number" min="1" max="5" value="5" style="max-width:80px"></div>
         </div>
+        <div class="adm-field" style="margin-bottom:12px"><span class="adm-label">Quote</span><textarea class="adm-inp" id="tQuote" rows="3" placeholder="What did the client say about Akshay..."></textarea></div>
+        <label style="display:flex;align-items:center;gap:8px;font-size:.78rem;color:var(--t2);margin-bottom:16px;cursor:pointer">
+          <input type="checkbox" id="tFeatured" checked> Show on homepage (featured)
+        </label>
+        <button class="adm-btn" id="addTestBtn" style="width:auto;padding:10px 28px" onclick="addTestimonial()">Add Testimonial</button>
       </div>
     </div>
 
@@ -67,7 +79,7 @@
     <div class="adm-sec">
       <h3>📰 Blog Posts</h3>
       <div class="adm-list" id="blogList"></div>
-      <div style="background:var(--bg3);border:1px solid rgba(201,168,76,.08);border-radius:10px;padding:20px">
+      <div style="background:var(--bg3);border:1px solid rgba(201,168,76,.08);border-radius:10px;padding:20px;margin-top:16px">
         <p style="font-size:.72rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:16px">Add New Post</p>
         <div class="adm-grid" style="margin-bottom:12px">
           <div class="adm-field"><span class="adm-label">Title</span><input class="adm-inp" id="bTitle" placeholder="Post title"></div>
@@ -75,36 +87,24 @@
           <div class="adm-field"><span class="adm-label">Image URL (optional)</span><input class="adm-inp" id="bImg" placeholder="https://...jpg"></div>
           <div class="adm-field"><span class="adm-label">Date</span><input class="adm-inp" type="date" id="bDate"></div>
         </div>
-        <div class="adm-field" style="margin-bottom:12px"><span class="adm-label">Excerpt (1–2 lines)</span><input class="adm-inp" id="bExcerpt" placeholder="Short summary shown on home page"></div>
+        <div class="adm-field" style="margin-bottom:12px"><span class="adm-label">Excerpt (1–2 lines)</span><input class="adm-inp" id="bExcerpt" placeholder="Short summary shown on listing page"></div>
         <div class="adm-field" style="margin-bottom:16px"><span class="adm-label">Full Content</span><textarea class="adm-inp" id="bContent" rows="4" placeholder="Full blog post content..." style="resize:vertical"></textarea></div>
-        <button class="adm-btn" style="width:auto;padding:10px 28px" onclick="addBlog()">Add Post</button>
-        <span class="adm-ok" id="blogOk" style="display:none">✓ Added</span>
+        <button class="adm-btn" id="addBlogBtn" style="width:auto;padding:10px 28px" onclick="addBlog()">Add Post</button>
       </div>
     </div>
 
-    <!-- PHOTOS -->
+    <!-- ADVISOR PHOTO -->
     <div class="adm-sec">
-      <h3>📷 About Page Photo Gallery</h3>
-      <div class="adm-photo-grid" id="photoGrid"></div>
-      <div style="background:var(--bg3);border:1px solid rgba(201,168,76,.08);border-radius:10px;padding:20px">
-        <p style="font-size:.72rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:14px">Add Photo</p>
-        <div class="adm-grid" style="margin-bottom:12px">
-          <div class="adm-field"><span class="adm-label">Image URL</span><input class="adm-inp" id="pUrl" placeholder="https://...jpg"></div>
-          <div class="adm-field"><span class="adm-label">Caption (optional)</span><input class="adm-inp" id="pCaption" placeholder="e.g. Client Meeting 2024"></div>
-        </div>
-        <button class="adm-btn" style="width:auto;padding:10px 24px" onclick="addPhotoByUrl()">Add by URL</button>
-        <span style="margin:0 12px;color:var(--t3);font-size:.8rem">or</span>
-        <input type="file" id="pFile" accept="image/*" style="display:none" onchange="addPhotoByFile(this)">
-        <button class="adm-btn sec" style="width:auto;padding:10px 24px" onclick="document.getElementById('pFile').click()">Upload File</button>
-        <span class="adm-ok" id="photoOk" style="display:none">✓ Added</span>
-      </div>
+      <h3>🖼️ Advisor Profile Photo</h3>
+      <p style="font-size:.82rem;color:var(--t2);margin-bottom:16px">To update the profile photo, upload the new image to the <code>images/</code> folder in your GitHub repo and name it <strong>akshay.jpg</strong>. It will deploy automatically.</p>
+      <a href="https://github.com/saur98-ai/Investment/upload/main/images" target="_blank" class="adm-btn sec" style="width:auto;padding:10px 24px;display:inline-block;text-decoration:none">Open GitHub Images Folder →</a>
     </div>
 
-    <!-- DANGER ZONE -->
+    <!-- RESET -->
     <div class="adm-sec" style="border-color:rgba(224,85,85,.15)">
-      <h3 style="color:var(--red)">⚠️ Reset</h3>
-      <p style="font-size:.82rem;color:var(--t2);margin-bottom:16px">Clear all admin customizations and restore site defaults. This cannot be undone.</p>
-      <button class="adm-btn del" style="width:auto;padding:10px 28px" onclick="resetAll()">Clear All Admin Data</button>
+      <h3 style="color:var(--red)">⚠️ Session</h3>
+      <p style="font-size:.82rem;color:var(--t2);margin-bottom:16px">Clear your local session. Does not delete any data.</p>
+      <button class="adm-btn del" style="width:auto;padding:10px 28px" onclick="admLogout()">End Session</button>
     </div>
 
   </div><!-- /adm-panel -->
@@ -112,83 +112,174 @@
 
 <script src="js/main.js"></script>
 <script>
-const ADM_PWD = 'akshay2024';
-const ADM_KEY = 'amAdmAuth';
+const API_GET  = '/.netlify/functions/get-data';
+const API_SAVE = '/.netlify/functions/save-data';
+const SESSION_KEY = 'admSecret';
 
-function admLogin(){
-  const pwd = document.getElementById('admPwd').value;
-  if(pwd === ADM_PWD){
-    localStorage.setItem(ADM_KEY,'1');
+let _secret = '';
+let _testimonials = [], _blogs = [];
+
+// ── Auth ───────────────────────────────────────────────
+function admLogin() {
+  const pwd = document.getElementById('admPwd').value.trim();
+  if (!pwd) return;
+  // Verify against the function (function returns 401 if wrong)
+  fetch(API_SAVE, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + pwd },
+    body: JSON.stringify({ key: 'contact', data: null, _ping: true })
+  }).then(r => {
+    if (r.status === 401) {
+      document.getElementById('admErr').style.display = 'block';
+      document.getElementById('admPwd').value = '';
+    } else {
+      _secret = pwd;
+      sessionStorage.setItem(SESSION_KEY, pwd);
+      showPanel();
+    }
+  }).catch(() => {
+    // Network error - accept the password and try later
+    _secret = pwd;
+    sessionStorage.setItem(SESSION_KEY, pwd);
     showPanel();
-  } else {
-    document.getElementById('admErr').style.display='block';
-    document.getElementById('admPwd').value='';
-  }
+  });
 }
 
-function admLogout(){
-  localStorage.removeItem(ADM_KEY);
-  location.reload();
+function admLogout() {
+  sessionStorage.removeItem(SESSION_KEY);
+  _secret = '';
+  document.getElementById('admLogin').style.display = '';
+  document.getElementById('admPanel').classList.remove('show');
+  document.getElementById('admPwd').value = '';
 }
 
-function showPanel(){
-  document.getElementById('admLogin').style.display='none';
+// Auto-restore session
+window.addEventListener('DOMContentLoaded', () => {
+  const saved = sessionStorage.getItem(SESSION_KEY);
+  if (saved) { _secret = saved; showPanel(); }
+});
+
+// ── API helpers ────────────────────────────────────────
+async function apiGet(key) {
+  try {
+    const r = await fetch(`${API_GET}?key=${key}`);
+    return r.ok ? await r.json() : null;
+  } catch { return null; }
+}
+
+async function apiSave(key, data) {
+  try {
+    const r = await fetch(API_SAVE, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + _secret },
+      body: JSON.stringify({ key, data })
+    });
+    return r.ok;
+  } catch { return false; }
+}
+
+function showNotice(ok) {
+  const el = document.getElementById(ok ? 'noticeOk' : 'noticeErr');
+  el.style.display = 'block';
+  setTimeout(() => el.style.display = 'none', 4000);
+}
+
+function setBusy(id, busy, label) {
+  const btn = document.getElementById(id);
+  if (!btn) return;
+  btn.disabled = busy;
+  btn.textContent = busy ? 'Saving…' : label;
+}
+
+// ── Panel init ─────────────────────────────────────────
+async function showPanel() {
+  document.getElementById('admLogin').style.display = 'none';
   document.getElementById('admPanel').classList.add('show');
-  loadCfg();
+  const [cfgData, testData, blogData] = await Promise.all([
+    apiGet('contact'), apiGet('testimonials'), apiGet('blogs')
+  ]);
+  if (cfgData) loadCfgFields(cfgData);
+  _testimonials = (testData && testData.items) ? testData.items : [];
+  _blogs = (blogData && blogData.items) ? blogData.items : [];
+  renderTestList();
   renderBlogList();
-  renderPhotoGrid();
 }
 
-function loadCfg(){
-  const cfg=JSON.parse(localStorage.getItem('amCfg')||'{}');
-  ['Phone','Email','Whatsapp','WaMsg','Kotak','Insta','Fb','Li'].forEach(k=>{
-    const el=document.getElementById('cfg'+k);
-    if(el)el.value=cfg[k.toLowerCase()]||'';
+// ── Contact ────────────────────────────────────────────
+function loadCfgFields(cfg) {
+  const map = { Phone:'phone', Email:'email', Whatsapp:'whatsapp', WaMsg:'waMsg', Kotak:'kotak', Insta:'instagram', Fb:'facebook', Li:'linkedin' };
+  Object.entries(map).forEach(([id, key]) => {
+    const el = document.getElementById('cfg' + id);
+    if (el) el.value = cfg[key] || '';
   });
-  const dp=cfg.dp;
-  if(dp)document.getElementById('admDpPreview').src=dp;
 }
 
-function saveCfg(){
-  const cfg=JSON.parse(localStorage.getItem('amCfg')||'{}');
-  ['Phone','Email','Whatsapp','WaMsg','Kotak','Insta','Fb','Li'].forEach(k=>{
-    const el=document.getElementById('cfg'+k);
-    if(el)cfg[k.toLowerCase()]=el.value.trim();
+async function saveCfg() {
+  setBusy('saveCfgBtn', true, 'Save Contact Info');
+  const map = { Phone:'phone', Email:'email', Whatsapp:'whatsapp', WaMsg:'waMsg', Kotak:'kotak', Insta:'instagram', Fb:'facebook', Li:'linkedin' };
+  const cfg = {};
+  Object.entries(map).forEach(([id, key]) => {
+    const el = document.getElementById('cfg' + id);
+    if (el) cfg[key] = el.value.trim();
   });
-  localStorage.setItem('amCfg',JSON.stringify(cfg));
-  const ok=document.getElementById('cfgOk');
-  ok.style.display='inline';
-  setTimeout(()=>ok.style.display='none',2000);
+  const ok = await apiSave('contact', cfg);
+  setBusy('saveCfgBtn', false, 'Save Contact Info');
+  showNotice(ok);
 }
 
-function previewDp(input){
-  const f=input.files[0];if(!f)return;
-  const r=new FileReader();
-  r.onload=e=>{document.getElementById('admDpPreview').src=e.target.result;};
-  r.readAsDataURL(f);
+// ── Testimonials ───────────────────────────────────────
+function renderTestList() {
+  const el = document.getElementById('testList');
+  if (!_testimonials.length) { el.innerHTML = '<p style="font-size:.82rem;color:var(--t3);margin-bottom:12px">No testimonials yet.</p>'; return; }
+  el.innerHTML = _testimonials.map((t, i) => `
+    <div class="adm-item">
+      <div class="adm-item-info">
+        <div>${t.name}${t.featured ? ' <span style="font-size:.62rem;background:var(--gold);color:var(--bg);padding:2px 7px;border-radius:10px">Featured</span>' : ''}</div>
+        <div class="adm-item-sub">${t.role || ''} · ${'★'.repeat(parseInt(t.stars)||5)}</div>
+      </div>
+      <button class="adm-btn del" style="width:auto;padding:6px 16px;font-size:.75rem" onclick="deleteTestimonial(${i})">Delete</button>
+    </div>`).join('');
 }
 
-function saveDp(){
-  const src=document.getElementById('admDpPreview').src;
-  if(!src)return;
-  const cfg=JSON.parse(localStorage.getItem('amCfg')||'{}');
-  cfg.dp=src;
-  localStorage.setItem('amCfg',JSON.stringify(cfg));
-  alert('Profile photo saved.');
+async function addTestimonial() {
+  const name = document.getElementById('tName').value.trim();
+  if (!name) { alert('Name is required'); return; }
+  setBusy('addTestBtn', true, 'Add Testimonial');
+  _testimonials.unshift({
+    name,
+    initials: document.getElementById('tInitials').value.trim() || name.split(' ').map(w=>w[0]).join('').toUpperCase(),
+    role: document.getElementById('tRole').value.trim(),
+    quote: document.getElementById('tQuote').value.trim(),
+    stars: document.getElementById('tStars').value || '5',
+    featured: document.getElementById('tFeatured').checked
+  });
+  const ok = await apiSave('testimonials', { items: _testimonials });
+  if (ok) {
+    ['tName','tInitials','tRole','tQuote'].forEach(id => { const el=document.getElementById(id); if(el) el.value=''; });
+    document.getElementById('tStars').value = '5';
+    document.getElementById('tFeatured').checked = true;
+    renderTestList();
+  } else {
+    _testimonials.shift(); // rollback
+  }
+  setBusy('addTestBtn', false, 'Add Testimonial');
+  showNotice(ok);
 }
 
-function removeDp(){
-  const cfg=JSON.parse(localStorage.getItem('amCfg')||'{}');
-  delete cfg.dp;
-  localStorage.setItem('amCfg',JSON.stringify(cfg));
-  document.getElementById('admDpPreview').src='images/akshay.jpg';
+async function deleteTestimonial(idx) {
+  if (!confirm('Delete this testimonial?')) return;
+  const removed = _testimonials.splice(idx, 1);
+  const ok = await apiSave('testimonials', { items: _testimonials });
+  if (!ok) _testimonials.splice(idx, 0, removed[0]); // rollback
+  renderTestList();
+  showNotice(ok);
 }
 
-function renderBlogList(){
-  const blogs=JSON.parse(localStorage.getItem('amBlogs')||'[]');
-  const el=document.getElementById('blogList');
-  if(!blogs.length){el.innerHTML='<p style="font-size:.82rem;color:var(--t3)">No blog posts yet.</p>';return;}
-  el.innerHTML=blogs.map((b,i)=>`
+// ── Blogs ──────────────────────────────────────────────
+function renderBlogList() {
+  const el = document.getElementById('blogList');
+  if (!_blogs.length) { el.innerHTML = '<p style="font-size:.82rem;color:var(--t3);margin-bottom:12px">No blog posts yet.</p>'; return; }
+  el.innerHTML = _blogs.map((b, i) => `
     <div class="adm-item">
       <div class="adm-item-info">
         <div>${b.title}</div>
@@ -198,91 +289,38 @@ function renderBlogList(){
     </div>`).join('');
 }
 
-function addBlog(){
-  const title=document.getElementById('bTitle').value.trim();
-  if(!title){alert('Title is required');return;}
-  const blogs=JSON.parse(localStorage.getItem('amBlogs')||'[]');
-  const b={
-    id:Date.now(),
+async function addBlog() {
+  const title = document.getElementById('bTitle').value.trim();
+  if (!title) { alert('Title is required'); return; }
+  setBusy('addBlogBtn', true, 'Add Post');
+  _blogs.unshift({
+    id: Date.now(),
     title,
-    tag:document.getElementById('bTag').value.trim(),
-    imgUrl:document.getElementById('bImg').value.trim(),
-    date:document.getElementById('bDate').value,
-    excerpt:document.getElementById('bExcerpt').value.trim(),
-    content:document.getElementById('bContent').value.trim()
-  };
-  blogs.unshift(b);
-  localStorage.setItem('amBlogs',JSON.stringify(blogs));
-  ['bTitle','bTag','bImg','bDate','bExcerpt','bContent'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
+    tag: document.getElementById('bTag').value.trim(),
+    imgUrl: document.getElementById('bImg').value.trim(),
+    date: document.getElementById('bDate').value,
+    excerpt: document.getElementById('bExcerpt').value.trim(),
+    content: document.getElementById('bContent').value.trim()
+  });
+  const ok = await apiSave('blogs', { items: _blogs });
+  if (ok) {
+    ['bTitle','bTag','bImg','bDate','bExcerpt','bContent'].forEach(id => { const el=document.getElementById(id); if(el) el.value=''; });
+    renderBlogList();
+  } else {
+    _blogs.shift(); // rollback
+  }
+  setBusy('addBlogBtn', false, 'Add Post');
+  showNotice(ok);
+}
+
+async function deleteBlog(idx) {
+  if (!confirm('Delete this post?')) return;
+  const removed = _blogs.splice(idx, 1);
+  const ok = await apiSave('blogs', { items: _blogs });
+  if (!ok) _blogs.splice(idx, 0, removed[0]); // rollback
   renderBlogList();
-  const ok=document.getElementById('blogOk');ok.style.display='inline';setTimeout(()=>ok.style.display='none',2000);
+  showNotice(ok);
 }
-
-function deleteBlog(idx){
-  if(!confirm('Delete this post?'))return;
-  const blogs=JSON.parse(localStorage.getItem('amBlogs')||'[]');
-  blogs.splice(idx,1);
-  localStorage.setItem('amBlogs',JSON.stringify(blogs));
-  renderBlogList();
-}
-
-function renderPhotoGrid(){
-  const photos=JSON.parse(localStorage.getItem('amPhotos')||'[]');
-  const el=document.getElementById('photoGrid');
-  if(!photos.length){el.innerHTML='<p style="font-size:.82rem;color:var(--t3);grid-column:1/-1">No photos added yet.</p>';return;}
-  el.innerHTML=photos.map((p,i)=>`
-    <div class="adm-photo-item">
-      <img src="${p.url}" alt="${p.caption||''}">
-      <button class="adm-photo-del" onclick="deletePhoto(${i})" title="Remove">✕</button>
-    </div>`).join('');
-}
-
-function addPhotoByUrl(){
-  const url=document.getElementById('pUrl').value.trim();
-  const caption=document.getElementById('pCaption').value.trim();
-  if(!url){alert('Please enter an image URL');return;}
-  const photos=JSON.parse(localStorage.getItem('amPhotos')||'[]');
-  photos.push({url,caption});
-  localStorage.setItem('amPhotos',JSON.stringify(photos));
-  document.getElementById('pUrl').value='';
-  document.getElementById('pCaption').value='';
-  renderPhotoGrid();
-  const ok=document.getElementById('photoOk');ok.style.display='inline';setTimeout(()=>ok.style.display='none',2000);
-}
-
-function addPhotoByFile(input){
-  const f=input.files[0];if(!f)return;
-  const caption=document.getElementById('pCaption').value.trim();
-  const r=new FileReader();
-  r.onload=e=>{
-    const photos=JSON.parse(localStorage.getItem('amPhotos')||'[]');
-    photos.push({url:e.target.result,caption});
-    localStorage.setItem('amPhotos',JSON.stringify(photos));
-    document.getElementById('pCaption').value='';
-    input.value='';
-    renderPhotoGrid();
-    const ok=document.getElementById('photoOk');ok.style.display='inline';setTimeout(()=>ok.style.display='none',2000);
-  };
-  r.readAsDataURL(f);
-}
-
-function deletePhoto(idx){
-  if(!confirm('Remove this photo?'))return;
-  const photos=JSON.parse(localStorage.getItem('amPhotos')||'[]');
-  photos.splice(idx,1);
-  localStorage.setItem('amPhotos',JSON.stringify(photos));
-  renderPhotoGrid();
-}
-
-function resetAll(){
-  if(!confirm('This will clear ALL admin data (contact overrides, blogs, photos, DP). Continue?'))return;
-  ['amCfg','amBlogs','amPhotos'].forEach(k=>localStorage.removeItem(k));
-  alert('All admin data cleared. Refreshing...');
-  location.reload();
-}
-
-// Auto-check auth on load
-if(localStorage.getItem(ADM_KEY)==='1') showPanel();
 </script>
 </body>
 </html>

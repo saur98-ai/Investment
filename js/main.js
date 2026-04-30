@@ -434,20 +434,20 @@ function applyContact(c){
 }
 
 async function loadDynamicContent(){
-  // ── Contact info (runs on every page) ──
+  const API='/.netlify/functions/get-data';
+
+  // ── Contact info (every page) ──
   try{
-    const r=await fetch('/data/contact.json');
+    const r=await fetch(API+'?key=contact');
     if(r.ok)applyContact(await r.json());
   }catch(_){}
 
-  // ── Testimonials (full grid on testimonials.html) ──
+  // ── Testimonials ──
   const fullGrid=document.getElementById('testGrid');
-  // ── Testimonials (featured on index.html) ──
   const featGrid=document.getElementById('testFeatured');
-
   if(fullGrid||featGrid){
     try{
-      const r=await fetch('/data/testimonials.json');
+      const r=await fetch(API+'?key=testimonials');
       if(r.ok){
         const data=await r.json();
         const items=Array.isArray(data)?data:(data.items||[]);
@@ -462,6 +462,29 @@ async function loadDynamicContent(){
           featGrid.innerHTML=shown.length
             ?shown.map(_tc).join('')
             :'<p style="color:var(--t3);text-align:center;padding:40px 0;grid-column:1/-1">No testimonials yet.</p>';
+        }
+      }
+    }catch(_){}
+  }
+
+  // ── Blogs (listing page) ──
+  const blogGrid=document.getElementById('blogGrid');
+  if(blogGrid){
+    try{
+      const r=await fetch(API+'?key=blogs');
+      if(r.ok){
+        const data=await r.json();
+        const items=(data.items||[]);
+        if(items.length){
+          blogGrid.innerHTML=items.map(b=>`
+            <div class="bp-card-lg" data-cat="${(b.tag||'').toLowerCase()}">
+              ${b.imgUrl?`<div class="bp-img" style="background-image:url('${b.imgUrl}')"></div>`:''}
+              <div class="bp-body">
+                <div class="bp-meta"><span class="bp-tag">${b.tag||'General'}</span><span>${b.date||''}</span></div>
+                <h3 class="bp-title">${b.title}</h3>
+                <p class="bp-exc">${b.excerpt||''}</p>
+              </div>
+            </div>`).join('');
         }
       }
     }catch(_){}

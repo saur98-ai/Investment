@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -195,138 +195,220 @@
   <div class="cd">Disclaimer: Calculations are for illustration purposes only and assume constant rates. Actual returns may vary. Mutual fund investments are subject to market risks. Please read all scheme-related documents carefully before investing.</div>
 </div>
 
-<!-- MORE CALCULATORS -->
-<section style="padding:60px 5%;background:var(--bg2)">
+<!-- ADVANCED CALCULATORS -->
+<section style="padding:60px 5% 80px;background:var(--bg2)">
   <div style="max-width:1280px;margin:0 auto">
-    <div class="svc-head" style="margin-bottom:40px">
-      <div class="svc-tag">More Tools</div>
-      <h2 class="svc-title">Goal &amp; Scenario <em>Calculators</em></h2>
-      <p class="svc-sub">Plan for life's biggest milestones — education, marriage, property, retirement, and more.</p>
+    <div class="svc-head" style="margin-bottom:44px">
+      <div class="svc-tag">Advanced Tools</div>
+      <h2 class="svc-title">More <em>Calculators</em></h2>
+      <p class="svc-sub">Step-Up SIP, EMI, Retirement Corpus, Goal Planner, Cost of Delay, and Life Insurance Need — all built in.</p>
     </div>
-    <div class="mc-grid">
-      <div class="mc-card">
-        <div class="mc-ico">🎓</div>
-        <div class="mc-name">Dream Education</div>
-        <div class="mc-desc">Calculate how much to invest today to fund your child's higher education.</div>
-        <div class="mc-actions">
-          <a href="https://duoakfinserv.com/Home/Fin_Calculators_New" target="_blank" class="mc-btn">Use Calculator →</a>
-          <a href="contact.html" class="mc-svc">Goal Planning</a>
-        </div>
+    <div class="xc-grid">
+
+      <!-- 1. STEP-UP SIP -->
+      <div class="xc-card">
+        <div class="xc-head"><div class="xc-ico">📈</div><div><div class="xc-name">Step-Up SIP Calculator</div><div class="xc-sub">Increase SIP annually and see the wealth multiplier effect</div></div></div>
+        <div class="sg"><div class="sh"><span class="sl">Monthly SIP</span><span class="sv" id="su_v1">₹5,000</span></div><div class="sg-row"><input type="range" id="su_r1" min="500" max="100000" step="500" value="5000" oninput="xcSU()"><input type="number" id="su_n1" class="sg-num" min="500" max="100000" step="500" value="5000" onchange="document.getElementById('su_r1').value=this.value;xcSU()"></div></div>
+        <div class="sg"><div class="sh"><span class="sl">Annual Step-Up %</span><span class="sv" id="su_v2">10%</span></div><div class="sg-row"><input type="range" id="su_r2" min="0" max="30" step="1" value="10" oninput="xcSU()"><input type="number" id="su_n2" class="sg-num" min="0" max="30" step="1" value="10" onchange="document.getElementById('su_r2').value=this.value;xcSU()"></div></div>
+        <div class="sg"><div class="sh"><span class="sl">Expected Return (p.a.)</span><span class="sv" id="su_v3">12%</span></div><div class="sg-row"><input type="range" id="su_r3" min="1" max="30" step="0.5" value="12" oninput="xcSU()"><input type="number" id="su_n3" class="sg-num" min="1" max="30" step="0.5" value="12" onchange="document.getElementById('su_r3').value=this.value;xcSU()"></div></div>
+        <div class="sg"><div class="sh"><span class="sl">Time Period (Years)</span><span class="sv" id="su_v4">15</span></div><div class="sg-row"><input type="range" id="su_r4" min="1" max="40" step="1" value="15" oninput="xcSU()"><input type="number" id="su_n4" class="sg-num" min="1" max="40" step="1" value="15" onchange="document.getElementById('su_r4').value=this.value;xcSU()"></div></div>
+        <div class="xc-result-box"><div class="xc-result-val" id="su_corpus">—</div><div class="xc-result-lbl">Step-Up SIP Corpus</div></div>
+        <div class="xc-sub-results"><div class="xc-sub-r"><div class="xc-sub-r-val" id="su_normal">—</div><div class="xc-sub-r-lbl">Normal SIP Corpus</div></div><div class="xc-sub-r"><div class="xc-sub-r-val" id="su_extra" style="color:#4ade80">—</div><div class="xc-sub-r-lbl">Extra Wealth</div></div></div>
+        <a href="sip.html" class="xc-cta">Learn About SIP →</a>
       </div>
-      <div class="mc-card">
-        <div class="mc-ico">💍</div>
-        <div class="mc-name">Dream Wedding</div>
-        <div class="mc-desc">Estimate your savings target to plan the perfect wedding without financial stress.</div>
-        <div class="mc-actions">
-          <a href="https://duoakfinserv.com/Home/Fin_Calculators_New" target="_blank" class="mc-btn">Use Calculator →</a>
-          <a href="contact.html" class="mc-svc">Goal Planning</a>
-        </div>
+
+      <!-- 2. EMI CALCULATOR -->
+      <div class="xc-card">
+        <div class="xc-head"><div class="xc-ico">💳</div><div><div class="xc-name">EMI Calculator</div><div class="xc-sub">Calculate monthly instalment for any loan</div></div></div>
+        <div class="sg"><div class="sh"><span class="sl">Loan Amount</span><span class="sv" id="em_v1">₹20,00,000</span></div><div class="sg-row"><input type="range" id="em_r1" min="50000" max="50000000" step="50000" value="2000000" oninput="xcEM()"><input type="number" id="em_n1" class="sg-num" min="50000" max="50000000" step="50000" value="2000000" onchange="document.getElementById('em_r1').value=this.value;xcEM()"></div></div>
+        <div class="sg"><div class="sh"><span class="sl">Interest Rate (p.a.)</span><span class="sv" id="em_v2">8.5%</span></div><div class="sg-row"><input type="range" id="em_r2" min="1" max="24" step="0.1" value="8.5" oninput="xcEM()"><input type="number" id="em_n2" class="sg-num" min="1" max="24" step="0.1" value="8.5" onchange="document.getElementById('em_r2').value=this.value;xcEM()"></div></div>
+        <div class="sg"><div class="sh"><span class="sl">Tenure (Years)</span><span class="sv" id="em_v3">20</span></div><div class="sg-row"><input type="range" id="em_r3" min="1" max="30" step="1" value="20" oninput="xcEM()"><input type="number" id="em_n3" class="sg-num" min="1" max="30" step="1" value="20" onchange="document.getElementById('em_r3').value=this.value;xcEM()"></div></div>
+        <div class="xc-result-box"><div class="xc-result-val" id="em_emi">—</div><div class="xc-result-lbl">Monthly EMI</div></div>
+        <div class="xc-sub-results"><div class="xc-sub-r"><div class="xc-sub-r-val" id="em_total">—</div><div class="xc-sub-r-lbl">Total Payment</div></div><div class="xc-sub-r"><div class="xc-sub-r-val" id="em_interest" style="color:#f87171">—</div><div class="xc-sub-r-lbl">Total Interest</div></div></div>
+        <a href="loan.html" class="xc-cta">Loan Against Securities →</a>
       </div>
-      <div class="mc-card">
-        <div class="mc-ico">🏠</div>
-        <div class="mc-name">Dream Property / Car</div>
-        <div class="mc-desc">Work backward from your target purchase price to the SIP you need to start now.</div>
-        <div class="mc-actions">
-          <a href="https://duoakfinserv.com/Home/Fin_Calculators_New" target="_blank" class="mc-btn">Use Calculator →</a>
-          <a href="contact.html" class="mc-svc">Goal Planning</a>
-        </div>
+
+      <!-- 3. GOAL PLANNER -->
+      <div class="xc-card">
+        <div class="xc-head"><div class="xc-ico">🎯</div><div><div class="xc-name">Goal Planner</div><div class="xc-sub">Education, wedding, property, vacation — any dream</div></div></div>
+        <div class="sg"><div class="sh"><span class="sl">Goal Amount (Today's Value)</span><span class="sv" id="gp_v1">₹25,00,000</span></div><div class="sg-row"><input type="range" id="gp_r1" min="100000" max="100000000" step="100000" value="2500000" oninput="xcGP()"><input type="number" id="gp_n1" class="sg-num" min="100000" max="100000000" step="100000" value="2500000" onchange="document.getElementById('gp_r1').value=this.value;xcGP()"></div></div>
+        <div class="sg"><div class="sh"><span class="sl">Years to Goal</span><span class="sv" id="gp_v2">10</span></div><div class="sg-row"><input type="range" id="gp_r2" min="1" max="30" step="1" value="10" oninput="xcGP()"><input type="number" id="gp_n2" class="sg-num" min="1" max="30" step="1" value="10" onchange="document.getElementById('gp_r2').value=this.value;xcGP()"></div></div>
+        <div class="sg"><div class="sh"><span class="sl">Inflation Rate</span><span class="sv" id="gp_v3">6%</span></div><div class="sg-row"><input type="range" id="gp_r3" min="1" max="15" step="0.5" value="6" oninput="xcGP()"><input type="number" id="gp_n3" class="sg-num" min="1" max="15" step="0.5" value="6" onchange="document.getElementById('gp_r3').value=this.value;xcGP()"></div></div>
+        <div class="sg"><div class="sh"><span class="sl">Expected Return</span><span class="sv" id="gp_v4">12%</span></div><div class="sg-row"><input type="range" id="gp_r4" min="1" max="25" step="0.5" value="12" oninput="xcGP()"><input type="number" id="gp_n4" class="sg-num" min="1" max="25" step="0.5" value="12" onchange="document.getElementById('gp_r4').value=this.value;xcGP()"></div></div>
+        <div class="xc-result-box"><div class="xc-result-val" id="gp_sip">—</div><div class="xc-result-lbl">Monthly SIP Required</div></div>
+        <div class="xc-sub-results"><div class="xc-sub-r"><div class="xc-sub-r-val" id="gp_future">—</div><div class="xc-sub-r-lbl">Future Goal Value</div></div><div class="xc-sub-r"><div class="xc-sub-r-val" id="gp_lumpsum">—</div><div class="xc-sub-r-lbl">OR Lumpsum Today</div></div></div>
+        <a href="contact.html" class="xc-cta">Plan My Goal →</a>
       </div>
-      <div class="mc-card">
-        <div class="mc-ico">✈️</div>
-        <div class="mc-name">Dream Vacation</div>
-        <div class="mc-desc">Find the monthly investment needed to make your bucket-list travel a reality.</div>
-        <div class="mc-actions">
-          <a href="https://duoakfinserv.com/Home/Fin_Calculators_New" target="_blank" class="mc-btn">Use Calculator →</a>
-          <a href="contact.html" class="mc-svc">Goal Planning</a>
-        </div>
+
+      <!-- 4. RETIREMENT CORPUS -->
+      <div class="xc-card">
+        <div class="xc-head"><div class="xc-ico">🌅</div><div><div class="xc-name">Retirement Corpus Calculator</div><div class="xc-sub">Find out exactly how much you need to retire comfortably</div></div></div>
+        <div class="sg"><div class="sh"><span class="sl">Current Monthly Expense</span><span class="sv" id="rc_v1">₹50,000</span></div><div class="sg-row"><input type="range" id="rc_r1" min="10000" max="500000" step="5000" value="50000" oninput="xcRC()"><input type="number" id="rc_n1" class="sg-num" min="10000" max="500000" step="5000" value="50000" onchange="document.getElementById('rc_r1').value=this.value;xcRC()"></div></div>
+        <div class="sg"><div class="sh"><span class="sl">Years to Retirement</span><span class="sv" id="rc_v2">25</span></div><div class="sg-row"><input type="range" id="rc_r2" min="1" max="40" step="1" value="25" oninput="xcRC()"><input type="number" id="rc_n2" class="sg-num" min="1" max="40" step="1" value="25" onchange="document.getElementById('rc_r2').value=this.value;xcRC()"></div></div>
+        <div class="sg"><div class="sh"><span class="sl">Inflation Rate</span><span class="sv" id="rc_v3">6%</span></div><div class="sg-row"><input type="range" id="rc_r3" min="1" max="12" step="0.5" value="6" oninput="xcRC()"><input type="number" id="rc_n3" class="sg-num" min="1" max="12" step="0.5" value="6" onchange="document.getElementById('rc_r3').value=this.value;xcRC()"></div></div>
+        <div class="sg"><div class="sh"><span class="sl">Return on Investment</span><span class="sv" id="rc_v4">12%</span></div><div class="sg-row"><input type="range" id="rc_r4" min="4" max="20" step="0.5" value="12" oninput="xcRC()"><input type="number" id="rc_n4" class="sg-num" min="4" max="20" step="0.5" value="12" onchange="document.getElementById('rc_r4').value=this.value;xcRC()"></div></div>
+        <div class="xc-result-box"><div class="xc-result-val" id="rc_corpus">—</div><div class="xc-result-lbl">Corpus Needed at Retirement</div></div>
+        <div class="xc-sub-results"><div class="xc-sub-r"><div class="xc-sub-r-val" id="rc_sip">—</div><div class="xc-sub-r-lbl">Monthly SIP Now</div></div><div class="xc-sub-r"><div class="xc-sub-r-val" id="rc_exp">—</div><div class="xc-sub-r-lbl">Monthly Expense at Retirement</div></div></div>
+        <a href="retirement.html" class="xc-cta">Retirement Planning →</a>
       </div>
-      <div class="mc-card">
-        <div class="mc-ico">🌅</div>
-        <div class="mc-name">Dream Retirement</div>
-        <div class="mc-desc">See how much corpus you need and what monthly SIP gets you there comfortably.</div>
-        <div class="mc-actions">
-          <a href="https://duoakfinserv.com/Home/Fin_Calculators_New" target="_blank" class="mc-btn">Use Calculator →</a>
-          <a href="retirement.html" class="mc-svc">Retirement Planning</a>
-        </div>
+
+      <!-- 5. COST OF DELAY -->
+      <div class="xc-card">
+        <div class="xc-head"><div class="xc-ico">⏰</div><div><div class="xc-name">Cost of Delay Calculator</div><div class="xc-sub">See how much wealth you lose by waiting to start</div></div></div>
+        <div class="sg"><div class="sh"><span class="sl">Monthly SIP</span><span class="sv" id="cd_v1">₹10,000</span></div><div class="sg-row"><input type="range" id="cd_r1" min="500" max="100000" step="500" value="10000" oninput="xcCD()"><input type="number" id="cd_n1" class="sg-num" min="500" max="100000" step="500" value="10000" onchange="document.getElementById('cd_r1').value=this.value;xcCD()"></div></div>
+        <div class="sg"><div class="sh"><span class="sl">Expected Return (p.a.)</span><span class="sv" id="cd_v2">12%</span></div><div class="sg-row"><input type="range" id="cd_r2" min="1" max="25" step="0.5" value="12" oninput="xcCD()"><input type="number" id="cd_n2" class="sg-num" min="1" max="25" step="0.5" value="12" onchange="document.getElementById('cd_r2').value=this.value;xcCD()"></div></div>
+        <div class="sg"><div class="sh"><span class="sl">Total Investment Period (Years)</span><span class="sv" id="cd_v3">20</span></div><div class="sg-row"><input type="range" id="cd_r3" min="5" max="40" step="1" value="20" oninput="xcCD()"><input type="number" id="cd_n3" class="sg-num" min="5" max="40" step="1" value="20" onchange="document.getElementById('cd_r3').value=this.value;xcCD()"></div></div>
+        <div class="sg"><div class="sh"><span class="sl">Delay by (Years)</span><span class="sv" id="cd_v4">3</span></div><div class="sg-row"><input type="range" id="cd_r4" min="1" max="10" step="1" value="3" oninput="xcCD()"><input type="number" id="cd_n4" class="sg-num" min="1" max="10" step="1" value="3" onchange="document.getElementById('cd_r4').value=this.value;xcCD()"></div></div>
+        <div class="xc-result-box"><div class="xc-result-val" id="cd_loss" style="color:#f87171">—</div><div class="xc-result-lbl">Wealth Lost by Delaying</div></div>
+        <div class="xc-sub-results"><div class="xc-sub-r"><div class="xc-sub-r-val" id="cd_now">—</div><div class="xc-sub-r-lbl">Start Today</div></div><div class="xc-sub-r"><div class="xc-sub-r-val" id="cd_later">—</div><div class="xc-sub-r-lbl">Start in <span id="cd_delay_lbl">3</span> Years</div></div></div>
+        <a href="contact.html" class="xc-cta">Start Investing Today →</a>
       </div>
-      <div class="mc-card">
-        <div class="mc-ico">🛡️</div>
-        <div class="mc-name">Life Insurance Need</div>
-        <div class="mc-desc">Calculate the ideal life cover amount to protect your family's financial future.</div>
-        <div class="mc-actions">
-          <a href="https://duoakfinserv.com/Home/Fin_Calculators_New" target="_blank" class="mc-btn">Use Calculator →</a>
-          <a href="insurance.html" class="mc-svc">Insurance</a>
-        </div>
+
+      <!-- 6. LIFE INSURANCE NEED -->
+      <div class="xc-card">
+        <div class="xc-head"><div class="xc-ico">🛡️</div><div><div class="xc-name">Life Insurance Need Calculator</div><div class="xc-sub">Find the right cover amount for your family</div></div></div>
+        <div class="sg"><div class="sh"><span class="sl">Annual Income</span><span class="sv" id="li_v1">₹10,00,000</span></div><div class="sg-row"><input type="range" id="li_r1" min="200000" max="10000000" step="100000" value="1000000" oninput="xcLI()"><input type="number" id="li_n1" class="sg-num" min="200000" max="10000000" step="100000" value="1000000" onchange="document.getElementById('li_r1').value=this.value;xcLI()"></div></div>
+        <div class="sg"><div class="sh"><span class="sl">Years to Retirement</span><span class="sv" id="li_v2">25</span></div><div class="sg-row"><input type="range" id="li_r2" min="5" max="40" step="1" value="25" oninput="xcLI()"><input type="number" id="li_n2" class="sg-num" min="5" max="40" step="1" value="25" onchange="document.getElementById('li_r2').value=this.value;xcLI()"></div></div>
+        <div class="sg"><div class="sh"><span class="sl">Outstanding Loans</span><span class="sv" id="li_v3">₹0</span></div><div class="sg-row"><input type="range" id="li_r3" min="0" max="20000000" step="100000" value="0" oninput="xcLI()"><input type="number" id="li_n3" class="sg-num" min="0" max="20000000" step="100000" value="0" onchange="document.getElementById('li_r3').value=this.value;xcLI()"></div></div>
+        <div class="sg"><div class="sh"><span class="sl">Existing Cover</span><span class="sv" id="li_v4">₹0</span></div><div class="sg-row"><input type="range" id="li_r4" min="0" max="20000000" step="500000" value="0" oninput="xcLI()"><input type="number" id="li_n4" class="sg-num" min="0" max="20000000" step="500000" value="0" onchange="document.getElementById('li_r4').value=this.value;xcLI()"></div></div>
+        <div class="xc-result-box"><div class="xc-result-val" id="li_cover">—</div><div class="xc-result-lbl">Recommended Cover</div></div>
+        <div class="xc-sub-results"><div class="xc-sub-r"><div class="xc-sub-r-val" id="li_hlv">—</div><div class="xc-sub-r-lbl">Human Life Value</div></div><div class="xc-sub-r"><div class="xc-sub-r-val" id="li_gap" style="color:#f87171">—</div><div class="xc-sub-r-lbl">Coverage Gap</div></div></div>
+        <a href="insurance.html" class="xc-cta">Get Insurance Advice →</a>
       </div>
-      <div class="mc-card">
-        <div class="mc-ico">⏰</div>
-        <div class="mc-name">Cost of Delay</div>
-        <div class="mc-desc">See how much wealth you lose by waiting even 1–3 years to start your SIP.</div>
-        <div class="mc-actions">
-          <a href="https://duoakfinserv.com/Home/Fin_Calculators_New" target="_blank" class="mc-btn">Use Calculator →</a>
-          <a href="sip.html" class="mc-svc">SIP &amp; Mutual Funds</a>
-        </div>
-      </div>
-      <div class="mc-card">
-        <div class="mc-ico">📅</div>
-        <div class="mc-name">Limited Period SIP</div>
-        <div class="mc-desc">Project the maturity value of a SIP that runs only for a fixed number of years.</div>
-        <div class="mc-actions">
-          <a href="https://duoakfinserv.com/Home/Fin_Calculators_New" target="_blank" class="mc-btn">Use Calculator →</a>
-          <a href="sip.html" class="mc-svc">SIP &amp; Mutual Funds</a>
-        </div>
-      </div>
-      <div class="mc-card">
-        <div class="mc-ico">📈</div>
-        <div class="mc-name">SIP Step-Up</div>
-        <div class="mc-desc">Calculate how increasing your SIP annually by a small % dramatically boosts your wealth.</div>
-        <div class="mc-actions">
-          <a href="https://duoakfinserv.com/Home/Fin_Calculators_New" target="_blank" class="mc-btn">Use Calculator →</a>
-          <a href="sip.html" class="mc-svc">SIP &amp; Mutual Funds</a>
-        </div>
-      </div>
-      <div class="mc-card">
-        <div class="mc-ico">🎂</div>
-        <div class="mc-name">Birthday SIP</div>
-        <div class="mc-desc">A fun way to see what wealth you'd build by starting a SIP on each birthday.</div>
-        <div class="mc-actions">
-          <a href="https://duoakfinserv.com/Home/Fin_Calculators_New" target="_blank" class="mc-btn">Use Calculator →</a>
-          <a href="sip.html" class="mc-svc">SIP &amp; Mutual Funds</a>
-        </div>
-      </div>
-      <div class="mc-card">
-        <div class="mc-ico">🏦</div>
-        <div class="mc-name">Home Loan vs SIP</div>
-        <div class="mc-desc">Compare the long-term cost of a home loan against investing the EMI amount in SIP.</div>
-        <div class="mc-actions">
-          <a href="https://duoakfinserv.com/Home/Fin_Calculators_New" target="_blank" class="mc-btn">Use Calculator →</a>
-          <a href="loan.html" class="mc-svc">Loan Against Security</a>
-        </div>
-      </div>
-      <div class="mc-card">
-        <div class="mc-ico">💳</div>
-        <div class="mc-name">EMI Calculator</div>
-        <div class="mc-desc">Calculate your monthly loan instalment for any loan amount, rate, and tenure.</div>
-        <div class="mc-actions">
-          <a href="https://duoakfinserv.com/Home/Fin_Calculators_New" target="_blank" class="mc-btn">Use Calculator →</a>
-          <a href="loan.html" class="mc-svc">Loan Against Security</a>
-        </div>
-      </div>
+
     </div>
   </div>
 </section>
+
+<style>
+.xc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:24px}
+.xc-card{background:var(--bg3);border:1px solid rgba(201,168,76,.1);border-radius:16px;padding:28px;transition:border-color .3s}
+.xc-card:hover{border-color:rgba(201,168,76,.2)}
+.xc-head{display:flex;align-items:center;gap:14px;margin-bottom:18px}
+.xc-ico{font-size:1.5rem;width:42px;height:42px;display:flex;align-items:center;justify-content:center;background:rgba(201,168,76,.08);border-radius:10px;flex-shrink:0}
+.xc-name{font-size:.92rem;font-weight:600;color:var(--w);line-height:1.3}
+.xc-sub{font-size:.72rem;color:var(--t3);margin-top:3px}
+.xc-result-box{background:rgba(201,168,76,.05);border:1px solid rgba(201,168,76,.12);border-radius:10px;padding:14px;margin:14px 0;text-align:center}
+.xc-result-val{font-family:'Cormorant Garamond',serif;font-size:1.75rem;font-weight:700;color:var(--gold2);line-height:1}
+.xc-result-lbl{font-size:.68rem;color:var(--t3);margin-top:4px;letter-spacing:.5px;text-transform:uppercase}
+.xc-sub-results{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.xc-sub-r{background:var(--bg2);border-radius:8px;padding:10px;text-align:center}
+.xc-sub-r-val{font-size:.88rem;font-weight:600;color:var(--t1)}
+.xc-sub-r-lbl{font-size:.62rem;color:var(--t3);margin-top:2px}
+.xc-cta{display:block;text-align:center;margin-top:14px;padding:9px;border:1px solid rgba(201,168,76,.2);border-radius:8px;font-size:.78rem;color:var(--gold);text-decoration:none;transition:all .2s}
+.xc-cta:hover{background:rgba(201,168,76,.08);border-color:var(--gold)}
+@media(max-width:700px){.xc-grid{grid-template-columns:1fr}}
+</style>
+
+<script>
+function xcFmt(n){if(n>=1e7)return'₹'+(n/1e7).toFixed(2)+' Cr';if(n>=1e5)return'₹'+(n/1e5).toFixed(2)+' L';if(n>=1e3)return'₹'+(n/1e3).toFixed(1)+'K';return'₹'+Math.round(n).toLocaleString('en-IN')}
+function sipFV(monthly,rAnnual,yrs){var r=rAnnual/100/12,n=yrs*12;return monthly*(Math.pow(1+r,n)-1)/r*(1+r)}
+function sipRequired(fv,rAnnual,yrs){var r=rAnnual/100/12,n=yrs*12;return fv*r/((Math.pow(1+r,n)-1)*(1+r))}
+function pvLumpsum(fv,rAnnual,yrs){return fv/Math.pow(1+rAnnual/100,yrs)}
+
+// Step-Up SIP
+function xcSU(){
+  var p=parseFloat(document.getElementById('su_r1').value),g=parseFloat(document.getElementById('su_r2').value),r=parseFloat(document.getElementById('su_r3').value),y=parseFloat(document.getElementById('su_r4').value);
+  document.getElementById('su_v1').textContent=xcFmt(p);document.getElementById('su_v2').textContent=g+'%';document.getElementById('su_v3').textContent=r+'%';document.getElementById('su_v4').textContent=y;
+  document.getElementById('su_n1').value=p;document.getElementById('su_n2').value=g;document.getElementById('su_n3').value=r;document.getElementById('su_n4').value=y;
+  var mr=r/100/12,fv=0,sip=p;
+  for(var yr=0;yr<y;yr++){for(var m=0;m<12;m++){fv+=(fv+sip)*(1+mr);fv-=fv-fv;}/* correct loop */}
+  // proper calculation
+  fv=0;sip=p;
+  for(var yr=0;yr<y;yr++){
+    for(var m=0;m<12;m++){fv=(fv+sip)*(1+mr);}
+    sip*=(1+g/100);
+  }
+  var normal=sipFV(p,r,y);
+  document.getElementById('su_corpus').textContent=xcFmt(fv);
+  document.getElementById('su_normal').textContent=xcFmt(normal);
+  document.getElementById('su_extra').textContent='+'+xcFmt(Math.max(0,fv-normal));
+}
+
+// EMI
+function xcEM(){
+  var P=parseFloat(document.getElementById('em_r1').value),rate=parseFloat(document.getElementById('em_r2').value),yrs=parseFloat(document.getElementById('em_r3').value);
+  document.getElementById('em_v1').textContent=xcFmt(P);document.getElementById('em_v2').textContent=rate+'%';document.getElementById('em_v3').textContent=yrs;
+  document.getElementById('em_n1').value=P;document.getElementById('em_n2').value=rate;document.getElementById('em_n3').value=yrs;
+  var r=rate/100/12,n=yrs*12;
+  var emi=P*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1);
+  var total=emi*n,interest=total-P;
+  document.getElementById('em_emi').textContent=xcFmt(Math.round(emi));
+  document.getElementById('em_total').textContent=xcFmt(Math.round(total));
+  document.getElementById('em_interest').textContent=xcFmt(Math.round(interest));
+}
+
+// Goal Planner
+function xcGP(){
+  var goal=parseFloat(document.getElementById('gp_r1').value),yrs=parseFloat(document.getElementById('gp_r2').value),inf=parseFloat(document.getElementById('gp_r3').value),ret=parseFloat(document.getElementById('gp_r4').value);
+  document.getElementById('gp_v1').textContent=xcFmt(goal);document.getElementById('gp_v2').textContent=yrs;document.getElementById('gp_v3').textContent=inf+'%';document.getElementById('gp_v4').textContent=ret+'%';
+  document.getElementById('gp_n1').value=goal;document.getElementById('gp_n2').value=yrs;document.getElementById('gp_n3').value=inf;document.getElementById('gp_n4').value=ret;
+  var futureGoal=goal*Math.pow(1+inf/100,yrs);
+  var sip=sipRequired(futureGoal,ret,yrs);
+  var ls=pvLumpsum(futureGoal,ret,yrs);
+  document.getElementById('gp_future').textContent=xcFmt(Math.round(futureGoal));
+  document.getElementById('gp_sip').textContent=xcFmt(Math.ceil(sip));
+  document.getElementById('gp_lumpsum').textContent=xcFmt(Math.round(ls));
+}
+
+// Retirement Corpus
+function xcRC(){
+  var exp=parseFloat(document.getElementById('rc_r1').value),yrs=parseFloat(document.getElementById('rc_r2').value),inf=parseFloat(document.getElementById('rc_r3').value),ret=parseFloat(document.getElementById('rc_r4').value);
+  document.getElementById('rc_v1').textContent=xcFmt(exp);document.getElementById('rc_v2').textContent=yrs;document.getElementById('rc_v3').textContent=inf+'%';document.getElementById('rc_v4').textContent=ret+'%';
+  document.getElementById('rc_n1').value=exp;document.getElementById('rc_n2').value=yrs;document.getElementById('rc_n3').value=inf;document.getElementById('rc_n4').value=ret;
+  var expAtRetire=exp*Math.pow(1+inf/100,yrs);
+  // Corpus = 25× annual expense at retirement (standard rule), adjusted for post-retirement 6% return
+  var postRet=6/100/12,retYrs=25*12;
+  var corpus=expAtRetire*(1-Math.pow(1+postRet,-retYrs))/postRet;
+  var sip=sipRequired(corpus,ret,yrs);
+  document.getElementById('rc_corpus').textContent=xcFmt(Math.round(corpus));
+  document.getElementById('rc_sip').textContent=xcFmt(Math.ceil(sip));
+  document.getElementById('rc_exp').textContent=xcFmt(Math.round(expAtRetire));
+}
+
+// Cost of Delay
+function xcCD(){
+  var sip=parseFloat(document.getElementById('cd_r1').value),ret=parseFloat(document.getElementById('cd_r2').value),total=parseFloat(document.getElementById('cd_r3').value),delay=parseFloat(document.getElementById('cd_r4').value);
+  document.getElementById('cd_v1').textContent=xcFmt(sip);document.getElementById('cd_v2').textContent=ret+'%';document.getElementById('cd_v3').textContent=total;document.getElementById('cd_v4').textContent=delay;
+  document.getElementById('cd_n1').value=sip;document.getElementById('cd_n2').value=ret;document.getElementById('cd_n3').value=total;document.getElementById('cd_n4').value=delay;
+  document.getElementById('cd_delay_lbl').textContent=delay;
+  var now=sipFV(sip,ret,total);
+  var later=sipFV(sip,ret,Math.max(1,total-delay));
+  var loss=now-later;
+  document.getElementById('cd_now').textContent=xcFmt(Math.round(now));
+  document.getElementById('cd_later').textContent=xcFmt(Math.round(later));
+  document.getElementById('cd_loss').textContent=xcFmt(Math.round(loss));
+}
+
+// Life Insurance Need
+function xcLI(){
+  var income=parseFloat(document.getElementById('li_r1').value),yrs=parseFloat(document.getElementById('li_r2').value),loans=parseFloat(document.getElementById('li_r3').value),existing=parseFloat(document.getElementById('li_r4').value);
+  document.getElementById('li_v1').textContent=xcFmt(income);document.getElementById('li_v2').textContent=yrs;document.getElementById('li_v3').textContent=xcFmt(loans);document.getElementById('li_v4').textContent=xcFmt(existing);
+  document.getElementById('li_n1').value=income;document.getElementById('li_n2').value=yrs;document.getElementById('li_n3').value=loans;document.getElementById('li_n4').value=existing;
+  // Human Life Value = PV of future income stream at 6% discount rate
+  var r=6/100,hlv=income*(1-Math.pow(1+r,-yrs))/r;
+  var recommended=hlv+loans;
+  var gap=Math.max(0,recommended-existing);
+  document.getElementById('li_hlv').textContent=xcFmt(Math.round(hlv));
+  document.getElementById('li_cover').textContent=xcFmt(Math.round(recommended));
+  document.getElementById('li_gap').textContent=gap>0?('Gap: '+xcFmt(Math.round(gap))):'✓ Covered';
+}
+
+// Init all on load
+xcSU();xcEM();xcGP();xcRC();xcCD();xcLI();
+</script>
 
 <footer>
   <div class="f-grid">
     <div><div class="f-brand-name">Akshay Maheshwari</div><div class="f-brand-sub">Investment Advisor</div><p class="f-about">Helping individuals and families grow their wealth through smart, disciplined, and transparent financial guidance across India.</p></div>
     <div><h5 class="f-h">Services</h5><ul class="f-list f-list-2col"><li><a href="sip.html">SIP &amp; Mutual Funds</a></li><li><a href="stock.html">Stock Market</a></li><li><a href="insurance.html">Insurance</a></li><li><a href="retirement.html">Retirement</a></li><li><a href="pms.html">PMS</a></li><li><a href="private-equity.html">Private Equity</a></li><li><a href="bonds.html">Bonds</a></li><li><a href="loan.html">Loan Against Security</a></li><li><a href="aif.html">AIF</a></li><li><a href="unlisted.html">Unlisted Securities</a></li><li><a href="gift-city.html">Gift City</a></li><li><a href="international.html">International Equities</a></li><li><a href="will.html">Will</a></li><li><a href="trust.html">Trust</a></li><li><a href="family-office.html">Family Office</a></li><li><a href="debt-financing.html">Debt Financing</a></li><li><a href="equity-financing.html">Equity Financing</a></li><li><a href="exit-planning.html">Exit Planning</a></li><li><a href="succession-planning.html">Succession Planning</a></li><li><a href="estate-planning.html">Estate Planning</a></li><li><a href="elite.html">Elite Advisory</a></li></ul></div>
     <div><h5 class="f-h">Company</h5><ul class="f-list"><li><a href="about.html">About</a></li><li><a href="testimonials.html">Testimonials</a></li><li><a href="calculators.html">Calculators</a></li><li><a href="contact.html">Contact</a></li></ul></div>
-    <div><h5 class="f-h">Connect</h5><ul class="f-list"><li><a href="tel:+919827599966">📱 +91 98275 99966</a></li><li><a href="mailto:yourmail@gmail.com">📧 yourmail@gmail.com</a></li><li><a href="https://www.kotaksecurities.com/landing-page/franchisee/open-demat-account-partner-madhu-maheshwari-neo" target="_blank">📊 Open Demat Account</a></li><li><a href="https://wa.me/919827599966?text=i%20am%20intereseted%20in%20your%20financial%20advice" target="_blank">💬 WhatsApp</a></li></ul></div>
+    <div><h5 class="f-h">Connect</h5><ul class="f-list"><li><a href="tel:+919827599966">📱 +91 98275 99966</a></li><li><a href="mailto:yourmail@gmail.com">📧 yourmail@gmail.com</a></li><li><a href="https://www.kotaksecurities.com/landing-page/franchisee/open-demat-account-partner-madhu-maheshwari-neo" target="_blank">📊 Open Demat Account</a></li><li><a href="https://wa.me/919827599966?text=Hi%20Akshay%2C%20I%20am%20interested%20in%20your%20financial%20services." target="_blank">💬 WhatsApp</a></li></ul></div>
   </div>
-  <div class="f-disc"><p>AMFI Registered Mutual Fund Distributor – ARN-268752, ARN-33209 &nbsp;|&nbsp; Risk Factors – Investments in Mutual Funds are subject to Market Risks. Read all scheme related documents carefully before investing.</p></div><div class="f-bot"><p>© 2025 Akshay Maheshwari. All rights reserved.</p></div>
+  <div class="f-disc"><p style="font-weight:700;color:var(--gold);font-size:.8rem">AMFI Registered Mutual Fund Distributor &nbsp;|&nbsp; ARN-268752 &nbsp;&amp;&nbsp; ARN-33209</p><p style="margin-top:4px">Risk Factors – Investments in Mutual Funds are subject to Market Risks. Read all scheme related documents carefully before investing.</p></div><div class="f-comp"><a href="https://duoakfinserv.com/home/importantlinks" target="_blank">Important Links</a><span class="f-sep">|</span><a href="https://duoakfinserv.com/home/disclaimer" target="_blank">Disclaimer</a><span class="f-sep">|</span><a href="https://duoakfinserv.com/home/disclosure" target="_blank">Disclosure</a><span class="f-sep">|</span><a href="https://duoakfinserv.com/home/privacypolicy" target="_blank">Privacy Policy</a><span class="f-sep">|</span><a href="https://www.sebi.gov.in/filings/mutual-funds.html" target="_blank">SID/SAI/KIM</a><span class="f-sep">|</span><a href="https://duoakfinserv.com/content/codeof_conduct.pdf" target="_blank">Code of Conduct</a><span class="f-sep">|</span><a href="https://www.sebi.gov.in/sebiweb/home/HomeAction.do?doListing=yes&amp;sid=1&amp;ssid=7&amp;smid=0" target="_blank">SEBI Circulars</a><span class="f-sep">|</span><a href="https://www.amfiindia.com/investor-corner/knowledge-center/risks-in-mutual-funds.html" target="_blank">AMFI Risk Factors</a></div><div class="f-bot"><p>© 2025 Akshay Maheshwari. All rights reserved.</p></div>
 </footer>
 
-<a href="https://wa.me/919827599966?text=i%20am%20intereseted%20in%20your%20financial%20advice" target="_blank" class="waf">💬</a>
+<a href="https://wa.me/919827599966?text=Hi%20Akshay%2C%20I%20am%20interested%20in%20your%20financial%20services." target="_blank" class="waf">💬</a>
 <script src="js/main.js"></script>
 </body>
 </html>
